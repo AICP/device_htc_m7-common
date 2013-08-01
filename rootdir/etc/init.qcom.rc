@@ -196,6 +196,15 @@ on init
     chmod 0664 /sys/class/timed_output/vibrator/voltage_level
     restorecon /sys/class/timed_output/vibrator/voltage_level
 
+    # Touchscreen
+    chown system system /sys/android_touch/logo2menu
+    chown system system /sys/android_touch/sweep2wake
+    chown system system /sys/android_touch/home2wake
+    chown system system /sys/android_touch/logo_delay
+    chown system system /sys/android_touch/sleep_wake_vibration_time
+    chown system system /sys/android_touch/l2m_2_phase
+    chown system system /sys/class/leds/button-backlight/blink_buttons
+
 # On emmc mount the partition containing firmware
 on fs
     mkdir /devlog 0700 root root
