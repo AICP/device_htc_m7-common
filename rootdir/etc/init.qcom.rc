@@ -205,6 +205,7 @@ on init
     chown system system /sys/android_touch/l2m_2_phase
     chown system system /sys/class/leds/button-backlight/blink_buttons
     chown system system /sys/kernel/fast_charge/force_fast_charge
+    chown system system /sys/android_touch/pocket_detect
 
 # On emmc mount the partition containing firmware
 on fs

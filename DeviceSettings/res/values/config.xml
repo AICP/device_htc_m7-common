@@ -34,4 +34,6 @@
     <bool name="has_buttonlight">true</bool>
     <!-- fastcharge -->
     <bool name="has_fastcharge">true</bool>
+    <!-- pocketdetection -->
+    <bool name="has_pocketdetection">true</bool>
 </resources>

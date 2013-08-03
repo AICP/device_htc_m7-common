@@ -54,4 +54,16 @@
         <item>0x0 0xFFFF785A</item>
     </string-array>
 
+    <!-- Pocket detection -->
+    <string-array name="pocketdetection_entries">
+        <item>None</item>
+        <item>Dark</item>
+        <item>Light clothes</item>
+    </string-array>
+
+    <string-array name="pocketdetection_entries_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>

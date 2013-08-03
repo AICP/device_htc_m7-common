@@ -25,5 +25,15 @@
                 android:entryValues="@array/proximity_calibration_entries_values"
                 android:defaultValue="0x0 0xFFFF3C2D" />
     </PreferenceCategory>
+    <PreferenceCategory
+            android:title="@string/pocketdetection_title">
+            <ListPreference
+                android:key="pocketdetection_method"
+                android:title="@string/pocketdetection_summary_head"
+                android:summary="@string/pocketdetection_summary"
+                android:entries="@array/pocketdetection_entries"
+                android:entryValues="@array/pocketdetection_entries_values"
+                android:defaultValue="1" />
+    </PreferenceCategory>
 </PreferenceScreen>
 

@@ -48,6 +48,10 @@
     <string name="proximity_subcat_title">Proximity</string>
     <string name="proximity_calibration_title">Calibration</string>
     <string name="proximity_calibration_summary">Set the calibration value. Higher values mean less sensitivity.</string>
+    <string name="pocketdetection_title">Pocket wake protection</string>
+    <string name="pocketdetection_summary_head">Pocket detection method</string>
+    <string name="pocketdetection_summary">Select which pocket detection method you prefer to use.</string>
+    
 
     <!-- Button Lights -->
     <string name="category_buttonlight_title">Button Lights</string>

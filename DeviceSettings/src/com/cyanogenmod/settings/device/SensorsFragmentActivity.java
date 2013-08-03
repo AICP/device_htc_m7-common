@@ -17,6 +17,7 @@
 package com.cyanogenmod.settings.device;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -37,14 +38,36 @@ public class SensorsFragmentActivity extends PreferenceFragment implements OnPre
 
     private static final String KEY_PROXIMITY_CALIBRATION = "proximity_calibration";
     private static final String FILE_PROXIMITY_KADC = "/sys/devices/virtual/optical_sensors/proximity/ps_kadc";
+    public static final String KEY_POCKETDETECTION_METHOD = "pocketdetection_method";
+
+    private static boolean sPocketDetection;
+    private ListPreference mPocketDetectionMethod;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Resources res = getResources();
+        sPocketDetection = res.getBoolean(R.bool.has_pocketdetection);
+
         addPreferencesFromResource(R.xml.sensors_preferences);
 
         final ListPreference proximityPref = (ListPreference)findPreference(KEY_PROXIMITY_CALIBRATION);
         proximityPref.setOnPreferenceChangeListener(this);
+
+        if (sPocketDetection) {
+            mPocketDetectionMethod = (ListPreference) findPreference(KEY_POCKETDETECTION_METHOD);
+            mPocketDetectionMethod.setEnabled(PocketDetectionMethod.isSupported());
+            mPocketDetectionMethod.setOnPreferenceChangeListener(new PocketDetectionMethod());
+        }
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        String boxValue;
+        String key = preference.getKey();
+        Log.w(TAG, "key: " + key);
+        return true;
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
