@@ -206,6 +206,7 @@ on init
     chown system system /sys/class/leds/button-backlight/blink_buttons
     chown system system /sys/kernel/fast_charge/force_fast_charge
     chown system system /sys/android_touch/pocket_detect
+    chown system system /sys/class/leds/button-backlight/brightness
 
 # On emmc mount the partition containing firmware
 on fs

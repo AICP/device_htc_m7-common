@@ -36,5 +36,6 @@ public class Startup extends BroadcastReceiver {
         MiscFragmentActivity.restore(context);
         FastChargeSwitch.restore(context);
         PocketDetectionMethod.restore(context);
+        BacklightDisableSwitch.restore(context);
     }
 }

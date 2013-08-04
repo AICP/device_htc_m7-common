@@ -58,6 +58,8 @@
     <string name="buttonlightnotification_title">Backlight</string>
     <string name="buttonlightnotification_summary_head">Enable BLN</string>
     <string name="buttonlightnotification_summary">Select to enable the capacitive button backlight for notification events.</string>
+    <string name="backlight_title_head">Disable Button Backlight</string>
+    <string name="backlight_summary_head">Select to disable the capacitive button backlight.</string>
 
     <!-- Misc -->
     <string name="category_misc_title">Misc</string>
