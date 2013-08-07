@@ -10,14 +10,16 @@ public class WakeMethod implements OnPreferenceChangeListener {
 
     private static final String FILE_H2W = "/sys/android_touch/home2wake";
     private static final String FILE_S2W = "/sys/android_touch/sweep2wake";
+    private static final String FILE_DT2W = "/sys/android_touch/doubletap2wake";
 
     private static final String METHOD_NONE = "0";
     private static final String METHOD_HOME = "1";
     private static final String METHOD_LOGO = "2";
     private static final String METHOD_SWEEP = "3";
+    private static final String METHOD_DOUBLETAP = "4";
 
     public static boolean isSupported() {
-        return Utils.fileExists(FILE_H2W) && Utils.fileExists(FILE_S2W);
+        return Utils.fileExists(FILE_H2W) && Utils.fileExists(FILE_S2W) && Utils.fileExists(FILE_DT2W);
     }
 
     private static void setSysFsForMethod(String method)
@@ -26,21 +28,31 @@ public class WakeMethod implements OnPreferenceChangeListener {
         {
              Utils.writeValue(FILE_H2W, "0\n");
              Utils.writeValue(FILE_S2W, "0\n");
+             Utils.writeValue(FILE_DT2W, "0\n");
         } else
         if (method.equals(METHOD_HOME))
         {
              Utils.writeValue(FILE_H2W, "2\n");
              Utils.writeValue(FILE_S2W, "0\n");
+             Utils.writeValue(FILE_DT2W, "0\n");
         } else
         if (method.equals(METHOD_LOGO))
         {
              Utils.writeValue(FILE_H2W, "3\n");
              Utils.writeValue(FILE_S2W, "0\n");
+             Utils.writeValue(FILE_DT2W, "0\n");
         } else
         if (method.equals(METHOD_SWEEP))
         {
              Utils.writeValue(FILE_H2W, "2\n");
              Utils.writeValue(FILE_S2W, "1\n");
+             Utils.writeValue(FILE_DT2W, "0\n");
+        }
+        if (method.equals(METHOD_DOUBLETAP))
+        {
+             Utils.writeValue(FILE_H2W, "0\n");
+             Utils.writeValue(FILE_S2W, "0\n");
+             Utils.writeValue(FILE_DT2W, "1\n");
         }
     }
 
