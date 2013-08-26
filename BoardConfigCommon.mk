@@ -37,6 +37,12 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01400000
 TARGET_KERNEL_CONFIG := cyanogenmod_m7_defconfig
 TARGET_KERNEL_SOURCE := kernel/htc/m7
 
+# Custom flags
+ARCH_ARM_HAVE_TLS_REGISTER := true
+TARGET_GLOBAL_CFLAGS += -fmerge-all-constants -funsafe-math-optimizations -ftree-vectorize -mfloat-abi=softfp -mfpu=neon-vfpv4
+TARGET_GLOBAL_CPPFLAGS += -fmerge-all-constants -funsafe-math-optimizations -ftree-vectorize -mfloat-abi=softfp -mfpu=neon-vfpv4
+TARGET_EXTRA_CFLAGS += $(call cc-option, -pipe)
+
 # Flags
 COMMON_GLOBAL_CFLAGS += -DNEW_ION_API=1
 COMMON_GLOBAL_CFLAGS += -DNEW_LIBRIL_HTC
