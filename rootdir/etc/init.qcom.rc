@@ -29,7 +29,7 @@
 import init.qcom.usb.rc
 
 on init
-    export $BOOTCLASSPATH:system/framework/htcirlibs.jar
+    export BOOTCLASSPATH /system/framework/core.jar:/system/framework/core-junit.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/telephony-common.jar:/system/framework/voip-common.jar:/system/framework/mms-common.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/apache-xml.jar:/system/framework/htcirlibs.jar
 
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
@@ -205,9 +205,10 @@ on init
     chown system system /sys/android_touch/l2m_2_phase
     chown system system /sys/android_touch/doubletap2wake
     chown system system /sys/class/leds/button-backlight/blink_buttons
+    chown system system /sys/class/leds/button-backlight/currents
+    chown system system /sys/class/leds/button-backlight/brightness
     chown system system /sys/kernel/fast_charge/force_fast_charge
     chown system system /sys/android_touch/pocket_detect
-    chown system system /sys/class/leds/button-backlight/brightness
 
 # On emmc mount the partition containing firmware
 on fs
