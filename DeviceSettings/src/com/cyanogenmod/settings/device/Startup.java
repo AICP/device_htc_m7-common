@@ -37,5 +37,8 @@ public class Startup extends BroadcastReceiver {
         FastChargeSwitch.restore(context);
         PocketDetectionMethod.restore(context);
         BacklightDisableSwitch.restore(context);
+        F2WSensitivityMethod.restore(context);
+        Flick2SleepSwitch.restore(context);
+        Flick2WakeSwitch.restore(context);
     }
 }

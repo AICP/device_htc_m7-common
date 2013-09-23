@@ -30,10 +30,12 @@
     <bool name="has_logo2menu">true</bool>
     <!-- wake -->
     <bool name="has_wake">true</bool>
-    <!-- buttonlight -->
+    <!-- button light -->
     <bool name="has_buttonlight">true</bool>
     <!-- fastcharge -->
     <bool name="has_fastcharge">true</bool>
-    <!-- pocketdetection -->
+    <!-- pocket detection -->
     <bool name="has_pocketdetection">true</bool>
+    <!-- flick -->
+    <bool name="has_flick_option">true</bool>
 </resources>

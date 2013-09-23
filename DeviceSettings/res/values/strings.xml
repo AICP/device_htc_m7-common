@@ -51,8 +51,16 @@
     <string name="pocketdetection_title">Pocket wake protection</string>
     <string name="pocketdetection_summary_head">Pocket detection method</string>
     <string name="pocketdetection_summary">Select which pocket detection method you prefer to use.</string>
+    <string name="flick_pick_title">Flick/Pick2Wake</string>
+    <string name="flick2wake_summary_head">Flick2Wake</string>
+    <string name="flick2wake_summary">Flick the phone, with a good strength, and the screen will turn on.</string>
+    <string name="flick2sleep_summary_head">Flick2Sleep</string>
+    <string name="flick2sleep_summary">Flick the phone, with a good strength, and the screen will turn off.</string>
+    <string name="f2w_sensitivity_summary_head">Flick sensitivity</string>
+    <string name="f2w_sensitivity_summary">Select which flick sensitivity method you prefer to use.</string>
+    <string name="pick2wake_summary_head">Pick2Wake</string>
+    <string name="pick2wake_summary">Pick the phone to vertical position and the screen will turn on. It drains more battery with this option.</string>
     
-
     <!-- Button Lights -->
     <string name="category_buttonlight_title">Button Lights</string>
     <string name="buttonlightnotification_title">Backlight</string>

@@ -27,6 +27,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.TwoStatePreference;
 import android.util.Log;
 
 import com.cyanogenmod.settings.device.R;
@@ -39,9 +40,18 @@ public class SensorsFragmentActivity extends PreferenceFragment implements OnPre
     private static final String KEY_PROXIMITY_CALIBRATION = "proximity_calibration";
     private static final String FILE_PROXIMITY_KADC = "/sys/devices/virtual/optical_sensors/proximity/ps_kadc";
     public static final String KEY_POCKETDETECTION_METHOD = "pocketdetection_method";
+    public static final String KEY_FLICK2WAKE_SWITCH = "flick2wake_switch";
+    public static final String KEY_FLICK2SLEEP_SWITCH = "flick2sleep_switch";
+    public static final String KEY_F2WSENSITIVITY_METHOD = "f2w_sensitivity_method";
+    public static final String KEY_PICK2WAKE_SWITCH = "pick2wake_switch";
 
     private static boolean sPocketDetection;
+    private static boolean sFlickPick;
     private ListPreference mPocketDetectionMethod;
+    private TwoStatePreference mFlick2WakeSwitch;
+    private TwoStatePreference mFlick2SleepSwitch;
+    private ListPreference mF2WSensitivityMethod;
+    private TwoStatePreference mPick2WakeSwitch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,6 +59,7 @@ public class SensorsFragmentActivity extends PreferenceFragment implements OnPre
 
         Resources res = getResources();
         sPocketDetection = res.getBoolean(R.bool.has_pocketdetection);
+        sFlickPick = res.getBoolean(R.bool.has_flick_option);
 
         addPreferencesFromResource(R.xml.sensors_preferences);
 
@@ -59,6 +70,24 @@ public class SensorsFragmentActivity extends PreferenceFragment implements OnPre
             mPocketDetectionMethod = (ListPreference) findPreference(KEY_POCKETDETECTION_METHOD);
             mPocketDetectionMethod.setEnabled(PocketDetectionMethod.isSupported());
             mPocketDetectionMethod.setOnPreferenceChangeListener(new PocketDetectionMethod());
+        }
+
+        if (sFlickPick) {
+            mFlick2WakeSwitch = (TwoStatePreference) findPreference(KEY_FLICK2WAKE_SWITCH);
+            mFlick2WakeSwitch.setEnabled(Flick2WakeSwitch.isSupported());
+            mFlick2WakeSwitch.setOnPreferenceChangeListener(new Flick2WakeSwitch());
+
+            mFlick2SleepSwitch = (TwoStatePreference) findPreference(KEY_FLICK2SLEEP_SWITCH);
+            mFlick2SleepSwitch.setEnabled(Flick2SleepSwitch.isSupported());
+            mFlick2SleepSwitch.setOnPreferenceChangeListener(new Flick2SleepSwitch());
+
+            mF2WSensitivityMethod = (ListPreference) findPreference(KEY_F2WSENSITIVITY_METHOD);
+            mF2WSensitivityMethod.setEnabled(F2WSensitivityMethod.isSupported());
+            mF2WSensitivityMethod.setOnPreferenceChangeListener(new F2WSensitivityMethod());
+
+            mPick2WakeSwitch = (TwoStatePreference) findPreference(KEY_PICK2WAKE_SWITCH);
+            mPick2WakeSwitch.setEnabled(Pick2WakeSwitch.isSupported());
+            mPick2WakeSwitch.setOnPreferenceChangeListener(new Pick2WakeSwitch());
         }
     }
 

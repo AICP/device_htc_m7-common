@@ -35,5 +35,30 @@
                 android:entryValues="@array/pocketdetection_entries_values"
                 android:defaultValue="1" />
     </PreferenceCategory>
+    <PreferenceCategory
+            android:title="@string/flick_pick_title">
+            <CheckBoxPreference
+                android:key="flick2wake_switch"
+                android:title="@string/flick2wake_summary_head"
+                android:summary="@string/flick2wake_summary"
+                android:defaultValue="0" />
+            <CheckBoxPreference
+                android:key="flick2sleep_switch"
+                android:title="@string/flick2sleep_summary_head"
+                android:summary="@string/flick2sleep_summary"
+                android:defaultValue="0" />
+            <ListPreference
+                android:key="f2w_sensitivity_method"
+                android:title="@string/f2w_sensitivity_summary_head"
+                android:summary="@string/f2w_sensitivity_summary"
+                android:entries="@array/f2w_sensitivity_entries"
+                android:entryValues="@array/f2w_sensitivity_entries_values"
+                android:defaultValue="1" />
+            <CheckBoxPreference
+                android:key="pick2wake_switch"
+                android:title="@string/pick2wake_summary_head"
+                android:summary="@string/pick2wake_summary"
+                android:defaultValue="0" />
+    </PreferenceCategory>
 </PreferenceScreen>
 

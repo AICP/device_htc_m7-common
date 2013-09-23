@@ -68,4 +68,15 @@
         <item>1</item>
         <item>2</item>
     </string-array>
+
+    <!-- Flick/Pick2Wake -->
+    <string-array name="f2w_sensitivity_entries">
+        <item>Less sensitive</item>
+        <item>More sensitive</item>
+    </string-array>
+
+    <string-array name="f2w_sensitivity_entries_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
 </resources>
