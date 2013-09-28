@@ -54,6 +54,13 @@
                 android:entries="@array/f2w_sensitivity_entries"
                 android:entryValues="@array/f2w_sensitivity_entries_values"
                 android:defaultValue="1" />
+            <ListPreference
+                android:key="f2s_time_out_method"
+                android:title="@string/f2s_time_out_summary_head"
+                android:summary="@string/f2s_time_out_summary"
+                android:entries="@array/f2s_time_out_entries"
+                android:entryValues="@array/f2s_time_out_entries_values"
+                android:defaultValue="0" />
             <CheckBoxPreference
                 android:key="pick2wake_switch"
                 android:title="@string/pick2wake_summary_head"

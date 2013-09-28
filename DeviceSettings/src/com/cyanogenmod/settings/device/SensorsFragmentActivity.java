@@ -44,6 +44,7 @@ public class SensorsFragmentActivity extends PreferenceFragment implements OnPre
     public static final String KEY_FLICK2SLEEP_SWITCH = "flick2sleep_switch";
     public static final String KEY_F2WSENSITIVITY_METHOD = "f2w_sensitivity_method";
     public static final String KEY_PICK2WAKE_SWITCH = "pick2wake_switch";
+    public static final String KEY_F2STIMEOUT_METHOD = "f2s_time_out_method";
 
     private static boolean sPocketDetection;
     private static boolean sFlickPick;
@@ -52,6 +53,7 @@ public class SensorsFragmentActivity extends PreferenceFragment implements OnPre
     private TwoStatePreference mFlick2SleepSwitch;
     private ListPreference mF2WSensitivityMethod;
     private TwoStatePreference mPick2WakeSwitch;
+    private ListPreference mF2STimeOutMethod;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,6 +90,10 @@ public class SensorsFragmentActivity extends PreferenceFragment implements OnPre
             mPick2WakeSwitch = (TwoStatePreference) findPreference(KEY_PICK2WAKE_SWITCH);
             mPick2WakeSwitch.setEnabled(Pick2WakeSwitch.isSupported());
             mPick2WakeSwitch.setOnPreferenceChangeListener(new Pick2WakeSwitch());
+
+            mF2STimeOutMethod = (ListPreference) findPreference(KEY_F2STIMEOUT_METHOD);
+            mF2STimeOutMethod.setEnabled(F2STimeOutMethod.isSupported());
+            mF2STimeOutMethod.setOnPreferenceChangeListener(new F2STimeOutMethod());
         }
     }
 

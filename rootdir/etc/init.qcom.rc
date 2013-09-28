@@ -210,6 +210,7 @@ on init
     chown system system /sys/devices/virtual/htc_g_sensor/g_sensor/flick2sleep
     chown system system /sys/devices/virtual/htc_g_sensor/g_sensor/f2w_sensitivity
     chown system system /sys/devices/virtual/htc_g_sensor/g_sensor/pick2wake
+    chown system system /sys/devices/virtual/htc_g_sensor/g_sensor/f2w_min_sleep_time
 
 # On emmc mount the partition containing firmware
 on fs
