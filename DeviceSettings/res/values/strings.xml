@@ -60,7 +60,7 @@
     <string name="f2w_sensitivity_summary">Select which flick sensitivity method you prefer to use.</string>
     <string name="pick2wake_summary_head">Pick2Wake</string>
     <string name="pick2wake_summary">Pick the phone to vertical position and the screen will turn on. It drains more battery with this option.</string>
-    <string name="f2s_time_out_summary_head"> Flick2Sleep timeout</string>
+    <string name="f2s_time_out_summary_head">Sleep timeout before F2W</string>
     <string name="f2s_time_out_summary">Set the time for what the phone should wait after a F2S, before letting it react on F2W attempt.</string>
     
     <!-- Button Lights -->
