@@ -50,10 +50,10 @@ case "$target" in
         echo 1 > /sys/devices/system/cpu/cpu1/online
         echo 1 > /sys/devices/system/cpu/cpu2/online
         echo 1 > /sys/devices/system/cpu/cpu3/online
-        echo "ondemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-        echo "ondemand" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
-        echo "ondemand" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
-        echo "ondemand" > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
+        # echo "ondemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+        # echo "ondemand" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+        # echo "ondemand" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
+        # echo "ondemand" > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
         echo 50000 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
         echo 90 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
         echo 1 > /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
@@ -68,11 +68,11 @@ case "$target" in
         chown system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
         chown system /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
         chown system /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
-        echo "ondemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-        echo "ondemand" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
-        echo "ondemand" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
-        echo "ondemand" > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
-        echo 1 > /dev/cpuctl/apps/cpu.notify_on_migrate
+        # echo "ondemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+        # echo "ondemand" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+        # echo "ondemand" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
+        # echo "ondemand" > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
+        # echo 1 > /dev/cpuctl/apps/cpu.notify_on_migrate
         #echo 1 > /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
         # echo 384000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
         # echo 384000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
