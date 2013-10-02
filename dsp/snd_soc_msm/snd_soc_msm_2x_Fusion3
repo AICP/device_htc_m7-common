@@ -389,31 +389,6 @@ SectionVerb
 	PlaybackPCM  4
 EndSection
 
-SectionVerb
-	Name "HiFi Low PowerUSB PROXY Rx"
-
-	EnableSequence
-		'AFE_PCM_RX Audio Mixer MultiMedia3':1:1
-	EndSequence
-
-	DisableSequence
-		'AFE_PCM_RX Audio Mixer MultiMedia3':1:0
-	EndSequence
-	PlaybackPCM  4
-EndSection
-
-SectionVerb
-	Name "HiFi Low PowerUSB PROXY Tx"
-
-	EnableSequence
-	EndSequence
-
-	DisableSequence
-	EndSequence
-	PlaybackPCM  4
-EndSection
-
-
 # HTC additional verbs
 SectionVerb
 	Name "HiFi Low PowerSpeaker"
@@ -1373,6 +1348,8 @@ SectionDevice
 	EndSequence
 
 	ACDBID  603:1
+	EffectsMixerCTL "SRS TruMedia"
+
 EndSection
 
 SectionDevice
@@ -1397,6 +1374,8 @@ SectionDevice
 	EndSequence
 
 	ACDBID  14:1
+	EffectsMixerCTL "SRS TruMedia" 
+
 EndSection
 
 SectionDevice
@@ -1411,6 +1390,8 @@ SectionDevice
 	EndSequence
 
 	ACDBID  604:1
+	EffectsMixerCTL "SRS TruMedia"
+
 EndSection
 
 SectionDevice
@@ -1454,6 +1435,8 @@ SectionDevice
 	EndSequence
 
 	ACDBID  10:1
+	EffectsMixerCTL "SRS TruMedia"
+
 EndSection
 
 SectionDevice
@@ -1585,6 +1568,7 @@ SectionDevice
 	EndSequence
 
 	ACDBID  603:1
+
 EndSection
 
 SectionDevice
@@ -1640,20 +1624,22 @@ SectionDevice
 
 	EnableSequence
 		'SLIM_0_TX Channels':0:One
-		'SLIM TX7 MUX':0:DEC5
-		'DEC5 MUX':0:ADC2
-		'DEC5 Volume':2:54
+		'SLIM TX1 MUX':0:DEC1
+		'DEC1 MUX':0:ADC2
 		'ADC2 Volume':1:100
+		'MICBIAS2 CAPLESS Switch':1:1
 	EndSequence
 
 	DisableSequence
-		'SLIM TX7 MUX':0:ZERO
-		'DEC5 MUX':0:ZERO
-		'DEC5 Volume':2:0
+		'SLIM TX1 MUX':0:ZERO
+		'DEC1 MUX':0:ZERO
 		'ADC2 Volume':1:0
+		'MICBIAS2 CAPLESS Switch':1:0
 	EndSequence
 
-	ACDBID  8:2
+	ACDBID	8:2
+	EffectsMixerCTL "SRS TruMedia"
+
 EndSection
 
 SectionDevice
@@ -1679,6 +1665,7 @@ SectionDevice
 		'IIR1 Enable Band5':1:1
 		'IIR1 INP1 Volume':2:35
 		'IIR1 INP1 MUX':0:DEC5
+		'MICBIAS2 CAPLESS Switch':1:1
 	EndSequence
 
 	DisableSequence
@@ -1695,6 +1682,7 @@ SectionDevice
 		'IIR1 Enable Band3':1:0
 		'IIR1 Enable Band4':1:0
 		'IIR1 Enable Band5':1:0
+		'MICBIAS2 CAPLESS Switch':1:0
 	EndSequence
 
 	ACDBID  8:2
@@ -2351,7 +2339,7 @@ SectionDevice
 	DisableSequence
 	EndSequence
 
-	ACDBID  20:1
+	ACDBID  0:1
 EndSection
 
 SectionDevice
