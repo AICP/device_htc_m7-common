@@ -20,7 +20,4 @@
 #define BTM_DEF_LOCAL_NAME   "HTC One"
 #define BTA_DISABLE_DELAY 1000 /* in milliseconds */
 #define I2SPCM_SLAVE_BRCM TRUE
-#define BLUETOOTH_QCOM_SW TRUE
-#define PAN_NAP_DISABLED TRUE
-#define BLE_INCLUDED TRUE
 #endif

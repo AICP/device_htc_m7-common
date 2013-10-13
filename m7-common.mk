@@ -159,15 +159,15 @@ endif
 PRODUCT_COPY_FILES += \
     $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml
 
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    persist.sys.usb.config=mtp,adb
+
 # HTC IR Blaster resources
 PRODUCT_PACKAGES += \
     CIRModule \
     htcirlibs \
     libhtcirinterface_jni \
     init.rc
-
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp,adb
 
 # Common build properties
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -190,14 +190,11 @@ PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi xxhdpi
 
-# QRNGD
-PRODUCT_PACKAGES += qrngd
-
 # call dalvik heap config
 $(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
 
 # call hwui memory config
 $(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
 
-# call the proprietary setup
-$(call inherit-product-if-exists, vendor/htc/m7-common/m7-common-vendor.mk)
+# Include non-opensource parts
+$(call inherit-product, vendor/htc/m7-common/m7-common-vendor.mk)

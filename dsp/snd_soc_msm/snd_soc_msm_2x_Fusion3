@@ -251,30 +251,6 @@ SectionVerb
 	PlaybackPCM 0
 EndSection
 
-SectionVerb
-  Name "HiFi Low PowerUSB PROXY Rx"
-
-  EnableSequence
-    'AFE_PCM_RX Audio Mixer MultiMedia3':1:1
-  EndSequence
-
-  DisableSequence
-    'AFE_PCM_RX Audio Mixer MultiMedia3':1:0
-  EndSequence
-  PlaybackPCM  4
-EndSection
-
-SectionVerb
-  Name "HiFi Low PowerUSB PROXY Tx"
-
-  EnableSequence
-  EndSequence
-
-  DisableSequence
-  EndSequence
-  PlaybackPCM  4
-EndSection
-
 # HTC additional verbs
 SectionVerb
 	Name "HiFiSpeaker"
@@ -412,6 +388,31 @@ SectionVerb
 	EndSequence
 	PlaybackPCM  4
 EndSection
+
+SectionVerb
+	Name "HiFi Low PowerUSB PROXY Rx"
+
+	EnableSequence
+		'AFE_PCM_RX Audio Mixer MultiMedia3':1:1
+	EndSequence
+
+	DisableSequence
+		'AFE_PCM_RX Audio Mixer MultiMedia3':1:0
+	EndSequence
+	PlaybackPCM  4
+EndSection
+
+SectionVerb
+	Name "HiFi Low PowerUSB PROXY Tx"
+
+	EnableSequence
+	EndSequence
+
+	DisableSequence
+	EndSequence
+	PlaybackPCM  4
+EndSection
+
 
 # HTC additional verbs
 SectionVerb
@@ -1332,6 +1333,49 @@ SectionDevice
 EndSection
 
 SectionDevice
+	Name "Speaker Headset"
+
+	EnableSequence
+		'SLIM_0_RX Channels':0:Two
+		'RX3 MIX1 INP1':0:RX1
+		'RX3 MIX1 INP2':0:RX6
+		'RX5 MIX1 INP1':0:RX2
+		'RX5 MIX1 INP2':0:RX7
+		'RX4 DSM MUX':0:DSM_INV
+		'RX6 DSM MUX':0:DSM_INV
+		'RX3 Digital Volume':1:67
+		'RX4 Digital Volume':1:67
+		'RX5 Digital Volume':1:67
+		'RX6 Digital Volume':1:67
+		'LINEOUT1 Volume':1:0
+		'LINEOUT2 Volume':1:0
+		'LINEOUT3 Volume':1:0
+		'LINEOUT4 Volume':1:0
+		'HS AMP EN Switch':1:1
+	EndSequence
+
+	DisableSequence
+		'HS AMP EN Switch':1:0
+		'RX3 MIX1 INP1':0:ZERO
+		'RX3 MIX1 INP2':0:ZERO
+		'RX5 MIX1 INP1':0:ZERO
+		'RX5 MIX1 INP2':0:ZERO
+		'RX4 DSM MUX':0:CIC_OUT
+		'RX6 DSM MUX':0:CIC_OUT
+		'LINEOUT1 Volume':1:0
+		'LINEOUT2 Volume':1:0
+		'LINEOUT3 Volume':1:0
+		'LINEOUT4 Volume':1:0
+		'RX3 Digital Volume':1:0
+		'RX4 Digital Volume':1:0
+		'RX5 Digital Volume':1:0
+		'RX6 Digital Volume':1:0
+	EndSequence
+
+	ACDBID  603:1
+EndSection
+
+SectionDevice
 	Name "Voice Speaker"
 
 	EnableSequence
@@ -1353,8 +1397,6 @@ SectionDevice
 	EndSequence
 
 	ACDBID  14:1
-	EffectsMixerCTL "SRS TruMedia" 
-
 EndSection
 
 SectionDevice
@@ -1369,8 +1411,6 @@ SectionDevice
 	EndSequence
 
 	ACDBID  604:1
-	EffectsMixerCTL "SRS TruMedia"
-
 EndSection
 
 SectionDevice
@@ -1414,8 +1454,6 @@ SectionDevice
 	EndSequence
 
 	ACDBID  10:1
-	EffectsMixerCTL "SRS TruMedia"
-
 EndSection
 
 SectionDevice
@@ -1547,8 +1585,6 @@ SectionDevice
 	EndSequence
 
 	ACDBID  603:1
-	EffectsMixerCTL "SRS TruMedia"
-
 EndSection
 
 SectionDevice
@@ -1604,22 +1640,20 @@ SectionDevice
 
 	EnableSequence
 		'SLIM_0_TX Channels':0:One
-		'SLIM TX1 MUX':0:DEC1
-		'DEC1 MUX':0:ADC2
+		'SLIM TX7 MUX':0:DEC5
+		'DEC5 MUX':0:ADC2
+		'DEC5 Volume':2:54
 		'ADC2 Volume':1:100
-		'MICBIAS2 CAPLESS Switch':1:1
 	EndSequence
 
 	DisableSequence
-		'SLIM TX1 MUX':0:ZERO
-		'DEC1 MUX':0:ZERO
+		'SLIM TX7 MUX':0:ZERO
+		'DEC5 MUX':0:ZERO
+		'DEC5 Volume':2:0
 		'ADC2 Volume':1:0
-		'MICBIAS2 CAPLESS Switch':1:0
 	EndSequence
 
-	ACDBID	8:2
-	EffectsMixerCTL "SRS TruMedia"
-
+	ACDBID  8:2
 EndSection
 
 SectionDevice
@@ -1645,7 +1679,6 @@ SectionDevice
 		'IIR1 Enable Band5':1:1
 		'IIR1 INP1 Volume':2:35
 		'IIR1 INP1 MUX':0:DEC5
-		'MICBIAS2 CAPLESS Switch':1:1
 	EndSequence
 
 	DisableSequence
@@ -1662,7 +1695,6 @@ SectionDevice
 		'IIR1 Enable Band3':1:0
 		'IIR1 Enable Band4':1:0
 		'IIR1 Enable Band5':1:0
-		'MICBIAS2 CAPLESS Switch':1:0
 	EndSequence
 
 	ACDBID  8:2
@@ -2029,26 +2061,18 @@ EndSection
 SectionDevice
 	Name "Speaker DMIC Endfire"
 
-	 EnableSequence
+	EnableSequence
 		'SLIM_0_TX Channels':0:One
-		'SLIM TX7 MUX':0:DEC8
-		'DEC8 MUX':0:DMIC2
-		'DEC8 Volume':2:57
-		'SLIM TX8 MUX':0:DEC9
+		'SLIM TX7 MUX':0:DEC9
 		'DEC9 MUX':0:DMIC4
-		'DEC9 Volume':2:57
-		'MICBIAS1 CAPLESS Switch':1:0
+		'DEC9 Volume':2:5C
 		'MICBIAS3 CAPLESS Switch':1:0
 	EndSequence
 
 	DisableSequence
-		'SLIM TX7 MUX':0:ZERO
-		'SLIM TX8 MUX':0:ZERO
-		'DEC8 MUX':0:ZERO
+		'SLIM_0_TX Channels':0:ZERO
 		'DEC9 MUX':0:ZERO
-		'DEC8 Volume':2:0
 		'DEC9 Volume':2:0
-		'MICBIAS1 CAPLESS Switch':1:0
 		'MICBIAS3 CAPLESS Switch':1:0
 	EndSequence
 
@@ -2070,27 +2094,18 @@ EndSection
 SectionDevice
 	Name "Speaker DMIC Stereo"
 
-	 EnableSequence
+	EnableSequence
 		'SLIM_0_TX Channels':0:One
 		'SLIM TX7 MUX':0:DEC9
-		'DEC8 MUX':0:DMIC2
-		'DEC8 Volume':2:57
-		'SLIM TX8 MUX':0:DEC9
 		'DEC9 MUX':0:DMIC4
 		'DEC9 Volume':2:5C
-		'MICBIAS1 CAPLESS Switch':1:0
 		'MICBIAS3 CAPLESS Switch':1:0
 	EndSequence
 
 	DisableSequence
-                'SLIM_0_TX Channels':0:ZERO
-		'SLIM TX7 MUX':0:ZERO
-		'SLIM TX8 MUX':0:ZERO
-		'DEC8 MUX':0:ZERO
+		'SLIM_0_TX Channels':0:ZERO
 		'DEC9 MUX':0:ZERO
-		'DEC8 Volume':2:0
 		'DEC9 Volume':2:0
-		'MICBIAS1 CAPLESS Switch':1:0
 		'MICBIAS3 CAPLESS Switch':1:0
 	EndSequence
 
@@ -2320,7 +2335,7 @@ SectionDevice
 	DisableSequence
 	EndSequence
 
-	ACDBID  0:1
+	ACDBID  20:1
 EndSection
 
 SectionDevice
