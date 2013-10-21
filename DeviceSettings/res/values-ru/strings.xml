@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012-2013 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_name">Расширенные настройки</string>
+
+    <string name="defaults_button">Сброс настроек</string>
+
+    <!-- Haptic Preference -->
+    <string name="category_haptic_title">Тактильная отдача</string>
+
+    <!-- VibratorTuning -->
+    <string name="vibrator_title">Вибрация</string>
+    <string name="vibrator_tuning_title">Сила вибрации</string>
+    <string name="vibrator_tuning_summary_head">Регулировка силы вибрации</string>
+    <string name="vibrator_warning">Значения больше %1$d не рекомендуются</string>
+
+    <!-- Touchscreen Preference -->
+    <string name="category_touchscreen_title">Сенсорный экран</string>
+    <string name="logo2menu_title">Logo2Menu</string>
+    <string name="logo2menu_switch_title_head">Включено</string>
+    <string name="logo2menu_switch_summary_head">Использование верхней части HTC logo\'s в качестве кнопки меню.</string>
+    <string name="longtaplogosleep_switch_title_head">Longtap2Sleep</string>
+    <string name="longtaplogosleep_switch_summary_head">Если выбрано, долгое нажатие на HTC logo\'s погасит экран. Если выбрано, откроются настройки кнопок.</string>
+
+    <string name="wake_title">Пробуждение</string>
+    <string name="wake_method_title_head">Метод вклюения экрана</string>
+    <string name="wake_method_summary_head">Выберите метод вклюения экрана.</string>
+
+    <!-- Sensors Preference -->
+    <string name="category_sensors_title">Сенсоры</string>
+
+    <!-- Proximity Calibration -->
+    <string name="proximity_subcat_title">Датчик приближения</string>
+    <string name="proximity_calibration_title">Калибровка</string>
+    <string name="proximity_calibration_summary">Установите значение. Большее значение дает меньшую чувствительность.</string>
+    <string name="pocketdetection_title">Режим "В кармане"</string>
+    <string name="pocketdetection_summary_head">Тип работы режима "В кармане"</string>
+    <string name="pocketdetection_summary">Выберите метод который Вам предпочтителен.</string>
+    <string name="flick_pick_title">Flick/Pick2Wake</string>
+    <string name="flick2wake_summary_head">Flick2Wake</string>
+    <string name="flick2wake_summary">С силой потресите телефон, чтобы включить экран.</string>
+    <string name="flick2sleep_summary_head">Flick2Sleep</string>
+    <string name="flick2sleep_summary">С силой потресите телефон, чтобы выключить экран.</string>
+    <string name="f2w_sensitivity_summary_head">Чувствительнось F2W</string>
+    <string name="f2w_sensitivity_summary">Выберите метод F2W который Вам предпочтителен.</string>
+    <string name="pick2wake_summary_head">Pick2Wake</string>
+    <string name="pick2wake_summary">Поднемите телефон вертикальнои экран включится. С этой опцией наблюдается больший расход батареи.</string>
+    <string name="f2s_time_out_summary_head">Режим ожидания до F2W</string>
+    <string name="f2s_time_out_summary">Установить время ожидания до срабатывания F2S, до этого времмение F2W не сработает.</string>
+    
+    <!-- Button Lights -->
+    <string name="category_buttonlight_title">Подсветка кнопок</string>
+    <string name="buttonlightnotification_title">Подсветка</string>
+    <string name="buttonlightnotification_summary_head">Включение BLN</string>
+    <string name="buttonlightnotification_summary">Выбрать кнопки для оповещения.</string>
+    <string name="backlight_title_head">Отключить подсветку кнопок</string>
+    <string name="backlight_summary_head">Выбрать отключение подсветки кнопок.</string>
+
+    <!-- Misc -->
+    <string name="category_misc_title">Misc</string>
+
+    <!-- Fast Charge -->
+    <string name="fastcharge_title">Fast Charge</string>
+    <string name="fastcharge_summary_head">Включено</string>
+    <string name="fastcharge_summary">Позволяет заряжаться быстрее от порта USB.</string>
+</resources>
