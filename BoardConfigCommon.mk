@@ -37,10 +37,6 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01400000
 TARGET_KERNEL_CONFIG := aokp_m7_defconfig
 TARGET_KERNEL_SOURCE := kernel/htc/m7
 
-# Flags
-COMMON_GLOBAL_CFLAGS += -DNEW_ION_API=1
-COMMON_GLOBAL_CFLAGS += -DNEW_LIBRIL_HTC
-
 # Audio
 BOARD_USES_FLUENCE_INCALL := true  # use DMIC in call only
 BOARD_USES_SEPERATED_AUDIO_INPUT := true  # use distinct voice recognition use case
