@@ -45,7 +45,6 @@ TARGET_EXTRA_CFLAGS += $(call cc-option, -pipe)
 
 # Flags
 COMMON_GLOBAL_CFLAGS += -DNEW_ION_API=1
-COMMON_GLOBAL_CFLAGS += -DNEW_LIBRIL_HTC
 
 # Audio
 BOARD_USES_FLUENCE_INCALL := true  # use DMIC in call only
