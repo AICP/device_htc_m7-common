@@ -78,4 +78,10 @@
     <string name="fastcharge_title">Fast Charge</string>
     <string name="fastcharge_summary_head">Enable</string>
     <string name="fastcharge_summary">Enable to draw more power when connected to a PC USB port.</string>
+
+    <!-- Performance -->
+    <string name="category_performance_title">Performance</string>
+    <string name="gpu_title">GPU</string>
+    <string name="gpuoc_summary_head">GPU frequency</string>
+    <string name="gpuoc_summary">Set desired GPU frequency that will be set on boot.</string>
 </resources>
