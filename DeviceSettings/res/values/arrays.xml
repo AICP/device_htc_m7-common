@@ -97,29 +97,4 @@
         <item>4</item>
         <item>5</item>
     </string-array>
-
-    <!-- gpu OC -->
-    <string-array name="gpuoc_entries">
-        <item>200 (underclock)</item>
-        <item>320 (underclock)</item>
-        <item>450 (default)</item>
-        <item>477 (safe overclock)</item>
-        <item>490 (safe overclock)</item>
-        <item>504 (safe overclock)</item>
-        <item>531 (safe overclock)</item>
-        <item>558 (risky overclock)</item>
-        <item>585 (risky overclock)</item>
-    </string-array>
-
-    <string-array name="gpuoc_entries_values" translatable="false">
-        <item>200000000</item>
-        <item>320000000</item>
-        <item>450000000</item>
-        <item>477000000</item>
-        <item>490000000</item>
-        <item>504000000</item>
-        <item>531000000</item>
-        <item>558000000</item>
-        <item>585000000</item>
-    </string-array>
 </resources>
