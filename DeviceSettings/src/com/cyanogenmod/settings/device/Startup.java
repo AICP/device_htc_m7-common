@@ -41,6 +41,5 @@ public class Startup extends BroadcastReceiver {
         Flick2SleepSwitch.restore(context);
         Flick2WakeSwitch.restore(context);
         F2STimeOutMethod.restore(context);
-        PerformanceFragmentActivity.restore(context);
     }
 }
