@@ -27,9 +27,9 @@ public class Startup extends BroadcastReceiver {
         HapticFragmentActivity.restore(context);
         VibratorTuningPreference.restore(context);
         SensorsFragmentActivity.restore(context);
-        TouchscreenFragmentActivity.restore(context);
-        Logo2MenuSwitch.restore(context);
-        WakeMethod.restore(context);
-        LongTapLogoSleepSwitch.restore(context);
+        //TouchscreenFragmentActivity.restore(context);
+        //Logo2MenuSwitch.restore(context);
+        //WakeMethod.restore(context);
+        //LongTapLogoSleepSwitch.restore(context);
     }
 }
