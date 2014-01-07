@@ -69,6 +69,7 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 TARGET_DISPLAY_INSECURE_MM_HEAP := true
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 HAVE_ADRENO_SOURCE := false
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 
 # USB
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
