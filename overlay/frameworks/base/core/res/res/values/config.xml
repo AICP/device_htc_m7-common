@@ -267,4 +267,7 @@
          config to 7. -->
     <integer name="config_deviceHardwareKeys">3</integer>
 
+    <!-- Force permanent menu key -->
+    <bool name="config_force_permanent_menu_key">true</bool>
+
 </resources>
