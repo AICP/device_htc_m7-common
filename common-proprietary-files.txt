@@ -2,7 +2,6 @@
 bin/akmd
 bin/ks
 bin/mm-qcamera-daemon
-bin/mpdecision
 bin/thermald
 
 # Configuration files
