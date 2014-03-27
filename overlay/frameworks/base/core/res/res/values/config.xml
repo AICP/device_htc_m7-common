@@ -267,4 +267,7 @@
     <!-- Force permanent menu key -->
     <bool name="config_force_permanent_menu_key">true</bool>
 
+    <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
+    <bool name="config_intrusiveBatteryLed">true</bool>
+
 </resources>
