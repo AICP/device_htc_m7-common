@@ -40,6 +40,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/init.post_boot.sh:system/etc/init.post_boot.sh
 
 # Recovery
+COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
 PRODUCT_PACKAGES += \
     lpm.rc \
     charger \
