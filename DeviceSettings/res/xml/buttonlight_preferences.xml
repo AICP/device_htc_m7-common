@@ -22,4 +22,9 @@
                 android:summary="@string/buttonlightnotification_summary"
                 android:defaultValue="0" />
     </PreferenceCategory>
+            <CheckBoxPreference
+                android:key="backlightdisable_switch"
+                android:title="@string/backlight_title_head"
+                android:summary="@string/backlight_summary_head"
+                android:defaultValue="0" />
 </PreferenceScreen>
