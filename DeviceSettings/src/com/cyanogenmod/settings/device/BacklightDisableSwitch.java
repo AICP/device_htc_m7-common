@@ -15,10 +15,9 @@ public class BacklightDisableSwitch implements OnPreferenceChangeListener {
         return Utils.fileExists(FILE);
     }
 
-    public static String getValue(Context context) {
- 	String value = Utils.getFileValue(FILE, "255");
+    public static Boolean getValue(Context context) {
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-        return sharedPrefs.getString(ButtonLightFragmentActivity.KEY_BACKLIGHTDISABLE_SWITCH, value);
+        return sharedPrefs.getBoolean(ButtonLightFragmentActivity.KEY_BACKLIGHTDISABLE_SWITCH, false);
     }
 
     /**
@@ -33,9 +32,8 @@ public class BacklightDisableSwitch implements OnPreferenceChangeListener {
         File blFile = new File(FILE);
         blFile.setWritable(true);
 
-        String value = getValue(context);
-        int ref = Integer.parseInt(value);
-        if(ref == 0) {
+        Boolean enabled = getValue(context);
+        if(enabled) {
             Utils.writeValue(FILE, "0\n");
             blFile.setWritable(false);
         }
