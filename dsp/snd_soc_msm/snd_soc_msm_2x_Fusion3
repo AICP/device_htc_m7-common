@@ -469,7 +469,7 @@ SectionVerb
 	DisableSequence
 		'SLIMBUS_0_RX Audio Mixer MultiMedia5':1:0
 	EndSequence
-	PlaybackPCM  40
+	PlaybackPCM  14
 EndSection
 
 SectionVerb
@@ -482,7 +482,7 @@ SectionVerb
 	DisableSequence
 		'AUX_PCM_RX Audio Mixer MultiMedia5':1:0
 	EndSequence
-	PlaybackPCM  40
+	PlaybackPCM  14
 EndSection
 
 SectionVerb
@@ -495,7 +495,7 @@ SectionVerb
 	DisableSequence
 		'AUX_PCM_RX Audio Mixer MultiMedia5':1:0
 	EndSequence
-	PlaybackPCM  40
+	PlaybackPCM  14
 EndSection
 
 SectionVerb
@@ -508,7 +508,7 @@ SectionVerb
 	DisableSequence
 		'HDMI Mixer MultiMedia5':1:0
 	EndSequence
-	PlaybackPCM  40
+	PlaybackPCM  14
 EndSection
 
 SectionVerb
@@ -521,7 +521,7 @@ SectionVerb
 	DisableSequence
 		'AFE_PCM_RX Audio Mixer MultiMedia5':1:0
 	EndSequence
-	PlaybackPCM  40
+	PlaybackPCM  14
 EndSection
 
 SectionVerb
@@ -532,7 +532,7 @@ SectionVerb
 
 	DisableSequence
 	EndSequence
-	PlaybackPCM  40
+	PlaybackPCM  14
 EndSection
 
 SectionVerb
@@ -545,7 +545,7 @@ SectionVerb
 	DisableSequence
 		'MI2S_RX Audio Mixer MultiMedia5':1:0
 	EndSequence
-	PlaybackPCM  40
+	PlaybackPCM  14
 EndSection
 
 SectionVerb
@@ -558,7 +558,7 @@ SectionVerb
 	DisableSequence
 		'MI2S_RX Audio Mixer MultiMedia5':1:0
 	EndSequence
-	PlaybackPCM  40
+	PlaybackPCM  14
 EndSection
 }
 SectionUseCase."HiFi Lowlatency Rec" {
@@ -572,8 +572,8 @@ SectionVerb
 	DisableSequence
 		'MultiMedia5 Mixer SLIM_0_TX':1:0
 	EndSequence
-	CapturePCM  40
-	PlaybackPCM  40
+	CapturePCM  14
+	PlaybackPCM  14
 EndSection
 
 SectionVerb
@@ -586,8 +586,8 @@ SectionVerb
 	DisableSequence
 		'MultiMedia5 Mixer AUX_PCM_TX':1:0
 	EndSequence
-	CapturePCM  40
-	PlaybackPCM  40
+	CapturePCM  14
+	PlaybackPCM  14
 EndSection
 
 SectionVerb
@@ -600,8 +600,8 @@ SectionVerb
 	DisableSequence
 		'MultiMedia5 Mixer AUX_PCM_TX':1:0
 	EndSequence
-	CapturePCM  40
-	PlaybackPCM  40
+	CapturePCM  14
+	PlaybackPCM  14
 EndSection
 
 SectionVerb
@@ -612,8 +612,8 @@ SectionVerb
 
 	DisableSequence
 	EndSequence
-	CapturePCM  40
-	PlaybackPCM  40
+	CapturePCM  14
+	PlaybackPCM  14
 EndSection
 
 SectionVerb
@@ -626,8 +626,8 @@ SectionVerb
 	DisableSequence
 		'MultiMedia5 Mixer AFE_PCM_TX':1:0
 	EndSequence
-	CapturePCM  40
-	PlaybackPCM  40
+	CapturePCM  14
+	PlaybackPCM  14
 EndSection
 }
 SectionUseCase."HiFi Rec" {
@@ -698,8 +698,8 @@ SectionVerb
 	DisableSequence
 		'MultiMedia4 Mixer SLIM_0_TX':1:1
 	EndSequence
-	CapturePCM  36
-	PlaybackPCM  36
+	CapturePCM  9
+	PlaybackPCM  9
 EndSection
 }
 SectionUseCase."HiFi Tunnel" {
@@ -713,7 +713,7 @@ SectionVerb
 	DisableSequence
 		'SLIMBUS_0_RX Audio Mixer MultiMedia4':1:0
 	EndSequence
-	PlaybackPCM  36
+	PlaybackPCM  9
 EndSection
 
 SectionVerb
@@ -726,7 +726,7 @@ SectionVerb
 	DisableSequence
 		'AUX_PCM_RX Audio Mixer MultiMedia4':1:0
 	EndSequence
-	PlaybackPCM  36
+	PlaybackPCM  9
 EndSection
 
 SectionVerb
@@ -739,7 +739,7 @@ SectionVerb
 	DisableSequence
 		'AUX_PCM_RX Audio Mixer MultiMedia4':1:0
 	EndSequence
-	PlaybackPCM  36
+	PlaybackPCM  9
 EndSection
 
 SectionVerb
@@ -752,7 +752,7 @@ SectionVerb
 	DisableSequence
 		'HDMI Mixer MultiMedia4':1:0
 	EndSequence
-	PlaybackPCM  36
+	PlaybackPCM  9
 EndSection
 
 SectionVerb
@@ -765,7 +765,7 @@ SectionVerb
 	DisableSequence
 		'AFE_PCM_RX Audio Mixer MultiMedia4':1:0
 	EndSequence
-	PlaybackPCM 36
+	PlaybackPCM 9
 EndSection
 
 SectionVerb
@@ -778,7 +778,7 @@ SectionVerb
 	DisableSequence
 		'MI2S_RX Audio Mixer MultiMedia4':1:0
 	EndSequence
-	PlaybackPCM  36
+	PlaybackPCM  9
 EndSection
 
 SectionVerb
@@ -791,7 +791,7 @@ SectionVerb
 	DisableSequence
 		'MI2S_RX Audio Mixer MultiMedia4':1:0
 	EndSequence
-	PlaybackPCM  36
+	PlaybackPCM  9
 EndSection
 }
 SectionUseCase."HiFi2" {
@@ -839,8 +839,8 @@ SectionVerb
 		'Voice Stub Tx Mixer STUB_TX_HL':1:0
 		'Voice Stub Tx Mixer STUB_1_TX_HL':1:0
 	EndSequence
-	CapturePCM  9
-	PlaybackPCM  9
+	CapturePCM  12
+	PlaybackPCM  12
 EndSection
 
 SectionVerb
@@ -859,8 +859,8 @@ SectionVerb
 		'SLIMBUS_3_RX_Voice Mixer Voice Stub':1:0
 		'SLIMBUS_3_RX Port Mixer AUX_PCM_DL_RX':1:0
 	EndSequence
-	CapturePCM  9
-	PlaybackPCM  9
+	CapturePCM  12
+	PlaybackPCM  12
 EndSection
 
 SectionVerb
@@ -881,8 +881,8 @@ SectionVerb
 
 	DisableSequence
 	EndSequence
-	CapturePCM  9
-	PlaybackPCM  9
+	CapturePCM  12
+	PlaybackPCM  12
 EndSection
 
 SectionVerb
@@ -901,8 +901,8 @@ SectionVerb
 		'SLIMBUS_3_RX_Voice Mixer Voice Stub':1:0
 		'SLIMBUS_3_RX Port Mixer AUX_PCM_DL_RX':1:0
 	EndSequence
-	CapturePCM  9
-	PlaybackPCM  9
+	CapturePCM  12
+	PlaybackPCM  12
 EndSection
 
 SectionVerb
@@ -923,8 +923,8 @@ SectionVerb
 
 	DisableSequence
 	EndSequence
-	CapturePCM  9
-	PlaybackPCM  9
+	CapturePCM  12
+	PlaybackPCM  12
 EndSection
 
 SectionVerb
@@ -947,8 +947,8 @@ SectionVerb
 		'SLIMBUS_3_RX_Voice Mixer Voice Stub':1:0
 		'SLIMBUS_3_RX Port Mixer MI2S_TX':1:0
 	EndSequence
-	CapturePCM  9
-	PlaybackPCM  9
+	CapturePCM  12
+	PlaybackPCM  12
 EndSection
 
 SectionVerb
@@ -971,8 +971,8 @@ SectionVerb
 		'SLIMBUS_3_RX_Voice Mixer Voice Stub':1:0
 		'SLIMBUS_3_RX Port Mixer MI2S_TX':1:0
 	EndSequence
-	CapturePCM  9
-	PlaybackPCM  9
+	CapturePCM  12
+	PlaybackPCM  12
 EndSection
 
 SectionVerb
@@ -995,8 +995,8 @@ SectionVerb
 		'SLIMBUS_3_RX_Voice Mixer Voice Stub':1:0
 		'SLIMBUS_3_RX Port Mixer MI2S_TX':1:0
 	EndSequence
-	CapturePCM  9
-	PlaybackPCM  9
+	CapturePCM  12
+	PlaybackPCM  12
 EndSection
 }
 SectionUseCase."Voice Call IP" {
@@ -2471,8 +2471,8 @@ SectionModifier
 	DisableSequence
 		'MultiMedia5 Mixer SLIM_0_TX':1:0
 	EndSequence
-	CapturePCM  40
-	PlaybackPCM  40
+	CapturePCM  14
+	PlaybackPCM  14
 EndSection
 
 SectionModifier
@@ -2485,8 +2485,8 @@ SectionModifier
 	DisableSequence
 		'MultiMedia5 Mixer AUX_PCM_TX':1:0
 	EndSequence
-	CapturePCM  40
-	PlaybackPCM  40
+	CapturePCM  14
+	PlaybackPCM  14
 EndSection
 
 SectionModifier
@@ -2499,8 +2499,8 @@ SectionModifier
 	DisableSequence
 		'MultiMedia5 Mixer AUX_PCM_TX':1:0
 	EndSequence
-	CapturePCM  40
-	PlaybackPCM  40
+	CapturePCM  14
+	PlaybackPCM  14
 EndSection
 
 SectionModifier
@@ -2511,8 +2511,8 @@ SectionModifier
 
 	DisableSequence
 	EndSequence
-	CapturePCM  40
-	PlaybackPCM  40
+	CapturePCM  14
+	PlaybackPCM  14
 EndSection
 
 SectionModifier
@@ -2525,8 +2525,8 @@ SectionModifier
 	DisableSequence
 		'MultiMedia5 Mixer AFE_PCM_TX':1:0
 	EndSequence
-	CapturePCM  40
-	PlaybackPCM  40
+	CapturePCM  14
+	PlaybackPCM  14
 EndSection
 
 SectionModifier
@@ -2685,8 +2685,8 @@ SectionModifier
 	DisableSequence
 		'SLIMBUS_0_RX Audio Mixer MultiMedia5':1:0
 	EndSequence
-	CapturePCM  40
-	PlaybackPCM  40
+	CapturePCM  14
+	PlaybackPCM  14
 EndSection
 
 SectionModifier
@@ -2699,8 +2699,8 @@ SectionModifier
 	DisableSequence
 		'AUX_PCM_RX Audio Mixer MultiMedia5':1:0
 	EndSequence
-	CapturePCM  40
-	PlaybackPCM  40
+	CapturePCM  14
+	PlaybackPCM  14
 EndSection
 
 SectionModifier
@@ -2713,8 +2713,8 @@ SectionModifier
 	DisableSequence
 		'AUX_PCM_RX Audio Mixer MultiMedia5':1:0
 	EndSequence
-	CapturePCM  40
-	PlaybackPCM  40
+	CapturePCM  14
+	PlaybackPCM  14
 EndSection
 
 SectionModifier
@@ -2727,8 +2727,8 @@ SectionModifier
 	DisableSequence
 		'AFE_PCM_RX Audio Mixer MultiMedia5':1:0
 	EndSequence
-	CapturePCM  40
-	PlaybackPCM  40
+	CapturePCM  14
+	PlaybackPCM  14
 EndSection
 
 SectionModifier
@@ -2741,8 +2741,8 @@ SectionModifier
 	DisableSequence
 		'MI2S_RX Audio Mixer MultiMedia5':1:0
 	EndSequence
-	CapturePCM  40
-	PlaybackPCM  40
+	CapturePCM  14
+	PlaybackPCM  14
 EndSection
 
 SectionModifier
@@ -2755,8 +2755,8 @@ SectionModifier
 	DisableSequence
 		'MI2S_RX Audio Mixer MultiMedia5':1:0
 	EndSequence
-	CapturePCM  40
-	PlaybackPCM  40
+	CapturePCM  14
+	PlaybackPCM  14
 EndSection
 
 SectionModifier
@@ -3166,7 +3166,7 @@ SectionModifier
 	DisableSequence
 		'SLIMBUS_0_RX Audio Mixer MultiMedia4':1:0
 	EndSequence
-	PlaybackPCM  36
+	PlaybackPCM  9
 EndSection
 
 SectionModifier
@@ -3179,7 +3179,7 @@ SectionModifier
 	DisableSequence
 		'AUX_PCM_RX Audio Mixer MultiMedia4':1:0
 	EndSequence
-	PlaybackPCM  36
+	PlaybackPCM  9
 EndSection
 
 SectionModifier
@@ -3192,7 +3192,7 @@ SectionModifier
 	DisableSequence
 		'AUX_PCM_RX Audio Mixer MultiMedia4':1:0
 	EndSequence
-	PlaybackPCM  36
+	PlaybackPCM  9
 EndSection
 
 SectionModifier
@@ -3205,7 +3205,7 @@ SectionModifier
 	DisableSequence
 		'HDMI Mixer MultiMedia4':1:0
 	EndSequence
-	PlaybackPCM  36
+	PlaybackPCM  9
 EndSection
 
 SectionModifier
@@ -3218,7 +3218,7 @@ SectionModifier
 	DisableSequence
 		'AFE_PCM_RX Audio Mixer MultiMedia4':1:0
 	EndSequence
-	PlaybackPCM  36
+	PlaybackPCM  9
 EndSection
 
 SectionModifier
@@ -3231,7 +3231,7 @@ SectionModifier
 	DisableSequence
 		'MI2S_RX Audio Mixer MultiMedia4':1:0
 	EndSequence
-	PlaybackPCM  36
+	PlaybackPCM  9
 EndSection
 
 SectionModifier
@@ -3248,8 +3248,8 @@ SectionModifier
 		'Voice Stub Tx Mixer STUB_TX_HL':1:0
 		'Voice Stub Tx Mixer STUB_1_TX_HL':1:0
 	EndSequence
-	CapturePCM  9
-	PlaybackPCM  9
+	CapturePCM  12
+	PlaybackPCM  12
 EndSection
 
 SectionModifier
@@ -3268,8 +3268,8 @@ SectionModifier
 		'SLIMBUS_3_RX_Voice Mixer Voice Stub':1:0
 		'SLIMBUS_3_RX Port Mixer AUX_PCM_DL_RX':1:0
 	EndSequence
-	CapturePCM  9
-	PlaybackPCM  9
+	CapturePCM  12
+	PlaybackPCM  12
 EndSection
 
 SectionModifier
@@ -3290,8 +3290,8 @@ SectionModifier
 
 	DisableSequence
 	EndSequence
-	CapturePCM  9
-	PlaybackPCM  9
+	CapturePCM  12
+	PlaybackPCM  12
 EndSection
 
 SectionModifier
@@ -3310,8 +3310,8 @@ SectionModifier
 		'SLIMBUS_3_RX_Voice Mixer Voice Stub':1:0
 		'SLIMBUS_3_RX Port Mixer AUX_PCM_DL_RX':1:0
 	EndSequence
-	CapturePCM  9
-	PlaybackPCM  9
+	CapturePCM  12
+	PlaybackPCM  12
 EndSection
 
 SectionModifier
@@ -3332,8 +3332,8 @@ SectionModifier
 
 	DisableSequence
 	EndSequence
-	CapturePCM  9
-	PlaybackPCM  9
+	CapturePCM  12
+	PlaybackPCM  12
 EndSection
 
 SectionModifier
@@ -3356,8 +3356,8 @@ SectionModifier
 		'SLIMBUS_3_RX_Voice Mixer Voice Stub':1:0
 		'SLIMBUS_3_RX Port Mixer MI2S_TX':1:0
 	EndSequence
-	CapturePCM  9
-	PlaybackPCM  9
+	CapturePCM  12
+	PlaybackPCM  12
 EndSection
 
 SectionModifier
@@ -3380,8 +3380,8 @@ SectionModifier
 		'SLIMBUS_3_RX_Voice Mixer Voice Stub':1:0
 		'SLIMBUS_3_RX Port Mixer MI2S_TX':1:0
 	EndSequence
-	CapturePCM  9
-	PlaybackPCM  9
+	CapturePCM  12
+	PlaybackPCM  12
 EndSection
 
 SectionModifier
@@ -3404,8 +3404,8 @@ SectionModifier
 		'SLIMBUS_3_RX_Voice Mixer Voice Stub':1:0
 		'SLIMBUS_3_RX Port Mixer MI2S_TX':1:0
 	EndSequence
-	CapturePCM  9
-	PlaybackPCM  9
+	CapturePCM  12
+	PlaybackPCM  12
 EndSection
 
 SectionModifier
