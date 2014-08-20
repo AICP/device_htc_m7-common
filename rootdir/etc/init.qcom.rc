@@ -226,6 +226,9 @@ on post-fs-data
     mkdir /data/radio 0770 radio radio
     chmod 2770 /data/radio
 
+    # Mpdecision state
+    mkdir /data/mpdecision 0660 system system
+
     # GPS
     mkdir /data/misc/location 0770 gps gps
     mkdir /data/misc/location/mq 0770 gps gps
@@ -354,6 +357,10 @@ service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usbdisk
 service netmgrd /system/bin/netmgrd
     class core
 # End FUSE
+
+service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
+    class main
+    user root
 
 service post-boot /system/bin/sh /system/etc/init.post_boot.sh
     user root
