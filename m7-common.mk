@@ -46,6 +46,7 @@ PRODUCT_PACKAGES += \
     charger \
     choice_fn \
     offmode_charging \
+    chargeled \
     init.recovery.qcom.rc
 
 PRODUCT_PACKAGES += \
