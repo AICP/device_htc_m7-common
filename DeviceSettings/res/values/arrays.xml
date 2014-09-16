@@ -17,9 +17,9 @@
 
     <string-array name="wake_method_entries">
         <item>None</item>
-        <item>Home button</item>
-        <item>Logo button</item>
         <item>Sweep over buttons</item>
+        <item>Double tap to wake</item>
+        <item>Both</item>
     </string-array>
 
     <string-array name="wake_method_entries_values" translatable="false">
