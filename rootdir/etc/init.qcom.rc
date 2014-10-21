@@ -339,6 +339,7 @@ service cir_fw_update /system/bin/cir_fw_update -u cir.img
     oneshot
 
 service fm_dl /system/bin/setprop hw.fm.init 1
+    class late_start
     user root
     group system fm_radio
     disabled
