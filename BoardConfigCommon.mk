@@ -62,7 +62,6 @@ BOARD_BLUEDROID_VENDOR_CONF := device/htc/m7-common/bluetooth/libbt_vndcfg.txt
 BOARD_BLUETOOTH_USES_HCIATTACH_PROPERTY := false
 
 # Camera
-COMMON_GLOBAL_CFLAGS += -DHTC_CAMERA_HARDWARE
 COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 USE_DEVICE_SPECIFIC_CAMERA := true
 
@@ -73,9 +72,6 @@ NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 
 # USB
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
-
-# We have the new GPS driver
-BOARD_HAVE_NEW_QC_GPS := true
 
 # Wifi
 WPA_SUPPLICANT_VERSION           := VER_0_8_X
