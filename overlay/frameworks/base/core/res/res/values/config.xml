@@ -261,20 +261,20 @@
              8 - Search
             16 - App switch
          For example, a device with Home, Back and Menu keys would set this
-         config to 7. -->
-    <integer name="config_deviceHardwareKeys">3</integer>
+         config to 7.
+    <integer name="config_deviceHardwareKeys">3</integer> -->
 
-    <!-- Force permanent menu key -->
-    <bool name="config_force_permanent_menu_key">true</bool>
+    <!-- Force permanent menu key
+    <bool name="config_force_permanent_menu_key">true</bool> -->
 
-    <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
-    <bool name="config_intrusiveBatteryLed">true</bool>
+    <!-- Is the battery LED intrusive? Used to decide if there should be a disable option
+    <bool name="config_intrusiveBatteryLed">true</bool> -->
 
     <!-- Enable the option to check proximity sensor when deciding whether to
          turn the screen on
          NOTE ! - Enable for devices that have a fast response proximity sensor
-    -->
+
     <bool name="config_proximityCheckOnWake">true</bool>
-    <integer name="config_proximityCheckTimeout">400</integer>
+    <integer name="config_proximityCheckTimeout">400</integer> -->
 
 </resources>
