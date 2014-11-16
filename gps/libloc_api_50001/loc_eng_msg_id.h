@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011,2012 Code Aurora Forum. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -9,7 +9,7 @@
  *       copyright notice, this list of conditions and the following
  *       disclaimer in the documentation and/or other materials provided
  *       with the distribution.
- *     * Neither the name of The Linux Foundation, nor the names of its
+ *     * Neither the name of Code Aurora Forum, Inc. nor the names of its
  *       contributors may be used to endorse or promote products derived
  *       from this software without specific prior written permission.
  *
@@ -85,7 +85,6 @@ enum loc_eng_msg_ids_t {
     LOC_ENG_MSG_REQUEST_POSITION,
     LOC_ENG_MSG_EXT_POWER_CONFIG,
 
-#ifdef FEATURE_ULP
     // The following messages are added for ulp
     LOC_ENG_MSG_REQUEST_PHONE_CONTEXT,
     LOC_ENG_MSG_REQUEST_NETWORK_POSIITON,
@@ -116,24 +115,13 @@ enum loc_eng_msg_ids_t {
     // Message is sent by QUIPC module in order to request some info from ULP
     ULP_MSG_REQUEST_COARSE_POSITION,
 
-    // Message is sent to ULP module to re-evaluate its subsystems
-    ULP_MSG_MONITOR,
-
-    // Last ULP MSG
-    ULP_MSG_LAST = 0x700,
-#endif
     /* Message is sent by HAL to LOC API to configure LTE Positioning
        Profile in modem */
     LOC_ENG_MSG_LPP_CONFIG,
 
-#ifdef FEATURE_ULP
     // Message is sent by Android framework (GpsLocationProvider)
     // to inject the raw command
     ULP_MSG_INJECT_RAW_COMMAND,
-#endif
-
-    /* Message is sent by HAL to LOC API to select A-GLONASS protocol */
-    LOC_ENG_MSG_A_GLONASS_PROTOCOL,
 };
 
 #ifdef __cplusplus
