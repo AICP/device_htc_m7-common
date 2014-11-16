@@ -1,4 +1,4 @@
-/* Copyright (c) 2009-2012, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2009-2012 Code Aurora Forum. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -9,7 +9,7 @@
  *       copyright notice, this list of conditions and the following
  *       disclaimer in the documentation and/or other materials provided
  *       with the distribution.
- *     * Neither the name of The Linux Foundation, nor the names of its
+ *     * Neither the name of Code Aurora Forum, Inc. nor the names of its
  *       contributors may be used to endorse or promote products derived
  *       from this software without specific prior written permission.
  *
@@ -57,7 +57,6 @@
 #include <loc_eng_dmn_conn_handler.h>
 #include <loc_eng_msg.h>
 #include <loc_eng_msg_id.h>
-#include <loc_eng_nmea.h>
 #include <msg_q.h>
 #include <loc.h>
 
@@ -84,7 +83,6 @@ static loc_param_s_type loc_parameter_table[] =
   {"INTERMEDIATE_POS",               &gps_conf.INTERMEDIATE_POS,               NULL, 'n'},
   {"ACCURACY_THRES",                 &gps_conf.ACCURACY_THRES,                 NULL, 'n'},
   {"ENABLE_WIPER",                   &gps_conf.ENABLE_WIPER,                   NULL, 'n'},
-  {"NMEA_PROVIDER",                  &gps_conf.NMEA_PROVIDER,                  NULL, 'n'},
   {"SUPL_VER",                       &gps_conf.SUPL_VER,                       NULL, 'n'},
   {"CAPABILITIES",                   &gps_conf.CAPABILITIES,                   NULL, 'n'},
   {"GYRO_BIAS_RANDOM_WALK",          &gps_conf.GYRO_BIAS_RANDOM_WALK,          &gps_conf.GYRO_BIAS_RANDOM_WALK_VALID, 'f'},
@@ -105,7 +103,6 @@ static loc_param_s_type loc_parameter_table[] =
   {"SENSOR_ALGORITHM_CONFIG_MASK",   &gps_conf.SENSOR_ALGORITHM_CONFIG_MASK,   NULL, 'n'},
   {"QUIPC_ENABLED",                  &gps_conf.QUIPC_ENABLED,                  NULL, 'n'},
   {"LPP_PROFILE",                    &gps_conf.LPP_PROFILE,                    NULL, 'n'},
-  {"A_GLONASS_POS_PROTOCOL_SELECT",  &gps_conf.A_GLONASS_POS_PROTOCOL_SELECT,  NULL, 'n'},
 };
 
 static void loc_default_parameters(void)
@@ -114,7 +111,6 @@ static void loc_default_parameters(void)
    gps_conf.INTERMEDIATE_POS = 0;
    gps_conf.ACCURACY_THRES = 0;
    gps_conf.ENABLE_WIPER = 0;
-   gps_conf.NMEA_PROVIDER = 0;
    gps_conf.SUPL_VER = 0x10000;
    gps_conf.CAPABILITIES = 0x7;
 
@@ -146,17 +142,12 @@ static void loc_default_parameters(void)
 
       /* LTE Positioning Profile configuration is disable by default*/
    gps_conf.LPP_PROFILE = 0;
-
-   /*By default no positioning protocol is selected on A-GLONASS system*/
-   gps_conf.A_GLONASS_POS_PROTOCOL_SELECT = 0;
 }
 
 LocEngContext::LocEngContext(gps_create_thread threadCreator) :
     deferred_q((const void*)loc_eng_create_msg_q()),
-#ifdef FEATURE_ULP
     //TODO: should we conditionally create ulp msg q?
     ulp_q((const void*)loc_eng_create_msg_q()),
-#endif
     deferred_action_thread(threadCreator("loc_eng",loc_eng_deferred_action_thread, this)),
     counter(0)
 {
@@ -193,9 +184,7 @@ void LocEngContext::drop()
             pthread_cond_wait(&cond, &lock);
 
             msg_q_destroy((void**)&deferred_q);
-#ifdef FEATURE_ULP
             msg_q_destroy((void**)&ulp_q);
-#endif
             delete me;
             me = NULL;
         }
@@ -280,13 +269,11 @@ int loc_eng_init(loc_eng_data_s_type &loc_eng_data, LocCallbacks* callbacks,
                   void (*loc_external_msg_sender) (void*, void*))
 
 {
-    int ret_val =-1;
-
     ENTRY_LOG_CALLFLOW();
     if (NULL == callbacks || 0 == event) {
         LOC_LOGE("loc_eng_init: bad parameters cb %p eMask %d", callbacks, event);
-        EXIT_LOG(%d, ret_val);
-        return ret_val;
+        EXIT_LOG(%d, 0);
+        return NULL;
     }
 
     STATE_CHECK((NULL == loc_eng_data.context),
@@ -308,7 +295,7 @@ int loc_eng_init(loc_eng_data_s_type &loc_eng_data, LocCallbacks* callbacks,
     loc_eng_data.nmea_cb      = callbacks->nmea_cb;
     loc_eng_data.acquire_wakelock_cb = callbacks->acquire_wakelock_cb;
     loc_eng_data.release_wakelock_cb = callbacks->release_wakelock_cb;
-    loc_eng_data.request_utc_time_cb = callbacks->request_utc_time_cb;
+
     loc_eng_data.intermediateFix = gps_conf.INTERMEDIATE_POS;
 
     // initial states taken care of by the memset above
@@ -316,27 +303,12 @@ int loc_eng_init(loc_eng_data_s_type &loc_eng_data, LocCallbacks* callbacks,
     // loc_eng_data.fix_session_status -- GPS_STATUS_NONE;
     // loc_eng_data.mute_session_state -- LOC_MUTE_SESS_NONE;
 
-    if ((event & LOC_API_ADAPTER_BIT_NMEA_1HZ_REPORT) && (gps_conf.NMEA_PROVIDER == NMEA_PROVIDER_AP))
-    {
-        event = event ^ LOC_API_ADAPTER_BIT_NMEA_1HZ_REPORT; // unregister for modem NMEA report
-        loc_eng_data.generateNmea = true;
-    }
-    else
-    {
-        loc_eng_data.generateNmea = false;
-    }
-
-#ifdef FEATURE_ULP
     LocEng locEngHandle(&loc_eng_data, event, loc_eng_data.acquire_wakelock_cb,
                         loc_eng_data.release_wakelock_cb, loc_eng_msg_sender, loc_external_msg_sender,
                         callbacks->location_ext_parser, callbacks->sv_ext_parser);
-#else
-    LocEng locEngHandle(&loc_eng_data, event, loc_eng_data.acquire_wakelock_cb,
-                        loc_eng_data.release_wakelock_cb, loc_eng_msg_sender,
-                        callbacks->location_ext_parser, callbacks->sv_ext_parser);
-#endif
     loc_eng_data.client_handle = LocApiAdapter::getLocApiAdapter(locEngHandle);
 
+    int ret_val =-1;
     if (NULL == loc_eng_data.client_handle) {
         // drop the context and declare failure
         ((LocEngContext*)(loc_eng_data.context))->drop();
@@ -371,20 +343,10 @@ static int loc_eng_reinit(loc_eng_data_s_type &loc_eng_data)
         msg_q_snd((void*)((LocEngContext*)(loc_eng_data.context))->deferred_q,
                   supl_msg, loc_eng_free_msg);
 
-        loc_eng_msg_lpp_config *lpp_msg(new loc_eng_msg_lpp_config(&loc_eng_data,
-                                                                          gps_conf.LPP_PROFILE));
-        msg_q_snd((void*)((LocEngContext*)(loc_eng_data.context))->deferred_q,
-                  lpp_msg, loc_eng_free_msg);
-
         loc_eng_msg_sensor_control_config *sensor_control_config_msg(
             new loc_eng_msg_sensor_control_config(&loc_eng_data, gps_conf.SENSOR_USAGE));
         msg_q_snd((void*)((LocEngContext*)(loc_eng_data.context))->deferred_q,
                   sensor_control_config_msg, loc_eng_free_msg);
-
-        loc_eng_msg_a_glonass_protocol *a_glonass_protocol_msg(new loc_eng_msg_a_glonass_protocol(&loc_eng_data,
-                                                                          gps_conf.A_GLONASS_POS_PROTOCOL_SELECT));
-        msg_q_snd((void*)((LocEngContext*)(loc_eng_data.context))->deferred_q,
-                  a_glonass_protocol_msg, loc_eng_free_msg);
 
         /* Make sure at least one of the sensor property is specified by the user in the gps.conf file. */
         if( gps_conf.GYRO_BIAS_RANDOM_WALK_VALID ||
@@ -464,7 +426,7 @@ void loc_eng_cleanup(loc_eng_data_s_type &loc_eng_data)
         loc_eng_data.internet_nif = NULL;
     }
 #endif
-    if (loc_eng_data.client_handle->isInSession())
+    if (loc_eng_data.navigating)
     {
         LOC_LOGD("loc_eng_cleanup: fix not stopped. stop it now.");
         loc_eng_stop(loc_eng_data);
@@ -475,14 +437,12 @@ void loc_eng_cleanup(loc_eng_data_s_type &loc_eng_data)
     ((LocEngContext*)(loc_eng_data.context))->drop();
     loc_eng_data.context = NULL;
 
-#ifdef FEATURE_ULP
     // De-initialize ulp
     if (locEngUlpInf != NULL)
     {
         locEngUlpInf = NULL;
         msg_q_destroy( &loc_eng_data.ulp_q);
     }
-#endif
 
     if (loc_eng_data.client_handle != NULL)
     {
@@ -491,8 +451,17 @@ void loc_eng_cleanup(loc_eng_data_s_type &loc_eng_data)
         loc_eng_data.client_handle = NULL;
     }
 
-    loc_eng_dmn_conn_loc_api_server_unblock();
-    loc_eng_dmn_conn_loc_api_server_join();
+#ifdef FEATURE_GNSS_BIT_API
+    {
+        char baseband[PROPERTY_VALUE_MAX];
+        property_get("ro.baseband", baseband, "msm");
+        if ((strcmp(baseband,"svlte2a") == 0))
+        {
+            loc_eng_dmn_conn_loc_api_server_unblock();
+            loc_eng_dmn_conn_loc_api_server_join();
+        }
+    }
+#endif /* FEATURE_GNSS_BIT_API */
 
 #endif
 
@@ -521,16 +490,13 @@ int loc_eng_start(loc_eng_data_s_type &loc_eng_data)
    ENTRY_LOG_CALLFLOW();
    INIT_CHECK(loc_eng_data.context, return -1);
 
-#ifdef FEATURE_ULP
    if((loc_eng_data.ulp_initialized == true) && (gps_conf.CAPABILITIES & ULP_CAPABILITY))
    {
        //Pass the start messgage to ULP if present & activated
        loc_eng_msg *msg(new loc_eng_msg(&loc_eng_data, ULP_MSG_START_FIX));
        msg_q_snd( (void*)((LocEngContext*)(loc_eng_data.context))->ulp_q,
                   msg, loc_eng_free_msg);
-   }
-   else
-#endif
+   }else
    {
        loc_eng_msg *msg(new loc_eng_msg(&loc_eng_data, LOC_ENG_MSG_START_FIX));
        msg_q_snd((void*)((LocEngContext*)(loc_eng_data.context))->deferred_q,
@@ -545,14 +511,13 @@ static int loc_eng_start_handler(loc_eng_data_s_type &loc_eng_data)
    ENTRY_LOG();
    int ret_val = LOC_API_ADAPTER_ERR_SUCCESS;
 
-   if (!loc_eng_data.client_handle->isInSession()) {
+   if (!loc_eng_data.navigating) {
        ret_val = loc_eng_data.client_handle->startFix();
 
        if (ret_val == LOC_API_ADAPTER_ERR_SUCCESS ||
            ret_val == LOC_API_ADAPTER_ERR_ENGINE_DOWN)
        {
-           loc_eng_data.client_handle->setInSession(TRUE);
-           loc_inform_gps_status(loc_eng_data, GPS_STATUS_SESSION_BEGIN);
+           loc_eng_data.navigating = TRUE;
        }
    }
 
@@ -581,16 +546,13 @@ int loc_eng_stop(loc_eng_data_s_type &loc_eng_data)
     ENTRY_LOG_CALLFLOW();
     INIT_CHECK(loc_eng_data.context, return -1);
 
-#ifdef FEATURE_ULP
     if((loc_eng_data.ulp_initialized == true) && (gps_conf.CAPABILITIES & ULP_CAPABILITY))
     {
         //Pass the start messgage to ULP if present & activated
         loc_eng_msg *msg(new loc_eng_msg(&loc_eng_data, ULP_MSG_STOP_FIX));
         msg_q_snd( (void*)((LocEngContext*)(loc_eng_data.context))->ulp_q,
                    msg, loc_eng_free_msg);
-    }
-    else
-#endif
+    }else
     {
         loc_eng_msg *msg(new loc_eng_msg(&loc_eng_data, LOC_ENG_MSG_STOP_FIX));
         msg_q_snd((void*)((LocEngContext*)(loc_eng_data.context))->deferred_q,
@@ -606,15 +568,16 @@ static int loc_eng_stop_handler(loc_eng_data_s_type &loc_eng_data)
    ENTRY_LOG();
    int ret_val = LOC_API_ADAPTER_ERR_SUCCESS;
 
-   if (loc_eng_data.client_handle->isInSession()) {
+   if (loc_eng_data.navigating) {
 
        ret_val = loc_eng_data.client_handle->stopFix();
-       if (ret_val == LOC_API_ADAPTER_ERR_SUCCESS)
+       if (ret_val == LOC_API_ADAPTER_ERR_SUCCESS &&
+           loc_eng_data.fix_session_status != GPS_STATUS_SESSION_BEGIN)
        {
            loc_inform_gps_status(loc_eng_data, GPS_STATUS_SESSION_END);
        }
 
-       loc_eng_data.client_handle->setInSession(FALSE);
+       loc_eng_data.navigating = FALSE;
    }
 
     EXIT_LOG(%d, ret_val);
@@ -702,6 +665,7 @@ int loc_eng_inject_time(loc_eng_data_s_type &loc_eng_data, GpsUtcTime time,
                                  uncertainty));
     msg_q_snd((void*)((LocEngContext*)(loc_eng_data.context))->deferred_q,
               msg, loc_eng_free_msg);
+
     EXIT_LOG(%d, 0);
     return 0;
 }
@@ -805,6 +769,14 @@ static void loc_inform_gps_status(loc_eng_data_s_type &loc_eng_data, GpsStatusVa
     {
         CALLBACK_LOG_CALLFLOW("status_cb", %s, loc_get_gps_status_name(gs.status));
         loc_eng_data.status_cb(&gs);
+
+        // Restore session begin if needed
+        if (status == GPS_STATUS_ENGINE_ON && last_status == GPS_STATUS_SESSION_BEGIN)
+        {
+            GpsStatus gs_sess_begin = { sizeof(gs_sess_begin),GPS_STATUS_SESSION_BEGIN };
+            CALLBACK_LOG_CALLFLOW("status_cb", %s, loc_get_gps_status_name(gs_sess_begin.status));
+            loc_eng_data.status_cb(&gs_sess_begin);
+        }
     }
 
     last_status = status;
@@ -871,27 +843,30 @@ void loc_eng_agps_init(loc_eng_data_s_type &loc_eng_data, AGpsCallbacks* callbac
     STATE_CHECK((NULL == loc_eng_data.agps_status_cb),
                 "agps instance already initialized",
                 return);
-    if(callbacks == NULL) {
-        LOC_LOGE("loc_eng_agps_init: bad parameters cb %p", callbacks);
-        EXIT_LOG(%s, VOID_RET);
-        return;
-    }
     loc_eng_data.agps_status_cb = callbacks->status_cb;
 
     loc_eng_data.agnss_nif = new AgpsStateMachine(loc_eng_data.agps_status_cb,
                                                   AGPS_TYPE_SUPL,
                                                   false);
-#ifdef FEATURE_IPV6
     loc_eng_data.internet_nif = new AgpsStateMachine(loc_eng_data.agps_status_cb,
                                                      AGPS_TYPE_WWAN_ANY,
                                                      false);
     loc_eng_data.wifi_nif = new AgpsStateMachine(loc_eng_data.agps_status_cb,
                                                  AGPS_TYPE_WIFI,
                                                  true);
-#endif
 
-    loc_eng_dmn_conn_loc_api_server_launch(callbacks->create_thread_cb,
+#ifdef FEATURE_GNSS_BIT_API
+    {
+        char baseband[PROPERTY_VALUE_MAX];
+        property_get("ro.baseband", baseband, "msm");
+        if ((strcmp(baseband,"svlte2a") == 0) ||
+            (strcmp(baseband,"msm") == 0))
+        {
+            loc_eng_dmn_conn_loc_api_server_launch(callbacks->create_thread_cb,
                                                    NULL, NULL, &loc_eng_data);
+        }
+    }
+#endif /* FEATURE_GNSS_BIT_API */
 
     loc_eng_agps_reinit(loc_eng_data);
     EXIT_LOG(%s, VOID_RET);
@@ -914,9 +889,8 @@ SIDE EFFECTS
    N/A
 
 ===========================================================================*/
-#ifdef FEATURE_IPV6
 int loc_eng_agps_open(loc_eng_data_s_type &loc_eng_data, AGpsType agpsType,
-                     const char* apn, AGpsBearerType bearerType)
+                     const char* apn, ApnIpType bearerType)
 {
     ENTRY_LOG_CALLFLOW();
     INIT_CHECK(loc_eng_data.context && loc_eng_data.agps_status_cb,
@@ -940,33 +914,6 @@ int loc_eng_agps_open(loc_eng_data_s_type &loc_eng_data, AGpsType agpsType,
     EXIT_LOG(%d, 0);
     return 0;
 }
-#else
-int loc_eng_agps_open(loc_eng_data_s_type &loc_eng_data,
-                     const char* apn)
-{
-    ENTRY_LOG_CALLFLOW();
-    INIT_CHECK(loc_eng_data.context && loc_eng_data.agps_status_cb,
-               return -1);
-
-    if (apn == NULL)
-    {
-        LOC_LOGE("APN Name NULL\n");
-        return 0;
-    }
-
-    LOC_LOGD("loc_eng_agps_open APN name = [%s]", apn);
-
-    int apn_len = smaller_of(strlen (apn), MAX_APN_LEN);
-    loc_eng_msg_atl_open_success *msg(
-        new loc_eng_msg_atl_open_success(&loc_eng_data, apn,
-                                        apn_len));
-    msg_q_snd((void*)((LocEngContext*)(loc_eng_data.context))->deferred_q,
-              msg, loc_eng_free_msg);
-
-    EXIT_LOG(%d, 0);
-    return 0;
-}
-#endif
 
 /*===========================================================================
 FUNCTION    loc_eng_agps_closed
@@ -985,7 +932,6 @@ SIDE EFFECTS
    N/A
 
 ===========================================================================*/
-#ifdef FEATURE_IPV6
 int loc_eng_agps_closed(loc_eng_data_s_type &loc_eng_data, AGpsType agpsType)
 {
     ENTRY_LOG_CALLFLOW();
@@ -999,21 +945,6 @@ int loc_eng_agps_closed(loc_eng_data_s_type &loc_eng_data, AGpsType agpsType)
     EXIT_LOG(%d, 0);
     return 0;
 }
-#else
-int loc_eng_agps_closed(loc_eng_data_s_type &loc_eng_data)
-{
-    ENTRY_LOG_CALLFLOW();
-    INIT_CHECK(loc_eng_data.context && loc_eng_data.agps_status_cb,
-               return -1);
-
-    loc_eng_msg_atl_closed *msg(new loc_eng_msg_atl_closed(&loc_eng_data));
-    msg_q_snd((void*)((LocEngContext*)(loc_eng_data.context))->deferred_q,
-              msg, loc_eng_free_msg);
-
-    EXIT_LOG(%d, 0);
-    return 0;
-}
-#endif
 
 /*===========================================================================
 FUNCTION    loc_eng_agps_open_failed
@@ -1032,7 +963,6 @@ SIDE EFFECTS
    N/A
 
 ===========================================================================*/
-#ifdef FEATURE_IPV6
 int loc_eng_agps_open_failed(loc_eng_data_s_type &loc_eng_data, AGpsType agpsType)
 {
     ENTRY_LOG_CALLFLOW();
@@ -1046,21 +976,6 @@ int loc_eng_agps_open_failed(loc_eng_data_s_type &loc_eng_data, AGpsType agpsTyp
     EXIT_LOG(%d, 0);
     return 0;
 }
-#else
-int loc_eng_agps_open_failed(loc_eng_data_s_type &loc_eng_data)
-{
-    ENTRY_LOG_CALLFLOW();
-    INIT_CHECK(loc_eng_data.context && loc_eng_data.agps_status_cb,
-               return -1);
-
-    loc_eng_msg_atl_open_failed *msg(new loc_eng_msg_atl_open_failed(&loc_eng_data));
-    msg_q_snd((void*)((LocEngContext*)(loc_eng_data.context))->deferred_q,
-              msg, loc_eng_free_msg);
-
-    EXIT_LOG(%d, 0);
-    return 0;
-}
-#endif
 
 /*===========================================================================
 
@@ -1289,10 +1204,9 @@ static void loc_eng_report_status (loc_eng_data_s_type &loc_eng_data, GpsStatusV
     }
 
     // Session End is not reported during Android navigating state
-    boolean navigating = loc_eng_data.client_handle->isInSession();
     if (status != GPS_STATUS_NONE &&
-        !(status == GPS_STATUS_SESSION_END && navigating) &&
-        !(status == GPS_STATUS_SESSION_BEGIN && !navigating))
+        !(status == GPS_STATUS_SESSION_END && loc_eng_data.navigating) &&
+        !(status == GPS_STATUS_SESSION_BEGIN && !loc_eng_data.navigating))
     {
         if (loc_eng_data.mute_session_state != LOC_MUTE_SESS_IN_SESSION)
         {
@@ -1352,9 +1266,7 @@ void loc_eng_handle_engine_up(loc_eng_data_s_type &loc_eng_data)
 
     if (loc_eng_data.agps_status_cb != NULL) {
         loc_eng_data.agnss_nif->dropAllSubscribers();
-#ifdef FEATURE_IPV6
         loc_eng_data.internet_nif->dropAllSubscribers();
-#endif
 
         loc_eng_agps_reinit(loc_eng_data);
     }
@@ -1362,10 +1274,9 @@ void loc_eng_handle_engine_up(loc_eng_data_s_type &loc_eng_data)
     loc_eng_report_status(loc_eng_data, GPS_STATUS_ENGINE_ON);
 
     // modem is back up.  If we crashed in the middle of navigating, we restart.
-    if (loc_eng_data.client_handle->isInSession()) {
+    if (loc_eng_data.navigating) {
         // This sets the copy in adapter to modem
         loc_eng_data.client_handle->setPositionMode(NULL);
-        loc_eng_data.client_handle->setInSession(false);
         loc_eng_start_handler(loc_eng_data);
     }
     EXIT_LOG(%s, VOID_RET);
@@ -1498,24 +1409,10 @@ static void loc_eng_deferred_action_thread(void* arg)
         }
         break;
 
-        case LOC_ENG_MSG_A_GLONASS_PROTOCOL:
-        {
-            loc_eng_msg_a_glonass_protocol *svMsg = (loc_eng_msg_a_glonass_protocol*)msg;
-            loc_eng_data_p->client_handle->setAGLONASSProtocol(svMsg->a_glonass_protocol);
-        }
-        break;
-
         case LOC_ENG_MSG_SUPL_VERSION:
         {
             loc_eng_msg_suple_version *svMsg = (loc_eng_msg_suple_version*)msg;
             loc_eng_data_p->client_handle->setSUPLVersion(svMsg->supl_version);
-        }
-        break;
-
-        case LOC_ENG_MSG_LPP_CONFIG:
-        {
-            loc_eng_msg_lpp_config *svMsg = (loc_eng_msg_lpp_config*)msg;
-            loc_eng_data_p->client_handle->setLPPConfig(svMsg->lpp_config);
         }
         break;
 
@@ -1529,16 +1426,7 @@ static void loc_eng_deferred_action_thread(void* arg)
         case LOC_ENG_MSG_SET_SENSOR_PROPERTIES:
         {
             loc_eng_msg_sensor_properties *spMsg = (loc_eng_msg_sensor_properties*)msg;
-            loc_eng_data_p->client_handle->setSensorProperties(spMsg->gyroBiasVarianceRandomWalk_valid,
-                                                               spMsg->gyroBiasVarianceRandomWalk,
-                                                               spMsg->accelRandomWalk_valid,
-                                                               spMsg->accelRandomWalk,
-                                                               spMsg->angleRandomWalk_valid,
-                                                               spMsg->angleRandomWalk,
-                                                               spMsg->rateRandomWalk_valid,
-                                                               spMsg->rateRandomWalk,
-                                                               spMsg->velocityRandomWalk_valid,
-                                                               spMsg->velocityRandomWalk);
+            loc_eng_data_p->client_handle->setSensorProperties(spMsg->gyroBiasVarianceRandomWalk);
         }
         break;
 
@@ -1546,10 +1434,7 @@ static void loc_eng_deferred_action_thread(void* arg)
         {
             loc_eng_msg_sensor_perf_control_config *spccMsg = (loc_eng_msg_sensor_perf_control_config*)msg;
             loc_eng_data_p->client_handle->setSensorPerfControlConfig(spccMsg->controlMode, spccMsg->accelSamplesPerBatch, spccMsg->accelBatchesPerSec,
-                                                                      spccMsg->gyroSamplesPerBatch, spccMsg->gyroBatchesPerSec,
-                                                                      spccMsg->accelSamplesPerBatchHigh, spccMsg->accelBatchesPerSecHigh,
-                                                                      spccMsg->gyroSamplesPerBatchHigh, spccMsg->gyroBatchesPerSecHigh,
-                                                                      spccMsg->algorithmConfig);
+                                                                      spccMsg->gyroSamplesPerBatch, spccMsg->gyroBatchesPerSec);
         }
         break;
 
@@ -1563,70 +1448,30 @@ static void loc_eng_deferred_action_thread(void* arg)
         case LOC_ENG_MSG_REPORT_POSITION:
             if (loc_eng_data_p->mute_session_state != LOC_MUTE_SESS_IN_SESSION)
             {
-                bool reported = false;
                 loc_eng_msg_report_position *rpMsg = (loc_eng_msg_report_position*)msg;
                 if (loc_eng_data_p->location_cb != NULL) {
                     if (LOC_SESS_FAILURE == rpMsg->status) {
                         // in case we want to handle the failure case
                         loc_eng_data_p->location_cb(NULL, NULL);
-                        reported = true;
                     }
                     // what's in the else if is... (line by line)
                     // 1. this is a good fix; or
-                    //   1.1 there is source info; or
-                    //   1.1.1 this is from hybrid provider;
-                    //   1.2 it is a Satellite fix; or
-                    //   1.2.1 it is a sensor fix
                     // 2. (must be intermediate fix... implicit)
                     //   2.1 we accepte intermediate; and
                     //   2.2 it is NOT the case that
                     //   2.2.1 there is inaccuracy; and
                     //   2.2.2 we care about inaccuracy; and
                     //   2.2.3 the inaccuracy exceeds our tolerance
-                    else if ((LOC_SESS_SUCCESS == rpMsg->status && (
-#ifdef FEATURE_ULP
-                               ((LOCATION_HAS_SOURCE_INFO & rpMsg->location.flags) &&
-                                ULP_LOCATION_IS_FROM_HYBRID == rpMsg->location.position_source) ||
-#endif
-                               ((LOC_POS_TECH_MASK_SATELLITE & rpMsg->technology_mask) ||
-                                (LOC_POS_TECH_MASK_SENSORS & rpMsg->technology_mask)))) ||
+                    else if (LOC_SESS_SUCCESS == rpMsg->status ||
                              (LOC_SESS_INTERMEDIATE == loc_eng_data_p->intermediateFix &&
                               !((rpMsg->location.flags & GPS_LOCATION_HAS_ACCURACY) &&
                                 (gps_conf.ACCURACY_THRES != 0) &&
                                 (rpMsg->location.accuracy > gps_conf.ACCURACY_THRES)))) {
                         loc_eng_data_p->location_cb((GpsLocation*)&(rpMsg->location),
                                                     (void*)rpMsg->locationExt);
-                        reported = true;
                     }
                 }
 
-                // if we have reported this fix
-                if (reported &&
-                    // and if this is a singleshot
-                    GPS_POSITION_RECURRENCE_SINGLE ==
-                    loc_eng_data_p->client_handle->getPositionMode().recurrence) {
-                    if (LOC_SESS_INTERMEDIATE == rpMsg->status) {
-                        // modem could be still working for a final fix,
-                        // although we no longer need it.  So stopFix().
-                        loc_eng_data_p->client_handle->stopFix();
-                    }
-                    // turn off the session flag.
-                    loc_eng_data_p->client_handle->setInSession(false);
-                }
-
-#ifdef FEATURE_ULP
-                if (loc_eng_data_p->generateNmea && rpMsg->location.position_source == ULP_LOCATION_IS_FROM_GNSS)
-                {
-                    loc_eng_nmea_generate_pos(loc_eng_data_p, rpMsg->location, rpMsg->locationExtended);
-                }
-#else
-                if (loc_eng_data_p->generateNmea && (LOC_POS_TECH_MASK_SATELLITE & rpMsg->technology_mask))
-                {
-                    loc_eng_nmea_generate_pos(loc_eng_data_p, rpMsg->location, rpMsg->locationExtended);
-                }
-#endif
-
-#ifdef FEATURE_ULP
                 // Free the allocated memory for rawData
                 GpsLocation* gp = (GpsLocation*)&(rpMsg->location);
                 if (gp != NULL && gp->rawData != NULL)
@@ -1635,7 +1480,6 @@ static void loc_eng_deferred_action_thread(void* arg)
                     gp->rawData = NULL;
                     gp->rawDataSize = 0;
                 }
-#endif
             }
 
             break;
@@ -1648,12 +1492,6 @@ static void loc_eng_deferred_action_thread(void* arg)
                     loc_eng_data_p->sv_status_cb((GpsSvStatus*)&(rsMsg->svStatus),
                                                  (void*)rsMsg->svExt);
                 }
-
-                if (loc_eng_data_p->generateNmea)
-                {
-                    loc_eng_nmea_generate_sv(loc_eng_data_p, rsMsg->svStatus, rsMsg->locationExtended);
-                }
-
             }
             break;
 
@@ -1678,10 +1516,8 @@ static void loc_eng_deferred_action_thread(void* arg)
             loc_eng_msg_request_bit* brqMsg = (loc_eng_msg_request_bit*)msg;
             if (brqMsg->ifType == LOC_ENG_IF_REQUEST_TYPE_SUPL) {
                 stateMachine = loc_eng_data_p->agnss_nif;
-#ifdef FEATURE_IPV6
             } else if (brqMsg->ifType == LOC_ENG_IF_REQUEST_TYPE_ANY) {
                 stateMachine = loc_eng_data_p->internet_nif;
-#endif
             } else {
                 LOC_LOGD("%s]%d: unknown I/F request type = 0x%x\n", __func__, __LINE__, brqMsg->ifType);
                 break;
@@ -1698,10 +1534,8 @@ static void loc_eng_deferred_action_thread(void* arg)
             loc_eng_msg_release_bit* brlMsg = (loc_eng_msg_release_bit*)msg;
             if (brlMsg->ifType == LOC_ENG_IF_REQUEST_TYPE_SUPL) {
                 stateMachine = loc_eng_data_p->agnss_nif;
-#ifdef FEATURE_IPV6
             } else if (brlMsg->ifType == LOC_ENG_IF_REQUEST_TYPE_ANY) {
                 stateMachine = loc_eng_data_p->internet_nif;
-#endif
             } else {
                 LOC_LOGD("%s]%d: unknown I/F request type = 0x%x\n", __func__, __LINE__, brlMsg->ifType);
                 break;
@@ -1715,16 +1549,11 @@ static void loc_eng_deferred_action_thread(void* arg)
         case LOC_ENG_MSG_REQUEST_ATL:
         {
             loc_eng_msg_request_atl* arqMsg = (loc_eng_msg_request_atl*)msg;
-#ifdef FEATURE_IPV6
             boolean backwardCompatibleMode = AGPS_TYPE_INVALID == arqMsg->type;
             AgpsStateMachine* stateMachine = (AGPS_TYPE_SUPL == arqMsg->type ||
                                               backwardCompatibleMode) ?
                                              loc_eng_data_p->agnss_nif :
                                              loc_eng_data_p->internet_nif;
-#else
-            boolean backwardCompatibleMode = false;
-            AgpsStateMachine* stateMachine = loc_eng_data_p->agnss_nif;
-#endif
             ATLSubscriber subscriber(arqMsg->handle,
                                      stateMachine,
                                      loc_eng_data_p->client_handle,
@@ -1743,25 +1572,21 @@ static void loc_eng_deferred_action_thread(void* arg)
                              false);
             // attempt to unsubscribe from agnss_nif first
             if (! loc_eng_data_p->agnss_nif->unsubscribeRsrc((Subscriber*)&s1)) {
-#ifdef FEATURE_IPV6
                 ATLSubscriber s2(arlMsg->handle,
                                  loc_eng_data_p->internet_nif,
                                  loc_eng_data_p->client_handle,
                                  false);
                 // if unsuccessful, try internet_nif
                 loc_eng_data_p->internet_nif->unsubscribeRsrc((Subscriber*)&s2);
-#endif
             }
         }
         break;
 
-#ifdef FEATURE_IPV6
         case LOC_ENG_MSG_REQUEST_WIFI:
         {
             loc_eng_msg_request_wifi *wrqMsg = (loc_eng_msg_request_wifi *)msg;
             if (wrqMsg->senderId == LOC_ENG_IF_REQUEST_SENDER_ID_QUIPC ||
-                wrqMsg->senderId == LOC_ENG_IF_REQUEST_SENDER_ID_MSAPM ||
-                wrqMsg->senderId == LOC_ENG_IF_REQUEST_SENDER_ID_MSAPU) {
+                wrqMsg->senderId == LOC_ENG_IF_REQUEST_SENDER_ID_MSAPM) {
               AgpsStateMachine* stateMachine = loc_eng_data_p->wifi_nif;
               WIFISubscriber subscriber(stateMachine, wrqMsg->ssid, wrqMsg->password, wrqMsg->senderId);
               stateMachine->subscribeRsrc((Subscriber*)&subscriber);
@@ -1780,7 +1605,6 @@ static void loc_eng_deferred_action_thread(void* arg)
             stateMachine->unsubscribeRsrc((Subscriber*)&subscriber);
         }
         break;
-#endif
 
         case LOC_ENG_MSG_REQUEST_XTRA_DATA:
             if (loc_eng_data_p->xtra_module_data.download_request_cb != NULL)
@@ -1790,14 +1614,6 @@ static void loc_eng_deferred_action_thread(void* arg)
             break;
 
         case LOC_ENG_MSG_REQUEST_TIME:
-            if (loc_eng_data_p->request_utc_time_cb != NULL)
-            {
-                loc_eng_data_p->request_utc_time_cb();
-            }
-            else
-            {
-                LOC_LOGE("%s] ERROR: Callback function for request_time is NULL", __func__);
-            }
             break;
 
         case LOC_ENG_MSG_REQUEST_POSITION:
@@ -1826,7 +1642,6 @@ static void loc_eng_deferred_action_thread(void* arg)
         {
             loc_eng_msg_atl_open_success *aosMsg = (loc_eng_msg_atl_open_success*)msg;
             AgpsStateMachine* stateMachine;
-#ifdef FEATURE_IPV6
             switch (aosMsg->agpsType) {
               case AGPS_TYPE_WIFI: {
                 stateMachine = loc_eng_data_p->wifi_nif;
@@ -1842,9 +1657,6 @@ static void loc_eng_deferred_action_thread(void* arg)
             }
 
             stateMachine->setBearer(aosMsg->bearerType);
-#else
-            stateMachine = loc_eng_data_p->agnss_nif;
-#endif
             stateMachine->setAPN(aosMsg->apn, aosMsg->length);
             stateMachine->onRsrcEvent(RSRC_GRANTED);
         }
@@ -1854,7 +1666,6 @@ static void loc_eng_deferred_action_thread(void* arg)
         {
             loc_eng_msg_atl_closed *acsMsg = (loc_eng_msg_atl_closed*)msg;
             AgpsStateMachine* stateMachine;
-#ifdef FEATURE_IPV6
             switch (acsMsg->agpsType) {
               case AGPS_TYPE_WIFI: {
                 stateMachine = loc_eng_data_p->wifi_nif;
@@ -1868,9 +1679,7 @@ static void loc_eng_deferred_action_thread(void* arg)
                 stateMachine  = loc_eng_data_p->internet_nif;
               }
             }
-#else
-            stateMachine = loc_eng_data_p->agnss_nif;
-#endif
+
             stateMachine->onRsrcEvent(RSRC_RELEASED);
         }
         break;
@@ -1879,7 +1688,6 @@ static void loc_eng_deferred_action_thread(void* arg)
         {
             loc_eng_msg_atl_open_failed *aofMsg = (loc_eng_msg_atl_open_failed*)msg;
             AgpsStateMachine* stateMachine;
-#ifdef FEATURE_IPV6
             switch (aofMsg->agpsType) {
               case AGPS_TYPE_WIFI: {
                 stateMachine = loc_eng_data_p->wifi_nif;
@@ -1893,9 +1701,7 @@ static void loc_eng_deferred_action_thread(void* arg)
                 stateMachine  = loc_eng_data_p->internet_nif;
               }
             }
-#else
-            stateMachine = loc_eng_data_p->agnss_nif;
-#endif
+
             stateMachine->onRsrcEvent(RSRC_DENIED);
         }
         break;
@@ -1908,7 +1714,6 @@ static void loc_eng_deferred_action_thread(void* arg)
             loc_eng_handle_engine_up(*loc_eng_data_p);
             break;
 
-#ifdef FEATURE_ULP
         case LOC_ENG_MSG_REQUEST_NETWORK_POSIITON:
         {
             loc_eng_msg_request_network_position *nlprequestmsg = (loc_eng_msg_request_network_position*)msg;
@@ -1938,7 +1743,7 @@ static void loc_eng_deferred_action_thread(void* arg)
                 LOC_LOGE("Ulp Phone context request call back not initialized");
             }
         break;
-#endif
+
         default:
             LOC_LOGE("unsupported msgid = %d\n", msg->msgid);
             break;
@@ -1968,7 +1773,7 @@ static void loc_eng_deferred_action_thread(void* arg)
 
     EXIT_LOG(%s, VOID_RET);
 }
-#ifdef FEATURE_ULP
+
 /*===========================================================================
 FUNCTION loc_eng_ulp_init
 
@@ -1991,15 +1796,15 @@ int loc_eng_ulp_init(loc_eng_data_s_type &loc_eng_data, const ulpInterface * loc
 {
     ENTRY_LOG();
     int ret_val=-1;
-    if((loc_eng_ulpInf != NULL) && (((ulpInterface *)loc_eng_ulpInf)->init != NULL))
+
+    if(loc_eng_ulpInf != NULL)
     {
         // Initialize the ULP interface
         ((ulpInterface *)loc_eng_ulpInf)->init(loc_eng_data);
         loc_eng_data.ulp_initialized = TRUE;
-        ret_val = 0;
     }
-    else
-        LOC_LOGE("ulp not initialized. NULL parameter");
+    ret_val = 0;
+exit:
     EXIT_LOG(%d, ret_val);
     return ret_val;
 }
@@ -2153,14 +1958,9 @@ SIDE EFFECTS
 ===========================================================================*/
 int loc_eng_ulp_phone_context_init(loc_eng_data_s_type &loc_eng_data,UlpPhoneContextCallbacks *callback)
 {
-    int ret_val = -1;
     ENTRY_LOG();
-    if(callback != NULL) {
-        loc_eng_data.ulp_phone_context_req_cb = callback->ulp_request_phone_context_cb ;
-        ret_val = 0;
-    }
-    else
-        LOC_LOGE("loc_eng_ulp_phone_context_init: bad parameters cb %p", callback);
+    loc_eng_data.ulp_phone_context_req_cb = callback->ulp_request_phone_context_cb ;
+    int ret_val =0;
     EXIT_LOG(%d, ret_val);
     return ret_val;
 }
@@ -2184,16 +1984,11 @@ SIDE EFFECTS
 int loc_eng_ulp_network_init(loc_eng_data_s_type &loc_eng_data,
                              UlpNetworkLocationCallbacks *callbacks)
 {
-    int ret_val = -1;
-    ENTRY_LOG_CALLFLOW();
-    if(callbacks != NULL) {
-        loc_eng_data.ulp_network_callback = callbacks->ulp_network_location_request_cb;
-        ret_val = 0;
-    }
-    else
-        LOC_LOGE("loc_eng_ulp_network_init: bad parameters cb %p", callbacks);
-    EXIT_LOG(%d, ret_val);
-    return ret_val;
+   ENTRY_LOG_CALLFLOW();
+   loc_eng_data.ulp_network_callback = callbacks->ulp_network_location_request_cb;
+   int ret_val =0;
+   EXIT_LOG(%d, ret_val);
+   return ret_val;
 }
 
 
@@ -2232,7 +2027,6 @@ int loc_eng_ulp_send_network_position(loc_eng_data_s_type &loc_eng_data,
     EXIT_LOG(%d, ret_val);
     return ret_val;
 }
-#endif
 /*===========================================================================
 FUNCTION    loc_eng_read_config
 
