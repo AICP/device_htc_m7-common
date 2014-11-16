@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011,2012 Code Aurora Forum. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -9,7 +9,7 @@
  *       copyright notice, this list of conditions and the following
  *       disclaimer in the documentation and/or other materials provided
  *       with the distribution.
- *     * Neither the name of The Linux Foundation, nor the names of its
+ *     * Neither the name of Code Aurora Forum, Inc. nor the names of its
  *       contributors may be used to endorse or promote products derived
  *       from this software without specific prior written permission.
  *
@@ -37,10 +37,6 @@
 #include "loc.h"
 #include <loc_eng_log.h>
 #include "loc_eng_msg_id.h"
-
-#ifndef SSID_BUF_SIZE
-    #define SSID_BUF_SIZE (32+1)
-#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -102,35 +98,6 @@ struct LocPosMode
     }
 };
 
-/** Flags to indicate which values are valid in a GpsLocationExtended. */
-typedef uint16_t GpsLocationExtendedFlags;
-/** GpsLocationExtended has valid pdop, hdop, vdop. */
-#define GPS_LOCATION_EXTENDED_HAS_DOP 0x0001
-/** GpsLocationExtended has valid altitude mean sea level. */
-#define GPS_LOCATION_EXTENDED_HAS_ALTITUDE_MEAN_SEA_LEVEL 0x0002
-/** GpsLocation has valid magnetic deviation. */
-#define GPS_LOCATION_EXTENDED_HAS_MAG_DEV 0x0004
-/** GpsLocation has valid mode indicator. */
-#define GPS_LOCATION_EXTENDED_HAS_MODE_IND 0x0008
-
-/** Represents gps location extended. */
-typedef struct {
-    /** set to sizeof(GpsLocationExtended) */
-    size_t          size;
-    /** Contains GpsLocationExtendedFlags bits. */
-    uint16_t        flags;
-    /** Contains the Altitude wrt mean sea level */
-    float           altitudeMeanSeaLevel;
-    /** Contains Position Dilusion of Precision. */
-    float           pdop;
-    /** Contains Horizontal Dilusion of Precision. */
-    float           hdop;
-    /** Contains Vertical Dilusion of Precision. */
-    float           vdop;
-    /** Contains Magnetic Deviation. */
-    float           magneticDeviation;
-} GpsLocationExtended;
-
 typedef enum {
   LOC_ENG_IF_REQUEST_TYPE_SUPL = 0,
   LOC_ENG_IF_REQUEST_TYPE_WIFI,
@@ -140,7 +107,6 @@ typedef enum {
 typedef enum {
   LOC_ENG_IF_REQUEST_SENDER_ID_QUIPC = 0,
   LOC_ENG_IF_REQUEST_SENDER_ID_MSAPM,
-  LOC_ENG_IF_REQUEST_SENDER_ID_MSAPU,
   LOC_ENG_IF_REQUEST_SENDER_ID_GPSONE_DAEMON,
   LOC_ENG_IF_REQUEST_SENDER_ID_MODEM,
   LOC_ENG_IF_REQUEST_SENDER_ID_UNKNOWN
@@ -160,16 +126,6 @@ struct loc_eng_msg {
         LOC_LOGV("deleting msg %s", loc_get_msg_name(msgid));
         LOC_LOGV("deleting msg ox%x", msgid);
     }
-};
-
-struct loc_eng_msg_a_glonass_protocol : public loc_eng_msg {
-    const unsigned long a_glonass_protocol;
-    inline loc_eng_msg_a_glonass_protocol(void* instance, unsigned long protocol) :
-        loc_eng_msg(instance, LOC_ENG_MSG_A_GLONASS_PROTOCOL),
-        a_glonass_protocol(protocol)
-        {
-            LOC_LOGV("A-GLONASS protocol: 0x%lx", protocol);
-        }
 };
 
 struct loc_eng_msg_suple_version : public loc_eng_msg {
@@ -361,52 +317,25 @@ struct loc_eng_msg_delete_aiding_data : public loc_eng_msg {
 
 struct loc_eng_msg_report_position : public loc_eng_msg {
     const GpsLocation location;
-    const GpsLocationExtended locationExtended;
     const void* locationExt;
     const enum loc_sess_status status;
-    const LocPosTechMask technology_mask;
-    inline loc_eng_msg_report_position(void* instance, GpsLocation &loc, GpsLocationExtended &locExtended, void* locExt,
+    inline loc_eng_msg_report_position(void* instance, GpsLocation &loc, void* locExt,
                                        enum loc_sess_status st) :
         loc_eng_msg(instance, LOC_ENG_MSG_REPORT_POSITION),
-        location(loc), locationExtended(locExtended), locationExt(locExt), status(st), technology_mask(LOC_POS_TECH_MASK_DEFAULT)
+        location(loc), locationExt(locExt), status(st)
     {
-#ifdef FEATURE_ULP
-        LOC_LOGV("flags: %d\n  source: %d\n  latitude: %f\n  longitude: %f\n  altitude: %f\n  speed: %f\n  bearing: %f\n  accuracy: %f\n  timestamp: %lld\n  rawDataSize: %d\n  rawData: %p\n  Session status: %d\n Technology mask: %u",
+        LOC_LOGV("flags: %d\n  source: %d\n  latitude: %f\n  longitude: %f\n  altitude: %f\n  speed: %f\n  bearing: %f\n  accuracy: %f\n  timestamp: %lld\n  rawDataSize: %d\n  rawData: %p\n  Session status: %d",
                  location.flags, location.position_source, location.latitude, location.longitude,
                  location.altitude, location.speed, location.bearing, location.accuracy,
-                 location.timestamp, location.rawDataSize, location.rawData,status,technology_mask);
-#else
-        LOC_LOGV("flags: %d\n  latitude: %f\n  longitude: %f\n  altitude: %f\n  speed: %f\n  bearing: %f\n  accuracy: %f\n  timestamp: %lld\n  Session status: %d\n Technology mask: %u",
-                 location.flags, location.latitude, location.longitude,
-                 location.altitude, location.speed, location.bearing, location.accuracy,
-                 location.timestamp, status,technology_mask);
-#endif
-    }
-    inline loc_eng_msg_report_position(void* instance, GpsLocation &loc, GpsLocationExtended &locExtended, void* locExt,
-                                       enum loc_sess_status st, LocPosTechMask technology) :
-        loc_eng_msg(instance, LOC_ENG_MSG_REPORT_POSITION),
-        location(loc), locationExtended(locExtended), locationExt(locExt), status(st), technology_mask(technology)
-    {
-#ifdef FEATURE_ULP
-        LOC_LOGV("flags: %d\n  source: %d\n  latitude: %f\n  longitude: %f\n  altitude: %f\n  speed: %f\n  bearing: %f\n  accuracy: %f\n  timestamp: %lld\n  rawDataSize: %d\n  rawData: %p\n  Session status: %d\n Technology mask: %u",
-                 location.flags, location.position_source, location.latitude, location.longitude,
-                 location.altitude, location.speed, location.bearing, location.accuracy,
-                 location.timestamp, location.rawDataSize, location.rawData,status,technology_mask);
-#else
-        LOC_LOGV("flags: %d\n  latitude: %f\n  longitude: %f\n  altitude: %f\n  speed: %f\n  bearing: %f\n  accuracy: %f\n  timestamp: %lld\n  Session status: %d\n Technology mask: %u",
-                 location.flags, location.latitude, location.longitude,
-                 location.altitude, location.speed, location.bearing, location.accuracy,
-                 location.timestamp, status,technology_mask);
-#endif
+                 location.timestamp, location.rawDataSize, location.rawData,status);
     }
 };
 
 struct loc_eng_msg_report_sv : public loc_eng_msg {
     const GpsSvStatus svStatus;
-    const GpsLocationExtended locationExtended;
     const void* svExt;
-    inline loc_eng_msg_report_sv(void* instance, GpsSvStatus &sv, GpsLocationExtended &locExtended, void* ext) :
-        loc_eng_msg(instance, LOC_ENG_MSG_REPORT_SV), svStatus(sv), locationExtended(locExtended), svExt(ext)
+    inline loc_eng_msg_report_sv(void* instance, GpsSvStatus &sv, void* ext) :
+        loc_eng_msg(instance, LOC_ENG_MSG_REPORT_SV), svStatus(sv), svExt(ext)
     {
         LOC_LOGV("num sv: %d\n  ephemeris mask: %dxn  almanac mask: %x\n  used in fix mask: %x\n      sv: prn         snr       elevation      azimuth",
                  svStatus.num_svs, svStatus.ephemeris_mask, svStatus.almanac_mask, svStatus.used_in_fix_mask);
@@ -583,6 +512,7 @@ struct loc_eng_msg_release_wifi : public loc_eng_msg {
     }
 };
 
+
 struct loc_eng_msg_request_atl : public loc_eng_msg {
     const int handle;
     const AGpsType type;
@@ -720,17 +650,16 @@ struct loc_eng_msg_inject_xtra_data : public loc_eng_msg {
     }
 };
 
-#ifdef FEATURE_IPV6
 struct loc_eng_msg_atl_open_success : public loc_eng_msg {
     const AGpsStatusValue agpsType;
     const int length;
     char* const apn;
-    const AGpsBearerType bearerType;
+    const ApnIpType bearerType;
     inline loc_eng_msg_atl_open_success(void* instance,
                                         AGpsStatusValue atype,
                                         const char* name,
                                         int len,
-                                        AGpsBearerType btype) :
+                                        ApnIpType btype) :
         loc_eng_msg(instance, LOC_ENG_MSG_ATL_OPEN_SUCCESS),
         agpsType(atype), length(len),
         apn(new char[len+1]), bearerType(btype)
@@ -747,30 +676,7 @@ struct loc_eng_msg_atl_open_success : public loc_eng_msg {
         delete[] apn;
     }
 };
-#else
-struct loc_eng_msg_atl_open_success : public loc_eng_msg {
-    const int length;
-    char* const apn;
-    inline loc_eng_msg_atl_open_success(void* instance,
-                                        const char* name,
-                                        int len) :
-        loc_eng_msg(instance, LOC_ENG_MSG_ATL_OPEN_SUCCESS),
-        length(len),
-        apn(new char[len+1])
-    {
-        memcpy((void*)apn, (void*)name, len);
-        apn[len] = 0;
-        LOC_LOGV("apn: %s\n",
-                 apn);
-    }
-    inline ~loc_eng_msg_atl_open_success()
-    {
-        delete[] apn;
-    }
-};
-#endif
 
-#ifdef FEATURE_IPV6
 struct loc_eng_msg_atl_open_failed : public loc_eng_msg {
     const AGpsStatusValue agpsType;
     inline loc_eng_msg_atl_open_failed(void* instance,
@@ -782,17 +688,7 @@ struct loc_eng_msg_atl_open_failed : public loc_eng_msg {
                  loc_get_agps_type_name(agpsType));
     }
 };
-#else
-struct loc_eng_msg_atl_open_failed : public loc_eng_msg {
-    inline loc_eng_msg_atl_open_failed(void* instance) :
-        loc_eng_msg(instance, LOC_ENG_MSG_ATL_OPEN_FAILED)
-    {
-        LOC_LOGV("");
-    }
-};
-#endif
 
-#ifdef FEATURE_IPV6
 struct loc_eng_msg_atl_closed : public loc_eng_msg {
     const AGpsStatusValue agpsType;
     inline loc_eng_msg_atl_closed(void* instance,
@@ -804,15 +700,6 @@ struct loc_eng_msg_atl_closed : public loc_eng_msg {
                  loc_get_agps_type_name(agpsType));
     }
 };
-#else
-struct loc_eng_msg_atl_closed : public loc_eng_msg {
-    inline loc_eng_msg_atl_closed(void* instance) :
-        loc_eng_msg(instance, LOC_ENG_MSG_ATL_CLOSED)
-    {
-        LOC_LOGV("");
-    }
-};
-#endif
 
 struct loc_eng_msg_set_data_enable : public loc_eng_msg {
     const int enable;
@@ -835,7 +722,6 @@ struct loc_eng_msg_set_data_enable : public loc_eng_msg {
     }
 };
 
-#ifdef FEATURE_ULP
 struct loc_eng_msg_request_network_position : public loc_eng_msg {
     const UlpNetworkRequestPos networkPosRequest;
     inline loc_eng_msg_request_network_position (void* instance, UlpNetworkRequestPos networkPosReq) :
@@ -947,7 +833,6 @@ struct ulp_msg_report_quipc_position : public loc_eng_msg {
                  quipc_error_code);
     }
 };
-#endif
 
 void loc_eng_msg_sender(void* loc_eng_data_p, void* msg);
 int loc_eng_msgget(int * p_req_msgq);

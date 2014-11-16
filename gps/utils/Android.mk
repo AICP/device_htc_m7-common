@@ -20,8 +20,6 @@ LOCAL_CFLAGS += \
      -fno-short-enums \
      -D_ANDROID_
 
-LOCAL_LDFLAGS += -Wl,--export-dynamic
-
 ## Includes
 LOCAL_C_INCLUDES:=
 

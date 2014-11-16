@@ -1,4 +1,4 @@
-/* Copyright (c) 2011-2012, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011,2012, Code Aurora Forum. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -9,7 +9,7 @@
  *       copyright notice, this list of conditions and the following
  *       disclaimer in the documentation and/or other materials provided
  *       with the distribution.
- *     * Neither the name of The Linux Foundation, nor the names of its
+ *     * Neither the name of Code Aurora Forum, Inc. nor the names of its
  *       contributors may be used to endorse or promote products derived
  *       from this software without specific prior written permission.
  *
@@ -154,36 +154,22 @@ bool ATLSubscriber::notifyRsrcStatus(Notification &notification)
             break;
         case RSRC_DENIED:
         {
-#ifdef FEATURE_IPV6
             AGpsType type = mBackwardCompatibleMode ?
                               AGPS_TYPE_INVALID : mStateMachine->getType();
             ((LocApiAdapter*)mLocAdapter)->atlOpenStatus(ID, 0,
                                             (char*)mStateMachine->getAPN(),
                                             mStateMachine->getBearer(),
                                             type);
-#else
-            AGpsType type = mStateMachine->getType();
-            ((LocApiAdapter*)mLocAdapter)->atlOpenStatus(ID, 0,
-                                            (char*)mStateMachine->getAPN(),
-                                            type);
-#endif
         }
             break;
         case RSRC_GRANTED:
         {
-#ifdef FEATURE_IPV6
             AGpsType type = mBackwardCompatibleMode ?
                               AGPS_TYPE_INVALID : mStateMachine->getType();
             ((LocApiAdapter*)mLocAdapter)->atlOpenStatus(ID, 1,
                                             (char*)mStateMachine->getAPN(),
                                             mStateMachine->getBearer(),
                                             type);
-#else
-            AGpsType type = mStateMachine->getType();
-            ((LocApiAdapter*)mLocAdapter)->atlOpenStatus(ID, 1,
-                                            (char*)mStateMachine->getAPN(),
-                                            type);
-#endif
         }
             break;
         default:
@@ -194,7 +180,6 @@ bool ATLSubscriber::notifyRsrcStatus(Notification &notification)
     return notify;
 }
 
-#ifdef FEATURE_IPV6
 bool WIFISubscriber::notifyRsrcStatus(Notification &notification)
 {
     bool notify = forMe(notification);
@@ -226,7 +211,7 @@ bool WIFISubscriber::notifyRsrcStatus(Notification &notification)
 
     return notify;
 }
-#endif
+
 
 //======================================================================
 // AgpsState:  AgpsReleasedState / AgpsPendingState / AgpsAcquiredState
@@ -703,23 +688,15 @@ void AgpsStateMachine::sendRsrcRequest(AGpsStatusValue action) const
         nifRequest.type = mType;
         nifRequest.status = action;
 
-#ifdef FEATURE_IPV6
         if (s == NULL) {
-            nifRequest.ipv4_addr = INADDR_NONE;
-            nifRequest.ipv6_addr[0] = 0;
+            nifRequest.ipaddr = INADDR_NONE;
+	    memset(&nifRequest.addr, 0, sizeof(nifRequest.addr));
             nifRequest.ssid[0] = '\0';
             nifRequest.password[0] = '\0';
         } else {
-            s->setIPAddresses(nifRequest.ipv4_addr, (char*)nifRequest.ipv6_addr);
+	    s->setIPAddresses(nifRequest.ipaddr, (char *)&((struct sockaddr_in6*)&(nifRequest.addr))->sin6_addr);
             s->setWifiInfo(nifRequest.ssid, nifRequest.password);
         }
-#else
-        if (s == NULL) {
-            nifRequest.ipaddr = INADDR_NONE;
-        } else {
-            nifRequest.ipaddr = s->ID;
-        }
-#endif
 
         CALLBACK_LOG_CALLFLOW("agps_cb", %s, loc_get_agps_status_name(action));
         (*mServicer)(&nifRequest);
