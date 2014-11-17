@@ -16,4 +16,5 @@
 
 <resources>
     <bool name="config_show_volumeRockerWake">true</bool>
+    <bool name="has_advanced_settings">true</bool>
 </resources>
