@@ -158,7 +158,9 @@ on init
     write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
 
     # Vibrator
-    chown system system /sys/class/timed_output/vibrator/voltage_level
+    chown root system /sys/class/timed_output/vibrator/voltage_level
+    chmod 0664 /sys/class/timed_output/vibrator/voltage_level
+    restorecon /sys/class/timed_output/vibrator/voltage_level
 
     # Touchscreen
     chown system system /sys/android_touch/logo2menu
