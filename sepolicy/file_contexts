@@ -37,3 +37,7 @@
 
 # Timer
 /dev/timerirq                   u:object_r:timerirq_device:s0
+
+# Device Specific Contents
+/sys/android_touch/keypad_enable				u:object_r:keypad_dev:s0
+ /sys/class/timed_output/vibrator/voltage_level				u:object_r:vibe_dev:s0
