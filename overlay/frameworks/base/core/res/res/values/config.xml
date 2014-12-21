@@ -271,7 +271,7 @@
          config to 7. -->
     <integer name="config_deviceHardwareKeys">67</integer>
 
-	    <!-- Hardware keys present on the device with the ability to wake, stored as a bit field.
+    <!-- Hardware keys present on the device with the ability to wake, stored as a bit field.
          This integer should equal the sum of the corresponding value for each
          of the following keys present:
              1 - Home
