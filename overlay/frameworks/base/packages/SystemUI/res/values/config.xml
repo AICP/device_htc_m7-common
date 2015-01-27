@@ -38,6 +38,6 @@
     <bool name="doze_pulse_on_significant_motion">false</bool>
 
     <!-- Doze: should the pickup sensor be used as a pulse signal? -->
-    <bool name="doze_pulse_on_pick_up">true</bool>
+    <bool name="doze_pulse_on_pick_up">false</bool>
 </resources>
 
