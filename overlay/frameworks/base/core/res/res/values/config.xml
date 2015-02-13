@@ -293,7 +293,7 @@
     <bool name="config_powerDecoupleAutoSuspendModeFromDisplay">false</bool>
     <bool name="config_powerDecoupleInteractiveModeFromDisplay">true</bool>
 
-    <bool name="config_dreamsSupported">false</bool>
+    <bool name="config_dreamsSupported">true</bool>
     <bool name="config_dozeAfterScreenOff">true</bool>
 
    <!-- Indicate whether to allow the device to suspend when the screen is off
