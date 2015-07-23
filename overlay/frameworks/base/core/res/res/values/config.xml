@@ -318,4 +318,8 @@
     <string name="config_perf_profile_prop">sys.perf.profile</string>
     <string name="config_perf_profile_default_entry">1</string>
 
+    <!-- Buttonbacklight brightness -->
+    <integer name="config_buttonBrightnessSettingDefault">20</integer>
+    <bool name="config_deviceHasVariableButtonBrightness">true</bool>
+
 </resources>
