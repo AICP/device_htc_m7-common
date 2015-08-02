@@ -23,6 +23,9 @@
 /sys/devices/virtual/timed_output/vibrator/voltage_level   u:object_r:vibeamp_sysfs:s0
 /sys/android_touch/keypad_enable   u:object_r:sysfs_hardware:s0
 
+# TapToWake
+/sys/android_touch/tap_to_wake               u:object_r:tap2wake_dev:s0
+
 # Display Calibration Tools
 /sys/devices/virtual/graphics/fb0/rgb              u:object_r:sysfs_display:s0
 
