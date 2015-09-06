@@ -46,6 +46,10 @@ TARGET_SCREEN_WIDTH := 1080
 $(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-dalvik-heap.mk)
 $(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
 
+# ART
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.dex2oat-flags=--no-watch-dog
+
 # Audio
 PRODUCT_PACKAGES += \
     audio_amplifier.msm8960
