@@ -35,4 +35,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.isUsbOtgEnabled=true
 
 #AICP Device Maintainers
-ro.aicp.maintainer=semdoc (doc HD), Chezbel
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.aicp.maintainer=semdoc (doc HD), Chezbel
