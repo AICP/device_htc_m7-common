@@ -26,9 +26,6 @@
 # TapToWake
 /sys/android_touch/tap_to_wake               u:object_r:tap2wake_dev:s0
 
-# Display Calibration Tools
-/sys/devices/virtual/graphics/fb0/rgb              u:object_r:sysfs_display:s0
-
 # Modem
 /dev/block/mmcblk0p17           u:object_r:modem_efs_partition_device:s0
 /dev/block/mmcblk0p20           u:object_r:modem_efs_partition_device:s0
