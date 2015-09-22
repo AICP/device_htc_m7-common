@@ -322,4 +322,7 @@
     <integer name="config_buttonBrightnessSettingDefault">20</integer>
     <bool name="config_deviceHasVariableButtonBrightness">true</bool>
 
+    <!-- Hardware keys on/off option -->
+    <bool name="config_hwKeysPref">true</bool>
+
 </resources>
