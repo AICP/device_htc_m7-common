@@ -59,6 +59,10 @@ WITH_LINEAGE_CHARGER := false
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/gps.conf:system/etc/gps.conf
 
+# HTC symbols
+PRODUCT_PACKAGES += \
+    libhtc_symbols
+
 # IDC
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/idc/projector_input.idc:system/usr/idc/projector_input.idc \
