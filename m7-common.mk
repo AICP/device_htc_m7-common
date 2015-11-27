@@ -79,10 +79,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/gps.conf:system/etc/gps.conf
 
-# HTC symbols
-PRODUCT_PACKAGES += \
-    libhtc_symbols
-
 # IDC
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/idc/projector_input.idc:system/usr/idc/projector_input.idc \
@@ -98,6 +94,10 @@ PRODUCT_COPY_FILES += \
 # Keystore
 PRODUCT_PACKAGES += \
     keystore.msm8960
+
+# Log
+PRODUCT_PACKAGES += \
+    liblog_shim
 
 # Media
 PRODUCT_COPY_FILES += \
