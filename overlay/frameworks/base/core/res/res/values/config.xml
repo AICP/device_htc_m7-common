@@ -276,6 +276,9 @@
          config to 7. -->
     <integer name="config_deviceHardwareWakeKeys">64</integer>
 
+    <!-- This bool is required by the android system to detect if hardware keys are present or not. -->
+    <bool name="config_hwKeysPref">true</bool>
+
     <!-- Maximum number of supported users -->
     <integer name="config_multiuserMaximumUsers">4</integer>
     <!-- Whether Multiuser UI should be shown -->
