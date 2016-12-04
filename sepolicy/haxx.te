@@ -1,0 +1,22 @@
+#============= bootanim ==============
+allow bootanim sysfs_kgsl:file { getattr open read };
+#============= mdm_helper ==============
+allow mdm_helper toolbox_exec:file { execute execute_no_trans getattr open read };
+#============= mediaserver ==============
+allow mediaserver audio_device:chr_file { ioctl open read write };
+#============= mm-qcamerad ==============
+allow mm-qcamerad camera_device:chr_file { ioctl open read write };
+#============= platform_app ==============
+allow platform_app sysfs_kgsl:file { getattr open read };
+#============= priv_app ==============
+allow priv_app sysfs_kgsl:file { getattr open read };
+#============= surfaceflinger ==============
+allow surfaceflinger sysfs_kgsl:file { getattr open read };
+#============= system_app ==============
+allow system_app sysfs_kgsl:file { getattr open read };
+#============= system_server ==============
+allow system_server sysfs_kgsl:file { getattr open read };
+#============= tee ==============
+allow tee system_file:file execmod;
+#============= untrusted_app ==============
+allow untrusted_app sysfs_kgsl:file { getattr open read };

@@ -9,6 +9,9 @@
 /dev/btlock                     u:object_r:bluetooth_device:s0
 /dev/rfkill                     u:object_r:bluetooth_device:s0
 
+# Cache
+/dev/block/mmcblk0p36           u:object_r:cache_block_device:s0
+
 # Camera
 /data/cam_socket.*              u:object_r:camera_socket:s0
 /dev/gemini.*                   u:object_r:camera_device:s0
@@ -32,6 +35,9 @@
 # Mpdecision
 /data/system/default_values     u:object_r:mpctl_data_file:s0
 /dev/socket/mpctl               u:object_r:mpctl_socket:s0
+
+# RenderThread
+/sys/devices/platform/kgsl-3d0.0/kgsl/kgsl-3d0/gpuclk       u:object_r:sysfs_thermal:s0
 
 # Sensors
 /data/misc/akmd_set.txt         u:object_r:sensors_data_file:s0
