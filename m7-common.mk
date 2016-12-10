@@ -53,7 +53,7 @@ PRODUCT_PACKAGES += \
 WITH_CM_CHARGER := false
 
 # Gello
-PRODUCT_PACKAGES += \
+# PRODUCT_PACKAGES += \
     Gello
 
 # GPS
