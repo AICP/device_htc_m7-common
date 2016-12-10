@@ -150,5 +150,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
     $(LOCAL_PATH)/configs/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
 
+# Enable Google Assistant
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.opa.eligible_device=true \
+    ro.product.model=Pixel XL
+
 # Include non-opensource parts
 $(call inherit-product-if-exists, vendor/htc/m7-common/m7-common-vendor.mk)
