@@ -47,6 +47,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     camera.msm8960 \
     libcamera_shim \
+    Camera2 \
     Snap
 
 # Charger
@@ -54,7 +55,7 @@ WITH_CM_CHARGER := false
 
 # Gello
 # PRODUCT_PACKAGES += \
-    Gello
+    Gello 
 
 # GPS
 PRODUCT_PACKAGES += \
