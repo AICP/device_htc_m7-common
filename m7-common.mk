@@ -47,7 +47,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     camera.msm8960 \
     libcamera_shim \
-    Snap
+    Camera2
 
 # Charger
 WITH_CM_CHARGER := false
