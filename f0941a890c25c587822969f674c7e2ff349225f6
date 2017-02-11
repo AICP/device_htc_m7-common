@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da9df570_2eb63e3e",
+        "filename": "BoardConfigCommon.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 3
+      },
+      "writtenOn": "2017-02-11T11:17:50Z",
+      "side": 1,
+      "message": "You have these already included:\nhttps://github.com/AICP/vendor_aicp/blob/n7.1/configs/common_packages.mk#L133",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 34
+      },
+      "revId": "f0941a890c25c587822969f674c7e2ff349225f6",
+      "serverId": "9f904cbb-a964-4fab-a7dc-5cfc4d5c238b",
+      "unresolved": false
+    }
+  ]
+}
