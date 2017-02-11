@@ -105,3 +105,8 @@ WPA_SUPPLICANT_VERSION           := VER_0_8_X
 
 # inherit from the proprietary version
 -include vendor/htc/m7-common/BoardConfigVendor.mk
+
+# Telephony-ext
+PRODUCT_PACKAGES += telephony-ext
+
+PRODUCT_BOOT_JARS += telephony-ext
