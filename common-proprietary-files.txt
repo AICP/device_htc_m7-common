@@ -166,25 +166,6 @@ etc/firmware/vidc.b03
 etc/firmware/vidc.mdt
 etc/firmware/vidc_1080p.fw
 
-# Graphics
-device/htc/m7-common/graphics/proprietary/vendor/lib/egl/eglsubAndroid.so:system/vendor/lib/egl/eglsubAndroid.so \
-device/htc/m7-common/graphics/proprietary/vendor/lib/egl/libEGL_adreno.so:system/vendor/lib/egl/libEGL_adreno.so \
-device/htc/m7-common/graphics/proprietary/vendor/lib/egl/libGLESv1_CM_adreno.so:system/vendor/lib/egl/libGLESv1_CM_adreno.so \
-device/htc/m7-common/graphics/proprietary/vendor/lib/egl/libGLESv2_adreno.so:system/vendor/lib/egl/libGLESv2_adreno.so \
-device/htc/m7-common/graphics/proprietary/vendor/lib/egl/libq3dtools_adreno.so:system/vendor/lib/egl/libq3dtools_adreno.so \
-device/htc/m7-common/graphics/proprietary/vendor/lib/libadreno_utils.so:system/vendor/lib/libadreno_utils.so \
-device/htc/m7-common/graphics/proprietary/vendor/lib/libbccQTI.so:system/vendor/lib/libbccQTI.so \
-device/htc/m7-common/graphics/proprietary/vendor/lib/libC2D2.so:system/vendor/lib/libC2D2.so \
-device/htc/m7-common/graphics/proprietary/vendor/lib/libc2d30-a3xx.so:system/vendor/lib/libc2d30-a3xx.so \
-device/htc/m7-common/graphics/proprietary/vendor/lib/libCB.so:system/vendor/lib/libCB.so \
-device/htc/m7-common/graphics/proprietary/vendor/lib/libgsl.so:system/vendor/lib/libgsl.so \
-device/htc/m7-common/graphics/proprietary/vendor/lib/libllvm-qcom.so:system/vendor/lib/libllvm-qcom.so \
-device/htc/m7-common/graphics/proprietary/vendor/lib/librs_adreno_sha1.so:system/vendor/lib/librs_adreno_sha1.so \
-device/htc/m7-common/graphics/proprietary/vendor/lib/librs_adreno.so:system/vendor/lib/librs_adreno.so \
-device/htc/m7-common/graphics/proprietary/vendor/lib/libRSDriver_adreno.so:system/vendor/lib/libRSDriver_adreno.so \
-device/htc/m7-common/graphics/proprietary/vendor/lib/libsc-a3xx.so:system/vendor/lib/libsc-a3xx.so \
-device/htc/m7-common/graphics/proprietary/vendor/lib/libuiblur.so:system/vendor/lib/libuiblur.so
-
 # Irda
 bin/cir_fw_update
 etc/cir.img
