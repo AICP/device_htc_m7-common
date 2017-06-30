@@ -1,5 +1,6 @@
 type camera_sysfs, fs_type, sysfs_type;
 type data_gpsone_file, data_file_type, file_type;
+type doubletap2wake_sysfs, fs_type, sysfs_type;
 type ion_debugfs, fs_type, debugfs_type;
 type mdm_helper_efs, data_file_type, file_type;
 type surfaceflinger_sysfs, fs_type, sysfs_type;
