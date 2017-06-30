@@ -1,0 +1,2 @@
+allow hal_power_default sysfs_doubletap2wake:file rw_file_perms;
+

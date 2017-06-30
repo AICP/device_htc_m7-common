@@ -102,6 +102,9 @@
 /sys/devices/virtual/graphics/fb1/product_description  -- u:object_r:surfaceflinger_sysfs:s0
 /sys/devices/virtual/graphics/fb1/vendor_name          -- u:object_r:surfaceflinger_sysfs:s0
 
+# TapToWake
+/sys/android_touch/doubletap2wake                         u:object_r:sysfs_doubletap2wake:s0
+
 # Wifi
 /sys/devices/platform/msm_sdcc.3/mmc_host/mmc1/mmc1:0001/mmc1:0001:2/net/wlan0/mtu   u:object_r:sysfs_wifi:s0
 /sys/devices/platform/msm_sdcc.3/mmc_host/mmc1/mmc1:0001/mmc1:0001:2/net/p2p0/mtu    u:object_r:sysfs_wifi:s0
