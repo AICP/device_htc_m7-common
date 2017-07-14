@@ -15,6 +15,9 @@ on boot
     setprop recovery.perf.mode 0
     start chargeled
 
+    setprop sys.usb.ffs.aio_compat 1
+
+
 on charger
     start choice_fn
     start detect_key
