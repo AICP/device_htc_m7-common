@@ -50,7 +50,7 @@ PRODUCT_PACKAGES += \
     Snap
 
 # Charger
-WITH_CM_CHARGER := false
+WITH_LINEAGE_CHARGER := false
 
 # GPS
 PRODUCT_PACKAGES += \
