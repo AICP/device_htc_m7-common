@@ -50,9 +50,6 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 # Charger
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/htc_lpm/lpm_mode
 
-# CMHW
-BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/cmhw
-
 # Filesystem
 BOARD_BOOTIMAGE_PARTITION_SIZE := 16777216
 BOARD_FLASH_BLOCK_SIZE := 131072
@@ -67,14 +64,14 @@ OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
 # Kernel
 BOARD_KERNEL_BASE := 0x80600000
-BOARD_KERNEL_CMDLINE := console=none androidboot.hardware=qcom user_debug=31
+BOARD_KERNEL_CMDLINE := console=none androidboot.hardware=qcom user_debug=31 androidboot.selinux=permissive
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01800000
 TARGET_KERNEL_CONFIG := m7_defconfig
 TARGET_KERNEL_SOURCE := kernel/htc/msm8960
 
 # Recovery
-BOARD_RECOVERY_BLDRMSG_OFFSET := 2048
+BOARD_GLOBAL_CFLAGS := -DBOARD_RECOVERY_BLDRMSG_OFFSET=2048
 BOARD_NO_SECURE_DISCARD := true
 TARGET_RECOVERY_DEVICE_DIRS += device/htc/m7-common
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/etc/fstab.qcom
@@ -87,9 +84,9 @@ BOARD_PROVIDES_LIBRIL := true
 BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril
 
 # SELinux
--include device/qcom/sepolicy/sepolicy.mk
+#-include device/qcom/sepolicy/sepolicy.mk
 
-BOARD_SEPOLICY_DIRS += device/htc/m7-common/sepolicy
+# BOARD_SEPOLICY_DIRS += device/htc/m7-common/sepolicy
 
 # Wifi
 BOARD_HOSTAPD_DRIVER             := NL80211
