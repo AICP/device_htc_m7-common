@@ -1,7 +1,7 @@
 /dev/rtc0                 0600   system     system
 
 # the DIAG device node is world writable/readable.
-/dev/diag                 0666   root       root
+/dev/diag                 0660   radio      oem_2950
 
 # the genlock client device node is world writable/readable.
 /dev/genlock              0666   root      root
