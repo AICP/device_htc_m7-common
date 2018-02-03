@@ -131,5 +131,9 @@ WIFI_DRIVER_FW_PATH_PARAM        := "/sys/module/bcmdhd/parameters/firmware_path
 WIFI_DRIVER_FW_PATH_STA          := "/system/etc/firmware/fw_bcm4335_b0.bin"
 WPA_SUPPLICANT_VERSION           := VER_0_8_X
 
+# Shipping API level (for CTS backward compatibility)
+PRODUCT_SHIPPING_API_LEVEL := 19
+
 # inherit from the proprietary version
 -include vendor/htc/m7-common/BoardConfigVendor.mk
+
