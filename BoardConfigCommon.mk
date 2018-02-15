@@ -99,6 +99,16 @@ ifneq ($(TARGET_BUILD_VARIANT),user)
 SELINUX_IGNORE_NEVERALLOWS := true
 endif
 
+# Shims
+TARGET_LD_SHIM_LIBS := \
+    /system/bin/mpdecision|libshims_atomic.so \
+    /system/lib/hw/camera.vendor.msm8960.so|libcamera_shim.so \
+    /system/vendor/lib/libqc-opt.so|libqc-opt_shim.so \
+    /system/lib/liblog.so|liblog_shim.so \
+    /system/vendor/lib/libwvm.so|libshim_wvm.so \
+    /system/lib/libril.so|libshim_ril.so \
+    /system/vendor/lib/libril-qc-qmi-1.so|libshim_ril.so
+
 # Wifi
 BOARD_HOSTAPD_DRIVER             := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_bcmdhd

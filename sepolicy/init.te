@@ -1,3 +1,4 @@
 allow init camera_sysfs:file rw_file_perms;
 allow init debugfs:file write;
 allow init vibeamp_sysfs:file rw_file_perms;
+
