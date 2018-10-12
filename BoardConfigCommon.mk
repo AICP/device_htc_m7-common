@@ -1,5 +1,6 @@
 # Copyright (C) 2016 The CyanogenMod Project
 # Copyright (C) 2013 The Android Open Source Project
+# Copyright (C) 2018 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -46,6 +47,7 @@ TARGET_BOOTANIMATION_HALF_RES := true
 
 # Camera
 TARGET_DISPLAY_INSECURE_MM_HEAP := true
+TARGET_PROCESS_SDK_VERSION_OVERRIDE += /system/bin/mediaserver=22
 USE_DEVICE_SPECIFIC_CAMERA := true
 
 # Charger
