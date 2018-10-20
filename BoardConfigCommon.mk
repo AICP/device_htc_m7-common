@@ -48,6 +48,9 @@ TARGET_BOOTANIMATION_HALF_RES := true
 # Camera
 TARGET_DISPLAY_INSECURE_MM_HEAP := true
 TARGET_PROCESS_SDK_VERSION_OVERRIDE += /system/bin/mediaserver=22
+TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
+    /system/bin/mediaserver=22 \
+    /system/vendor/bin/mm-qcamera-daemon=23
 USE_DEVICE_SPECIFIC_CAMERA := true
 
 # Charger
