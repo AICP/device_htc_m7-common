@@ -5,7 +5,7 @@ cc_library_static {
 }
 
 cc_library_shared {
-    name: "libcamera_client_custom",
+    name: "libcamera_client_htc",
 
     aidl: {
         export_aidl_headers: true,
