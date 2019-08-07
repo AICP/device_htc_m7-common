@@ -99,6 +99,27 @@ public:
     void setPictureFormat(const char *format);
     const char *getPictureFormat() const;
 
+    struct FPSRange{ 
+        int minFPS; 
+        int maxFPS; 
+        FPSRange(){ 
+            minFPS=0; 
+            maxFPS=0; 
+        }; 
+        FPSRange(int min,int max){ 
+            minFPS=min; 
+            maxFPS=max; 
+        }; 
+}; 
+    void getBrightnessLumaTargetSet(int *magic, int *sauce) const; 
+    void getRawSize(int *magic, int *sauce) const; 
+    void setPreviewFrameRateMode(const char *mode); 
+    const char *getPreviewFrameRateMode() const; 
+    void setTouchIndexAec(int x, int y); 
+    void getTouchIndexAec(int *x, int *y) const; 
+    void setTouchIndexAf(int x, int y); 
+    void getTouchIndexAf(int *x, int *y) const; 
+
     void dump() const;
     status_t dump(int fd, const Vector<String16>& args) const;
 
@@ -538,6 +559,162 @@ public:
     // Example values: "lowlight,hdr".
     static const char KEY_LIGHTFX[];
 
+    static const char KEY_CAPTURE_MODE[];
+    static const char KEY_FACE_DETECTION[];
+    static const char KEY_SUPPORTED_DENOISE[];
+    static const char KEY_CONTIBURST_TYPE[];
+    static const char KEY_OIS_SUPPORT[];
+    static const char KEY_OIS_MODE[];
+    static const char KEY_ZSL[];
+    static const char KEY_CAMERA_MODE[];
+    static const char KEY_SHARPNESS[];
+
+    static const char AE_BRACKET_HDR_OFF[];
+    static const char AE_BRACKET_HDR[];
+    static const char AE_BRACKET[];
+    static const char APP_OIS_SETTING_FALSE[];
+    static const char APP_OIS_SETTING_TRUE[];
+    static const char AUTO_EXPOSURE_CENTER_WEIGHTED[];
+    static const char AUTO_EXPOSURE_FRAME_AVG[];
+    static const char AUTO_EXPOSURE_SPOT_METERING[];
+    static const char BURST_MODE_LIMIT20[];
+    static const char BURST_MODE_UNLIMITED[];
+    static const char CAPTURE_MODE_CONTI_BURST_ONE_SHOT[];
+    static const char CAPTURE_MODE_CONTI_BURST[];
+    static const char CAPTURE_MODE_CONTI_ZOE[];
+    static const char CAPTURE_MODE_EIS[];
+    static const char CAPTURE_MODE_HDR[];
+    static const char CAPTURE_MODE_NORMAL[];
+    static const char CAPTURE_MODE_PANORAMA[];
+    static const char CAPTURE_MODE_ZOE[];
+    static const char CONTI_BURST_CAPTURE_DONE[];
+    static const char CONTI_BURST_CAPTURING[];
+    static const char DENOISE_OFF[];
+    static const char DENOISE_ON[];
+    static const char EFFECT_EMBOSS[];
+    static const char EFFECT_NEON[];
+    static const char EFFECT_SKETCH[];
+    static const char FACE_DETECTION_OFF[];
+    static const char FACE_DETECTION_ON[];
+    static const char FOCUS_MODE_NORMAL[];
+    static const char HDR_DISABLE[];
+    static const char HDR_ENABLE[];
+    static const char HISTOGRAM_DISABLE[];
+    static const char HISTOGRAM_ENABLE[];
+    static const char ISO_100[];
+    static const char ISO_1600[];
+    static const char ISO_200[] ;
+    static const char ISO_3200[];
+    static const char ISO_400[];
+    static const char ISO_6400[];
+    static const char ISO_800[];
+    static const char ISO_AUTO[];
+    static const char ISO_HJR[] ;
+    static const char KEY_AE_BRACKET_HDR[];
+    static const char KEY_APP_OIS_SETTING[];
+    static const char KEY_AUTO_EXPOSURE[];
+    static const char KEY_CONTI_BURST_STATE[];
+    static const char KEY_CONTRAST[];
+    static const char KEY_DEF_CONTRAST[];
+    static const char KEY_DEF_SATURATION[];
+    static const char KEY_DEF_SHARPNESS[];
+    static const char KEY_DENOISE[];
+    static const char KEY_EXIF_DATETIME[];
+    static const char KEY_FORCE_USE_AUDIO_ENABLED[];
+    static const char KEY_GPS_ALTITUDE_REF[];
+    static const char KEY_GPS_LATITUDE_REF[];
+    static const char KEY_GPS_LONGITUDE_REF[];
+    static const char KEY_GPS_STATUS[];
+    static const char KEY_GPU_EFFECT_PARAM_0[];
+    static const char KEY_GPU_EFFECT_PARAM_1[];
+    static const char KEY_GPU_EFFECT_PARAM_2[];
+    static const char KEY_GPU_EFFECT_PARAM_3[];
+    static const char KEY_GPU_EFFECT[];
+    static const char KEY_HIGH_DYNAMIC_RANGE_IMAGING[];
+    static const char KEY_HISTOGRAM[] ;
+    static const char KEY_ISO_MODE[];
+    static const char KEY_LENSSHADE[] ;
+    static const char KEY_MAX_CONTRAST[];
+    static const char KEY_MAX_SATURATION[];
+    static const char KEY_MAX_SHARPNESS[];
+    static const char KEY_MEMORY_COLOR_ENHANCEMENT[];
+    static const char KEY_MIN_CONTRAST[];
+    static const char KEY_MIN_SATURATION[];
+    static const char KEY_MIN_SHARPNESS[];
+    static const char KEY_POWER_MODE_SUPPORTED[];
+    static const char KEY_POWER_MODE[];
+    static const char KEY_PREVIEW_FRAME_RATE_AUTO_MODE[];
+    static const char KEY_PREVIEW_FRAME_RATE_FIXED_MODE[];
+    static const char KEY_PREVIEW_FRAME_RATE_MODE[];
+    static const char KEY_REDEYE_REDUCTION[];
+    static const char KEY_SATURATION[];
+    static const char KEY_SCENE_DETECT[];
+    static const char KEY_SELECTABLE_ZONE_AF[];
+    static const char KEY_SINGLE_ISP_OUTPUT_ENABLED[];
+    static const char KEY_SKIN_TONE_ENHANCEMENT[];
+    static const char KEY_SMILEINFO_BYFACE_SUPPORTED[];
+    static const char KEY_SUPPORTED_AUTO_EXPOSURE[];
+    static const char KEY_SUPPORTED_CAPTURE_MODES[];
+    static const char KEY_SUPPORTED_FACE_DETECTION[];
+    static const char KEY_SUPPORTED_HDR_IMAGING_MODES[];
+    static const char KEY_SUPPORTED_HFR_SIZES[];
+    static const char KEY_SUPPORTED_HISTOGRAM_MODES[] ;
+    static const char KEY_SUPPORTED_ISO_MODES[];
+    static const char KEY_SUPPORTED_LENSSHADE_MODES[] ;
+    static const char KEY_SUPPORTED_MEM_COLOR_ENHANCE_MODES[];
+    static const char KEY_SUPPORTED_PREVIEW_FRAME_RATE_MODES[];
+    static const char KEY_SUPPORTED_REDEYE_REDUCTION[];
+    static const char KEY_SUPPORTED_SCENE_DETECT[];
+    static const char KEY_SUPPORTED_SELECTABLE_ZONE_AF[];
+    static const char KEY_SUPPORTED_SKIN_TONE_ENHANCEMENT_MODES[];
+    static const char KEY_SUPPORTED_TOUCH_AF_AEC[];
+    static const char KEY_SUPPORTED_VIDEO_HIGH_FRAME_RATE_MODES[];
+    static const char KEY_SUPPORTED_ZSL_MODES[];
+    static const char KEY_TIME_CONS_POST_PROCESSING[];
+    static const char KEY_TOUCH_AF_AEC[];
+    static const char KEY_TOUCH_INDEX_AEC[];
+    static const char KEY_TOUCH_INDEX_AF[];
+    static const char KEY_VIDEO_HIGH_FRAME_RATE[];
+    static const char KEY_ZSL_MYMODE[];
+    static const char LENSSHADE_DISABLE[] ;
+    static const char LENSSHADE_ENABLE[] ;
+    static const char LOW_POWER[];
+    static const char MCE_DISABLE[];
+    static const char MCE_ENABLE[];
+    static const char NORMAL_POWER[];
+    static const char OIS_MODE_OFF[];
+    static const char OIS_MODE_ON[];
+    static const char PIXEL_FORMAT_NV12[];
+    static const char PIXEL_FORMAT_RAW[];
+    static const char PIXEL_FORMAT_YUV420SP_ADRENO[];
+    static const char PIXEL_FORMAT_YV12[];
+    static const char POST_PROCESSING_BYPASS[];
+    static const char POST_PROCESSING_DELAY[];
+    static const char POST_PROCESSING_ENABLE[];
+    static const char REDEYE_REDUCTION_DISABLE[];
+    static const char REDEYE_REDUCTION_ENABLE[];
+    static const char SCENE_DETECT_OFF[];
+    static const char SCENE_DETECT_ON[];
+    static const char SCENE_MODE_AR[];
+    static const char SCENE_MODE_BACKLIGHT[];
+    static const char SCENE_MODE_FLOWERS[];
+    static const char SCENE_MODE_OFF[];
+    static const char SCENE_MODE_TEXT[];
+    static const char SELECTABLE_ZONE_AF_AUTO[];
+    static const char SELECTABLE_ZONE_AF_CENTER_WEIGHTED[];
+    static const char SELECTABLE_ZONE_AF_FRAME_AVERAGE[];
+    static const char SELECTABLE_ZONE_AF_SPOT_METERING[];
+    static const char SKIN_TONE_ENHANCEMENT_DISABLE[];
+    static const char SKIN_TONE_ENHANCEMENT_ENABLE[];
+    static const char TOUCH_AF_AEC_OFF[] ;
+    static const char TOUCH_AF_AEC_ON[] ;
+    static const char VIDEO_HFR_2X[];
+    static const char VIDEO_HFR_3X[];
+    static const char VIDEO_HFR_4X[];
+    static const char VIDEO_HFR_OFF[];
+    static const char ZSL_OFF[];
+    static const char ZSL_ON[];
+
     // Value for KEY_ZOOM_SUPPORTED or KEY_SMOOTH_ZOOM_SUPPORTED.
     static const char TRUE[];
     static const char FALSE[];
@@ -690,6 +867,16 @@ public:
      */
     static int previewFormatToEnum(const char* format);
 
+    enum { 
+        CAMERA_ORIENTATION_UNKNOWN = 0, 
+        CAMERA_ORIENTATION_PORTRAIT = 1, 
+        CAMERA_ORIENTATION_LANDSCAPE = 2, 
+    }; 
+    int getOrientation() const; 
+    void setOrientation(int orientation); 
+    void setPreviewFpsRange(int minFPS,int maxFPS); 
+    void getSupportedHfrSizes(Vector<Size> &sizes) const; 
+    void getMeteringAreaCenter(int * x, int *y) const; 
 private:
     DefaultKeyedVector<String8,String8>    mMap;
 };
