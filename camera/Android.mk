@@ -21,8 +21,7 @@ include $(BUILD_SHARED_LIBRARY)
 include $(CLEAR_VARS)
 
 LOCAL_C_INCLUDES += \
-    $(LOCAL_PATH)/../include \
-    framework/native/include \
+    $(LOCAL_PATH)/camera/include \
     system/media/camera/include
 
 LOCAL_SRC_FILES := \
@@ -35,7 +34,7 @@ LOCAL_STATIC_LIBRARIES := \
 LOCAL_SHARED_LIBRARIES := \
     libhardware \
     liblog \
-    libcamera_client \
+    libcamera_client_htc \
     libutils \
     libcutils \
     libdl \
