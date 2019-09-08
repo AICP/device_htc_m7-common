@@ -19,7 +19,6 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES := \
     icu53.c
 
-LOCAL_SHARED_LIBRARIES := libicuuc libicui18n
 LOCAL_MODULE := libqc-opt_shim
 LOCAL_MODULE_TAGS := optional
 
