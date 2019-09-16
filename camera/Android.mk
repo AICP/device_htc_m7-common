@@ -41,7 +41,8 @@ LOCAL_SHARED_LIBRARIES := \
     libcutils \
     libdl \
     android.hidl.token@1.0-utils \
-    android.hardware.graphics.bufferqueue@1.0
+    android.hardware.graphics.bufferqueue@1.0 \
+    android.hardware.graphics.bufferqueue@2.0
 
 LOCAL_HEADER_LIBRARIES := libnativebase_headers
 
