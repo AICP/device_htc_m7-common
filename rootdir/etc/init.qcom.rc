@@ -160,16 +160,6 @@ on init
 
 # On emmc mount the partition containing firmware
 on fs
-    mkdir /devlog 0700 root root
-    mkdir /ramdump 0700 root root
-
-    # For firmwares
-    mkdir /firmware 0771 system system
-    mkdir /vendor 0771 system system
-    mkdir /vendor/firmware 0771 system system
-    mkdir /firmware/mdm 0771 system system
-    mkdir /firmware/q6 0771 system system
-
     mount_all ./fstab.qcom
 
     mkdir /mnt/qcks 0700 root system

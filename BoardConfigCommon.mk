@@ -76,6 +76,16 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01800000
 TARGET_KERNEL_CONFIG := m7_defconfig
 TARGET_KERNEL_SOURCE := kernel/htc/msm8960
 
+BOARD_ROOT_EXTRA_FOLDERS := \
+    firmware/q6 \
+    firmware/mdm
+
+BOARD_ROOT_EXTRA_SYMLINKS += \
+    /data/tombstones:/tombstones \
+    /data/persist:/persist \
+    /data/ramdump:/ramdump \
+    /data/devlog:/devlog
+
 # Recovery
 BOARD_GLOBAL_CFLAGS := -DBOARD_RECOVERY_BLDRMSG_OFFSET=2048
 BOARD_NO_SECURE_DISCARD := true
