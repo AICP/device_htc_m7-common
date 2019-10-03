@@ -367,19 +367,6 @@ service time_daemon /vendor/bin/time_daemon
     user root
     group root
 
-# WPA
-service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
-    -puse_p2p_group_interface \
-    -O/data/vendor/wifi/wpa/sockets/ \
-    -g@android:vendor_wpa_wlan0
-    interface android.hardware.wifi.supplicant@1.0::ISupplicant default
-    interface android.hardware.wifi.supplicant@1.1::ISupplicant default
-    interface android.hardware.wifi.supplicant@1.2::ISupplicant default
-    class main
-    socket vendor_wpa_wlan0 dgram 660 wifi wifi
-    disabled
-    oneshot
-
 # Property triggers begin here
 
 on property:init.svc.bootanim=stopped
