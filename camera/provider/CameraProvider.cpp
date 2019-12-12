@@ -15,7 +15,7 @@
  */
 
 #define LOG_TAG "CamProvider@2.4-impl"
-//#define LOG_NDEBUG 0
+#define LOG_NDEBUG 1
 #include <android/log.h>
 
 #include "CameraProvider.h"
