@@ -99,6 +99,9 @@ BOARD_ROOT_EXTRA_SYMLINKS += \
     /data/ramdump:/ramdump \
     /data/devlog:/devlog
 
+# LMKD stats logging
+TARGET_LMKD_STATS_LOG := true
+
 # Recovery
 BOARD_GLOBAL_CFLAGS := -DBOARD_RECOVERY_BLDRMSG_OFFSET=2048
 BOARD_NO_SECURE_DISCARD := true
