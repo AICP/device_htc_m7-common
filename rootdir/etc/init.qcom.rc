@@ -174,6 +174,9 @@ on fs
     mkdir /mnt/secdata 0755 system system
     mount tmpfs tmpfs /mnt/secdata mode=0755,gid=1000
 
+    # GPS
+    mount none /system/etc/gps.conf /system/etc/gps_debug.conf bind
+
 on post-fs-data
     # Create symbolic links to mount points outside of /data for qcks
     symlink /mnt/qcks /data/qcks
