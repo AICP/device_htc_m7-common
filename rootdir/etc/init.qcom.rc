@@ -145,6 +145,9 @@ on init
     chmod 0660 /sys/camera_htccallback/htccallback
     restorecon /sys/camera_htccallback/htccallback
 
+    # GPS
+    mount none /system/etc/gps.conf /system/etc/gps_debug.conf bind
+
     # Vibrator
     chown root system /sys/class/timed_output/vibrator/voltage_level
     chmod 0664 /sys/class/timed_output/vibrator/voltage_level
