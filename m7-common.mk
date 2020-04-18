@@ -111,10 +111,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml
 
-# PowerHAL
-PRODUCT_PACKAGES += \
-    libqc-opt_shim
-
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.qcom \
