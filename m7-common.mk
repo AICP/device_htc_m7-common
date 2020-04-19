@@ -39,10 +39,10 @@ PRODUCT_PACKAGES += \
     audio_amplifier.msm8960
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
-    $(LOCAL_PATH)/configs/audio_platform_info.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/audio_platform_info.xml \
-    $(LOCAL_PATH)/configs/audio_policy_configuration.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/audio_policy_configuration.xml \
-    $(LOCAL_PATH)/configs/mixer_paths.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/mixer_paths.xml
+    $(LOCAL_PATH)/configs/audio/audio_effects.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_effects.xml \
+    $(LOCAL_PATH)/configs/audio/audio_platform_info.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/audio_platform_info.xml \
+    $(LOCAL_PATH)/configs/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/audio_policy_configuration.xml \
+    $(LOCAL_PATH)/configs/audio/mixer_paths.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/mixer_paths.xml
 
 # Bluetooth
 PRODUCT_COPY_FILES += \
@@ -86,7 +86,7 @@ PRODUCT_PACKAGES += \
 
 # Media
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/media_profiles.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/media_profiles.xml
+    $(LOCAL_PATH)/configs/media/media_profiles.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/media_profiles.xml
 
 # NFC
 PRODUCT_PACKAGES += \
@@ -100,12 +100,12 @@ PRODUCT_PACKAGES += \
     Tag
 
 ifeq ($(TARGET_BUILD_VARIANT),user)
-    NFCEE_ACCESS_PATH := $(LOCAL_PATH)/configs/nfcee_access.xml
+    NFCEE_ACCESS_PATH := $(LOCAL_PATH)/configs/nfc/nfcee_access.xml
 else
-    NFCEE_ACCESS_PATH := $(LOCAL_PATH)/configs/nfcee_access_debug.xml
+    NFCEE_ACCESS_PATH := $(LOCAL_PATH)/configs/nfc/nfcee_access_debug.xml
 endif
 PRODUCT_COPY_FILES += \
-    $(NFCEE_ACCESS_PATH):$(TARGET_COPY_OUT_SYSTEM)/etc/nfcee_access.xml
+    $(NFCEE_ACCESS_PATH):$(TARGET_COPY_OUT_SYSTEM)/etc/nfc/nfcee_access.xml
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -134,7 +134,7 @@ PRODUCT_COPY_FILES += \
 
 # Thermal
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermald.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/thermald.conf
+    $(LOCAL_PATH)/configs/thermal/thermald.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/thermald.conf
 
 # Voice processing
 PRODUCT_PACKAGES += \
@@ -149,10 +149,10 @@ PRODUCT_PACKAGES += \
     libnetcmdiface
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/calibration:$(TARGET_COPY_OUT_SYSTEM)/etc/calibration \
-    $(LOCAL_PATH)/configs/calibration_EMEA:$(TARGET_COPY_OUT_SYSTEM)/etc/calibration_EMEA \
-    $(LOCAL_PATH)/configs/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/wifi/p2p_supplicant_overlay.conf \
-    $(LOCAL_PATH)/configs/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/wifi/wpa_supplicant_overlay.conf
+    $(LOCAL_PATH)/configs/wifi/calibration:$(TARGET_COPY_OUT_SYSTEM)/etc/calibration \
+    $(LOCAL_PATH)/configs/wifi/calibration_EMEA:$(TARGET_COPY_OUT_SYSTEM)/etc/calibration_EMEA \
+    $(LOCAL_PATH)/configs/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/wifi/p2p_supplicant_overlay.conf \
+    $(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/wifi/wpa_supplicant_overlay.conf
 
 # Include non-opensource parts
 $(call inherit-product-if-exists, vendor/htc/m7-common/m7-common-vendor.mk)
