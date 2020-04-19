@@ -15,6 +15,7 @@
 
 # common msm8960 configs
 $(call inherit-product, device/htc/msm8960-common/msm8960-common.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_k.mk)
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
