@@ -140,6 +140,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/thermal/thermald.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/thermald.conf
 
+# Vibrator
+PRODUCT_PACKAGES += \
+    android.hardware.vibrator@1.0-impl \
+    android.hardware.vibrator@1.0-service
+
 # Voice processing
 PRODUCT_PACKAGES += \
     libqcomvoiceprocessing
