@@ -67,11 +67,11 @@ GraphicBuffer::GraphicBuffer(uint32_t w, uint32_t h,
       mBufferMapper(GraphicBufferMapper::get()),
       mInitCheck(NO_ERROR)
 {
-    width  = w;
-    height = h;
-    stride = inStride;
+    width  = static_cast<int>(w);
+    height = static_cast<int>(h);
+    stride = static_cast<int>(inStride);
     format = inFormat;
-    usage  = inUsage;
+    usage  = static_cast<int>(inUsage);
     handle = inHandle;
 }
 
@@ -109,7 +109,7 @@ void GraphicBuffer::free_handle()
 }
 
 status_t GraphicBuffer::initCheck() const {
-    return mInitCheck;
+    return static_cast<status_t>(mInitCheck);
 }
 
 void GraphicBuffer::dumpAllocationsToSystemLog()
@@ -130,7 +130,7 @@ status_t GraphicBuffer::reallocate(uint32_t w, uint32_t h, PixelFormat f,
     if (mOwner != ownData)
         return INVALID_OPERATION;
 
-    if (handle && w==width && h==height && f==format && reqUsage==usage)
+    if (handle && static_cast<int>(w)==width && static_cast<int>(h)==height && f==format && static_cast<int>(reqUsage)==usage)
         return NO_ERROR;
 
     if (handle) {
@@ -141,16 +141,19 @@ status_t GraphicBuffer::reallocate(uint32_t w, uint32_t h, PixelFormat f,
     return initSize(w, h, f, reqUsage);
 }
 
-status_t GraphicBuffer::initSize(uint32_t w, uint32_t h, PixelFormat format,
+status_t GraphicBuffer::initSize(uint32_t w, uint32_t h, PixelFormat inFormat,
         uint32_t reqUsage)
 {
     GraphicBufferAllocator& allocator = GraphicBufferAllocator::get();
-    status_t err = allocator.alloc(w, h, format, reqUsage, &handle, &stride);
+    int outStride = 0;
+    status_t err = allocator.alloc(w, h, inFormat, reqUsage,
+            &handle, &outStride);
     if (err == NO_ERROR) {
-        this->width  = w;
-        this->height = h;
-        this->format = format;
-        this->usage  = reqUsage;
+        width = static_cast<int>(w);
+        height = static_cast<int>(h);
+        format = inFormat;
+        usage = static_cast<int>(reqUsage);
+        stride = static_cast<int>(outStride);
     }
     return err;
 }
@@ -249,11 +252,11 @@ status_t GraphicBuffer::unlockAsync(int *fenceFd)
 }
 
 size_t GraphicBuffer::getFlattenedSize() const {
-    return (10 + (handle ? handle->numInts : 0))*sizeof(int);
+    return static_cast<size_t>(10 + (handle ? handle->numInts : 0))*sizeof(int);
 }
 
 size_t GraphicBuffer::getFdCount() const {
-    return handle ? handle->numFds : 0;
+    return static_cast<size_t>(handle ? handle->numFds : 0);
 }
 
 status_t GraphicBuffer::flatten(void*& buffer, size_t& size, int*& fds, size_t& count) const {
@@ -279,15 +282,17 @@ status_t GraphicBuffer::flatten(void*& buffer, size_t& size, int*& fds, size_t& 
         buf[8] = handle->numFds;
         buf[9] = handle->numInts;
         native_handle_t const* const h = handle;
-        memcpy(fds,     h->data,             h->numFds*sizeof(int));
-        memcpy(&buf[10], h->data + h->numFds, h->numInts*sizeof(int));
+        memcpy(fds, handle->data,
+                static_cast<size_t>(handle->numFds) * sizeof(int));
+        memcpy(&buf[10], handle->data + handle->numFds,
+                static_cast<size_t>(handle->numInts) * sizeof(int));
     }
 
-    buffer = reinterpret_cast<void*>(static_cast<int*>(buffer) + sizeNeeded);
+    buffer = static_cast<void*>(static_cast<int*>(buffer) + sizeNeeded);
     size -= sizeNeeded;
     if (handle) {
         fds += handle->numFds;
-        count -= handle->numFds;
+        count -= static_cast<size_t>(handle->numFds);
     }
 
     return NO_ERROR;
@@ -300,8 +305,8 @@ status_t GraphicBuffer::unflatten(
     int const* buf = static_cast<int const*>(buffer);
     if (buf[0] != 'GBFR') return BAD_TYPE;
 
-    const size_t numFds  = buf[8];
-    const size_t numInts = buf[9];
+    const size_t numFds  = static_cast<size_t>(buf[8]);
+    const size_t numInts = static_cast<size_t>(buf[9]);
 
     // Limit the maxNumber to be relatively small. The number of fds or ints
     // should not come close to this number, and the number itself was simply
@@ -333,7 +338,7 @@ status_t GraphicBuffer::unflatten(
         stride = buf[3];
         format = buf[4];
         usage  = buf[5];
-        native_handle* h = native_handle_create(numFds, numInts);
+        native_handle* h = native_handle_create(static_cast<int>(numFds), static_cast<int>(numInts));
         if (!h) {
             width = height = stride = format = usage = 0;
             handle = NULL;
@@ -364,7 +369,7 @@ status_t GraphicBuffer::unflatten(
         }
     }
 
-    buffer = reinterpret_cast<void const*>(static_cast<int const*>(buffer) + sizeNeeded);
+    buffer = static_cast<void const*>(static_cast<int const*>(buffer) + sizeNeeded);
     size -= sizeNeeded;
     fds += numFds;
     count -= numFds;

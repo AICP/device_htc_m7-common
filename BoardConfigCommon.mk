@@ -54,6 +54,7 @@ TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
     /system/bin/audioserver=21 \
     /system/vendor/bin/hw/android.hardware.media.omx@1.0-service=21
 USE_DEVICE_SPECIFIC_CAMERA := true
+TARGET_SPECIFIC_CAMERA_PARAMETER_LIBRARY := camera_parameters_htc_msm8960
 
 # Charger
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/htc_lpm/lpm_mode

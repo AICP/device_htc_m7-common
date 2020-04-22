@@ -1,0 +1,5 @@
+cc_library_static {
+    name: "camera_parameters_htc_msm8960",
+    include_dirs: ["device/htc/m7-common/include"],
+    srcs: ["CameraParameters.cpp"],
+}

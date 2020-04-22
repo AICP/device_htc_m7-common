@@ -101,7 +101,16 @@ status_t GraphicBufferAllocator::alloc(uint32_t w, uint32_t h, PixelFormat forma
 
     // we have a h/w allocator and h/w buffer is requested
     status_t err;
-    err = mAllocDev->alloc(mAllocDev, w, h, format, usage, handle, stride);
+
+    // Filter out any usage bits that should not be passed to the gralloc module
+    usage &= GRALLOC_USAGE_ALLOC_MASK;
+
+    int outStride = 0;
+    err = mAllocDev->alloc(mAllocDev, static_cast<int>(w),
+            static_cast<int>(h), format, static_cast<int>(usage), handle,
+            &outStride);
+    *stride = static_cast<uint32_t>(outStride);
+
     ALOGW_IF(err, "alloc(%u, %u, %d, %08x, ...) failed %d (%s)",
             w, h, format, usage, err, strerror(-err));
 

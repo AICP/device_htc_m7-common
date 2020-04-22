@@ -76,8 +76,9 @@ public:
     GraphicBuffer(uint32_t w, uint32_t h, PixelFormat format, uint32_t usage);
 
     // create a buffer from an existing handle
-    GraphicBuffer(uint32_t w, uint32_t h, PixelFormat format, uint32_t usage,
-            uint32_t stride, native_handle_t* handle, bool keepOwnership);
+    GraphicBuffer(uint32_t w, uint32_t h, PixelFormat format,
+            uint32_t usage, uint32_t stride, native_handle_t* handle,
+            bool keepOwnership);
 
     // create a buffer from an existing ANativeWindowBuffer
     GraphicBuffer(ANativeWindowBuffer* buffer, bool keepOwnership);
@@ -85,10 +86,10 @@ public:
     // return status
     status_t initCheck() const;
 
-    uint32_t getWidth() const           { return width; }
-    uint32_t getHeight() const          { return height; }
-    uint32_t getStride() const          { return stride; }
-    uint32_t getUsage() const           { return usage; }
+    uint32_t getWidth() const           { return static_cast<uint32_t>(width); }
+    uint32_t getHeight() const          { return static_cast<uint32_t>(height); }
+    uint32_t getStride() const          { return static_cast<uint32_t>(stride); }
+    uint32_t getUsage() const           { return static_cast<uint32_t>(usage); }
     PixelFormat getPixelFormat() const  { return format; }
     Rect getBounds() const              { return Rect(width, height); }
     uint64_t getId() const              { return mId; }
@@ -144,7 +145,7 @@ private:
     GraphicBuffer& operator = (const GraphicBuffer& rhs);
     const GraphicBuffer& operator = (const GraphicBuffer& rhs) const;
 
-    status_t initSize(uint32_t w, uint32_t h, PixelFormat format,
+    status_t initSize(uint32_t w, uint32_t h, PixelFormat inFormat,
             uint32_t usage);
 
     void free_handle();

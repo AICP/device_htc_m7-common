@@ -53,6 +53,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/bluetooth/bcm4335_prepatch.hcd:$(TARGET_COPY_OUT_VENDOR)/firmware/bcm4335_prepatch.hcd
 
+# Camera HIDL interfaces
+PRODUCT_PACKAGES += \
+    android.hardware.camera.provider@2.4-impl-htc_msm8960 \
+    camera.device@1.0-impl-htc_msm8960
+
 # Camera
 PRODUCT_PACKAGES += \
     camera.msm8960 \

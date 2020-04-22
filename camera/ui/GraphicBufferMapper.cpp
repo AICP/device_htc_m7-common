@@ -16,6 +16,7 @@
 
 #define LOG_TAG "GraphicBufferMapper"
 #define ATRACE_TAG ATRACE_TAG_GRAPHICS
+#define LOG_NDEBUG 0
 
 #include <stdint.h>
 #include <errno.h>
@@ -44,7 +45,7 @@ GraphicBufferMapper::GraphicBufferMapper()
     int err = hw_get_module(GRALLOC_HARDWARE_MODULE_ID, &module);
     ALOGE_IF(err, "FATAL: can't find the %s module", GRALLOC_HARDWARE_MODULE_ID);
     if (err == 0) {
-        mAllocMod = (gralloc_module_t const *)module;
+        mAllocMod = reinterpret_cast<gralloc_module_t const *>(module);
     }
 }
 
@@ -78,7 +79,7 @@ status_t GraphicBufferMapper::lock(buffer_handle_t handle,
     ATRACE_CALL();
     status_t err;
 
-    err = mAllocMod->lock(mAllocMod, handle, usage,
+    err = mAllocMod->lock(mAllocMod, handle, static_cast<int>(usage),
             bounds.left, bounds.top, bounds.width(), bounds.height(),
             vaddr);
 
@@ -96,7 +97,7 @@ status_t GraphicBufferMapper::lockYCbCr(buffer_handle_t handle,
         return -EINVAL; // do not log failure
     }
 
-    err = mAllocMod->lock_ycbcr(mAllocMod, handle, usage,
+    err = mAllocMod->lock_ycbcr(mAllocMod, handle, static_cast<int>(usage),
             bounds.left, bounds.top, bounds.width(), bounds.height(),
             ycbcr);
 
