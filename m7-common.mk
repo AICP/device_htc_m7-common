@@ -30,6 +30,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
+# Bionic Shim
+PRODUCT_PACKAGES += \
+    libshims_bionic
+
 # Bluetooth HAL
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl \
@@ -67,10 +71,15 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     camera.msm8960 \
     libcamera_shim \
-    Snap
+    Snap \
+    libstdc++.vendor
 
 # Charger
 WITH_CM_CHARGER := false
+
+# GUI Shims
+PRODUCT_PACKAGES += \
+    libui_shim
 
 # GPS
 PRODUCT_PACKAGES += \
@@ -127,6 +136,10 @@ endif
 PRODUCT_COPY_FILES += \
     $(NFCEE_ACCESS_PATH):$(TARGET_COPY_OUT_SYSTEM)/etc/nfc/nfcee_access.xml
 
+# Perf
+PRODUCT_PACKAGES += \
+    libshims_atomic
+
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.audio.low_latency.xml \
@@ -144,6 +157,10 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.rc \
     init.target.rc \
     ueventd.qcom.rc
+
+# RIL
+PRODUCT_PACKAGES += \
+    libshims_ril
 
 # Seccomp policy
 PRODUCT_COPY_FILES += \
