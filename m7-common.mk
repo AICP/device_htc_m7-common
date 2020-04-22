@@ -69,6 +69,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/idc/projector_input.idc:$(TARGET_COPY_OUT_SYSTEM)/usr/idc/projector_input.idc \
     $(LOCAL_PATH)/idc/synaptics-rmi-touchscreen.idc:$(TARGET_COPY_OUT_SYSTEM)/usr/idc/synaptics-rmi-touchscreen.idc
 
+# Consumerir HIDL interfaces
+PRODUCT_PACKAGES += \
+    android.hardware.ir@1.0-impl
+
 # Keylayouts
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/h2w_headset.kl:$(TARGET_COPY_OUT_SYSTEM)/usr/keylayout/h2w_headset.kl \
