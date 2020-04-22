@@ -49,7 +49,8 @@ TARGET_BOOTANIMATION_HALF_RES := true
 TARGET_DISPLAY_INSECURE_MM_HEAP := true
 TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
     /system/bin/mediaserver=21 \
-    /system/vendor/bin/mm-qcamera-daemon=21
+    /system/vendor/bin/mm-qcamera-daemon=21 \
+    /system/bin/qseecomd=21
 USE_DEVICE_SPECIFIC_CAMERA := true
 
 # Charger
