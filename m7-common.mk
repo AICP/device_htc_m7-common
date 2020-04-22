@@ -30,6 +30,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
+# Bluetooth HAL
+PRODUCT_PACKAGES += \
+    android.hardware.bluetooth@1.0-impl \
+    libbt-vendor
+
 # Boot animation
 TARGET_SCREEN_HEIGHT := 1920
 TARGET_SCREEN_WIDTH := 1080
