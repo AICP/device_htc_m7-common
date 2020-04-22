@@ -32,7 +32,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Display
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196608 \
-    ro.sf.lcd_density=480
+    ro.sf.lcd_density=420
 
 # Input
 PRODUCT_PROPERTY_OVERRIDES += \
