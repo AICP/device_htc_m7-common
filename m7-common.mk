@@ -194,15 +194,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libshim_wvm
 
-# WiFi
-PRODUCT_PACKAGES += \
-    libnetcmdiface
-
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wifi/calibration:$(TARGET_COPY_OUT_SYSTEM)/etc/calibration \
     $(LOCAL_PATH)/configs/wifi/calibration_EMEA:$(TARGET_COPY_OUT_SYSTEM)/etc/calibration_EMEA \
-    $(LOCAL_PATH)/configs/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/wifi/p2p_supplicant_overlay.conf \
-    $(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/wifi/wpa_supplicant_overlay.conf
+    $(LOCAL_PATH)/configs/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
+    $(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf
 
 # Include non-opensource parts
 $(call inherit-product-if-exists, vendor/htc/m7-common/m7-common-vendor.mk)
