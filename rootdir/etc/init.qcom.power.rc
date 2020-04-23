@@ -63,6 +63,7 @@ on enable-low-power
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "interactive"
+    restorecon -R /sys/devices/system/cpu
     write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay "19000 1400000:39000 1700000:19000"
     write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 93
     write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1190400
