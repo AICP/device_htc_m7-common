@@ -1,0 +1,24 @@
+on early-boot
+    start qmuxd
+
+service kickstartgsm /system/bin/qcks -1 modem_st1 -2 modem_st2 -3 radio_config -4 cdma_record -i /firmware/mdm/image/ -u
+    class core
+    user root
+    oneshot
+    disabled
+
+service kickstartcdma /system/bin/qcks -1 modem_st1 -2 modem_st2 -3 radio_config -4 cdma_record -i /firmware/mdm/image/
+    class core
+    user root
+    oneshot
+    disabled
+
+on property:ro.product.device=m7vzw
+    start kickstartcdma
+
+on property:ro.product.device=m7spr
+    start kickstartcdma
+
+on property:ro.product.device=m7
+    start kickstartgsm
+
