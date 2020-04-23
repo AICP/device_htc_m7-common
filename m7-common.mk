@@ -74,6 +74,10 @@ PRODUCT_PACKAGES += \
     Snap \
     libstdc++.vendor
 
+# Camera External Config
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/camera/external_camera_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/external_camera_config.xml
+
 # Charger
 WITH_CM_CHARGER := false
 
