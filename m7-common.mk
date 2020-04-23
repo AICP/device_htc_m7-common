@@ -170,6 +170,15 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/seccomp/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy
 
+# Sensors HIDL interfaces
+PRODUCT_PACKAGES += \
+    android.hardware.sensors@1.0-impl.htc8960 \
+    android.hardware.sensors@1.0-service.htc8960
+
+# Sensors
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/sensors/_hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/_hals.conf
+
 # System properties
 -include $(LOCAL_PATH)/system_prop.mk
 
