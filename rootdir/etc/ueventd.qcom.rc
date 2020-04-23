@@ -1,11 +1,3 @@
-subsystem adsp
-    devname uevent_devpath
-    dirname /dev/adsp
-
-subsystem msm_camera
-    devname uevent_devpath
-    dirname /dev/msm_camera
-
 /dev/rtc0                 0600   system     system
 
 # the DIAG device node is world writable/readable.
@@ -44,7 +36,10 @@ subsystem msm_camera
 /dev/smd4                 0660   system     system
 /dev/smd3                 0660   bluetooth  bluetooth
 /dev/smd2                 0660   bluetooth  bluetooth
-/dev/smd7                 0660   bluetooth  bluetooth
+/dev/smd5                 0660   system     system
+/dev/smd6                 0660   system     system
+/dev/smd7                 0640   radio      radio
+/dev/smd11                0660   radio      radio
 /dev/smdcntl0             0640   radio      radio
 /dev/smdcntl1             0640   radio      radio
 /dev/smdcntl2             0640   radio      radio
@@ -53,6 +48,10 @@ subsystem msm_camera
 /dev/smdcntl5             0640   radio      radio
 /dev/smdcntl6             0640   radio      radio
 /dev/smdcntl7             0640   radio      radio
+/dev/smdcntl8             0640   radio      radio
+/dev/smdcntl9             0640   radio      radio
+/dev/smdcntl10            0640   radio      radio
+/dev/smdcntl11            0640   radio      radio
 /dev/sdioctl0             0640   radio      radio
 /dev/sdioctl1             0640   radio      radio
 /dev/sdioctl2             0640   radio      radio
@@ -71,12 +70,14 @@ subsystem msm_camera
 /dev/qemu_trace           0666   system     system
 /dev/gemini0              0660   system     camera
 /dev/rawchip0             0660   system     camera
-/dev/mdm                  0660   system     system
+/dev/mdm                  0660   system     radio
 /dev/ttyHSL1              0660   system     system
 /dev/tty_sdio_00          0660   system     system
 /dev/block/mmcblk0p17     0660   system     system
 /dev/block/mmcblk0p18     0660   system     system
+/dev/config*              0660   system     camera
 /dev/video*               0660   system     camera
+/dev/media*               0660   system     camera
 #regular apps need to be able to open ion
 /dev/ion                  0664   system     system
 
@@ -84,10 +85,11 @@ subsystem msm_camera
 /dev/rfkill               0660  root         wifi
 
 #permissions for video
-/dev/msm_vidc_reg         0660  system       audio
-/dev/msm_vidc_dec         0660  system       audio
-/dev/msm_vidc_dec_sec     0660  system       audio
-/dev/msm_vidc_enc         0660  system       audio
+/dev/msm_vidc_reg         0660  system       camera
+/dev/msm_vidc_dec         0660  system       camera
+/dev/msm_vidc_dec_sec     0660  system       camera
+/dev/msm_vidc_enc         0660  system       camera
+/dev/msm_vidc_enc_sec     0660  system       camera
 #permissions for audio
 /dev/msm_amrnb            0660  system       audio
 /dev/msm_amrwb            0660  system       audio
@@ -105,7 +107,8 @@ subsystem msm_camera
 /dev/msm_evrc_in          0660  system       audio
 /dev/msm_preproc_ctl      0660  system       audio
 /dev/msm_a2dp_in          0640  system       audio
-/dev/msm_amrnb_in         0640  system       audio
+/dev/msm_amrnb_in         0660  system       audio
+/dev/msm_amrwb_in         0660  system       audio
 /sys/devices/virtual/smdpkt/smdcntl*       open_timeout   0664 radio radio
 #permissions for sensors
 /dev/msm_dsps             0660  system       system
@@ -129,7 +132,6 @@ subsystem msm_camera
 /dev/pn544                0600  nfc          nfc
 
 # Audio
-/dev/adsp/*               0660  system       audio
 /dev/rt5501               0666  system       audio
 /dev/tfa9887              0666  system       audio
 /dev/tfa9887l             0666  system       audio
@@ -150,3 +152,13 @@ subsystem msm_camera
 
 # keystore
 /dev/qseecom              0660  system       drmrpc
+
+# Sensors
+/dev/cm3602               0640   compass    system
+/dev/lightsensor          0640   system     system
+/sys/devices/virtual/optical_sensors/proximity      ps_adc         0660    input    system
+/sys/devices/virtual/optical_sensors/proximity      ps_poll_delay  0660    input    system
+/sys/devices/virtual/optical_sensors/lightsensor    ls_auto        0660    input    system
+/sys/devices/virtual/optical_sensors/lightsensor    ls_poll_delay  0660    input    system
+/sys/devices/virtual/input/input*                   poll           0660    input    system
+/sys/devices/virtual/input/input*                   pollrate_ms    0660    input    system
