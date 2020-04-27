@@ -74,6 +74,9 @@ TARGET_SPECIFIC_HEADER_PATH += device/htc/m7-common/include
 HAVE_ADRENO_SOURCE := false
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
+# HIDL
+DEVICE_MANIFEST_FILE += device/htc/m7-common/manifest.xml
+
 # Kernel
 BOARD_KERNEL_BASE := 0x80600000
 BOARD_KERNEL_CMDLINE := console=none androidboot.hardware=qcom user_debug=31
