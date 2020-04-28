@@ -15,8 +15,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.bt.bdaddr_path=/sys/module/htc_bdaddress/parameters/bdaddress \
-    persist.bluetooth.bluetooth_audio_hal.disabled=true
+    ro.bt.bdaddr_path=/sys/module/htc_bdaddress/parameters/bdaddress
 
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
