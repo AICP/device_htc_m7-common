@@ -31,6 +31,8 @@
 
 LOCAL_PATH := device/htc/m7-common
 
+TARGET_SPECIFIC_HEADER_PATH += device/htc/m7-common/include
+
 # Audio
 AUDIO_USE_LL_AS_PRIMARY_OUTPUT := true
 BOARD_HAVE_HTC_CSDCLIENT := true
