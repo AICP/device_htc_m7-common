@@ -82,6 +82,10 @@ PRODUCT_COPY_FILES += \
 # Charger
 WITH_CM_CHARGER := false
 
+# DeviceParts
+PRODUCT_PACKAGES += \
+    DeviceParts
+
 # GUI Shims
 PRODUCT_PACKAGES += \
     libui_shim

@@ -158,6 +158,9 @@ on init
     chown root system /sys/android_touch/keypad_enable
     chmod 0660 /sys/android_touch/keypad_enable
 
+    chown system system /sys/devices/virtual/timed_output/vibrator/voltage_level
+    chmod 0664 /sys/devices/virtual/timed_output/vibrator/voltage_level
+
 # On emmc mount the partition containing firmware
 on fs
     mount_all /vendor/etc/fstab.qcom
