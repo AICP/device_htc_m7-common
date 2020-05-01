@@ -129,10 +129,7 @@ TARGET_LD_SHIM_LIBS := \
     /system/bin/mpdecision|libshims_atomic.so \
     /system/vendor/lib/hw/camera.vendor.msm8960.so|libcamera_shim.so \
     /system/lib/liblog.so|liblog_shim.so \
-    /system/vendor/lib/libril.so|libshims_ril.so \
-    /system/vendor/lib/libril-qc-qmi-1.so|libshims_ril.so \
-    /system/lib/libril-qc-qmi-1.so|libshims_ril.so \
-    /system/lib/libui.so|libui_shim.so
+    /system/lib/libril-qc-qmi-1.so|libshims_ril.so
 
 # Wifi
 BOARD_HOSTAPD_DRIVER             := NL80211
