@@ -30,10 +30,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
-# Bionic Shim
-PRODUCT_PACKAGES += \
-    libshims_bionic
-
 # Bluetooth HAL
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl \
@@ -85,10 +81,6 @@ WITH_CM_CHARGER := false
 # DeviceParts
 PRODUCT_PACKAGES += \
     DeviceParts
-
-# GUI Shims
-PRODUCT_PACKAGES += \
-    libui_shim
 
 # GNSS HAL
 PRODUCT_PACKAGES += \
@@ -216,10 +208,6 @@ PRODUCT_PACKAGES += \
 # USB
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service.basic
-
-# Widevine
-PRODUCT_PACKAGES += \
-    libshim_wvm
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wifi/calibration:$(TARGET_COPY_OUT_SYSTEM)/etc/calibration \
