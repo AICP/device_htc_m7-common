@@ -27,25 +27,6 @@ include $(BUILD_SHARED_LIBRARY)
 include $(CLEAR_VARS)
 
 LOCAL_SRC_FILES := \
-    vcsfp_shim.cpp
-
-LOCAL_MODULE := libvcsfp_shim
-LOCAL_MODULE_TAGS := optional
-
-include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-LOCAL_SRC_FILES := bionic.cpp
-LOCAL_MODULE := libshims_bionic
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_CLASS := SHARED_LIBRARIES
-LOCAL_32_BIT_ONLY := true
-LOCAL_SHARED_LIBRARIES := libc
-include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-
-LOCAL_SRC_FILES := \
     ril_shim.cpp
 LOCAL_MODULE := libshims_ril
 LOCAL_MODULE_TAGS := optional
@@ -59,28 +40,5 @@ LOCAL_SRC_FILES := \
 
 LOCAL_MODULE := libshims_atomic
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
-
-include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-LOCAL_SRC_FILES := \
-	pthread_kill.cpp
-
-LOCAL_SYSTEM_SHARED_LIBRARIES := libc
-LOCAL_SHARED_LIBRARIES := libdl_android
-LOCAL_MODULE := libC
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_CLASS := SHARED_LIBRARIES
-LOCAL_VENDOR_MODULE := true
-include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-
-LOCAL_SRC_FILES := \
-    GraphicBuffer.cpp
-
-LOCAL_SHARED_LIBRARIES := libui
-LOCAL_MODULE := libui_shim
-LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_SHARED_LIBRARY)

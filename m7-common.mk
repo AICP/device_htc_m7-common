@@ -86,10 +86,6 @@ WITH_CM_CHARGER := false
 PRODUCT_PACKAGES += \
     DeviceParts
 
-# GUI Shims
-PRODUCT_PACKAGES += \
-    libui_shim
-
 # GNSS HAL
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl \
@@ -216,10 +212,6 @@ PRODUCT_PACKAGES += \
 # USB
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service.basic
-
-# Widevine
-PRODUCT_PACKAGES += \
-    libshim_wvm
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/wifi/calibration:$(TARGET_COPY_OUT_SYSTEM)/etc/calibration \
