@@ -8,8 +8,6 @@ on early-init
 
 on init
 
-    symlink /sdcard /storage/sdcard0
-
     # For Invensense MPU3050
     chmod 0664 /sys/class/gyro_sensors/gyro/mpu_lpm_flag
     chown system system /sys/class/gyro_sensors/gyro/mpu_lpm_flag
