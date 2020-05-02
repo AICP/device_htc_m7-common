@@ -1,0 +1,2 @@
+allow nfc firmware_file:lnk_file { read };
+
