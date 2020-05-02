@@ -1,0 +1,2 @@
+allow adbroot device:file wr_file_perms;
+

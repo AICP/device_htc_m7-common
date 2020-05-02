@@ -1,1 +1,2 @@
-allow tee system_file:file execmod; # for libdrmfs
+# for libdrmfs
+allow tee vendor_lib_file:file { execmod };
