@@ -14,6 +14,7 @@
 /dev/gemini.*                   u:object_r:camera_device:s0
 /dev/rawchip.*                  u:object_r:camera_device:s0
 /sys/camera_htccallback/htccallback u:object_r:camera_sysfs:s0
+/sys/camera_led_status/(.*)     u:object_r:sysfs_camera_led_status:s0
 
 # CIR
 /dev/ttyHSL2                    u:object_r:cir_device:s0
@@ -61,3 +62,8 @@
 /sys/devices/virtual/graphics/fb1/hpd                  -- u:object_r:surfaceflinger_sysfs:s0
 /sys/devices/virtual/graphics/fb1/product_description  -- u:object_r:surfaceflinger_sysfs:s0
 /sys/devices/virtual/graphics/fb1/vendor_name          -- u:object_r:surfaceflinger_sysfs:s0
+
+# blobs
+/system/bin/mm-qcamera-daemon   u:object_r:mm-qcamerad_exec:s0
+/system/bin/netmgrd             u:object_r:netmgrd_exec:s0
+
