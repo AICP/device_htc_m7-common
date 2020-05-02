@@ -1,0 +1,7 @@
+allow sensors hal_sensors_hwservice:hwservice_manager { add find };
+allow sensors sysfs_sensors:dir { search };
+allow sensors sysfs_sensors:file rw_file_perms;
+allow sensors input_device:dir r_dir_perms;
+allow sensors input_device:chr_file r_file_perms;
+allow sensors hidl_base_hwservice:hwservice_manager { add find };
+
