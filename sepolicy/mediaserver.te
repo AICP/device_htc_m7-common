@@ -1,7 +1,21 @@
 allow mediaserver audio_device:chr_file rw_file_perms;
 allow mediaserver camera_device:chr_file rw_file_perms;
+allow mediaserver cameraproxy_service:service_manager find;
+allow mediaserver cameraserver_service:service_manager { add find };
+allow mediaserver graphics_device:dir { search };
+allow mediaserver hal_lineage_camera_motor_hwservice:hwservice_manager { add find };
+allow mediaserver fwk_camera_hwservice:hwservice_manager { add find };
 allow mediaserver ion_debugfs:file r_file_perms;
+allow mediaserver hal_camera_hwservice:hwservice_manager { add find };
+allow mediaserver hidl_base_hwservice:hwservice_manager { add find };
 allow mediaserver self:netlink_kobject_uevent_socket create_socket_perms;
+allow mediaserver sensor_privacy_service:service_manager { add find };
 allow mediaserver sensorservice_service:service_manager find;
+allow mediaserver sysfs_battery_supply:file r_file_perms;
+allow mediaserver sysfs_battery_temp:file r_file_perms;
+allow mediaserver sysfs_camera_led_status:file r_file_perms;
+allow mediaserver sysfs_camera_sensor:file r_file_perms;
 allow mediaserver system_server:unix_stream_socket rw_socket_perms;
+allow mediaserver vendor_lib_file:file { execmod };
+
 binder_call(mediaserver, system_server);

@@ -1,0 +1,2 @@
+allow ueventd self:capability { sys_resource };
+

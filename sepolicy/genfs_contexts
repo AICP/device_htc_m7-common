@@ -1,0 +1,2 @@
+genfscon sysfs /devices/platform/msm_ssbi.0/pm8921-core/pm8xxx-led/leds/amber                                           u:object_r:sysfs_leds:s0
+

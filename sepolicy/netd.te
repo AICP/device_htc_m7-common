@@ -1,0 +1,5 @@
+allow netd device:file rw_file_perms;
+allow netd sysfs_virtual_net:file rw_file_perms;
+# TODO:
+allow netd sysfs:file rw_file_perms;
+
