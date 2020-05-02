@@ -1,4 +1,9 @@
 type camera_sysfs, fs_type, sysfs_type;
+type sysfs_camera_sensor, fs_type, sysfs_type;
+type sysfs_camera_awb_cal, fs_type, sysfs_type;
+type sysfs_camera_led_status, fs_type, sysfs_type;
 type ion_debugfs, fs_type, debugfs_type;
 type surfaceflinger_sysfs, fs_type, sysfs_type;
 type vibeamp_sysfs, fs_type, sysfs_type;
+type vendor_lib_file, vendor_file_type, file_type;
+
