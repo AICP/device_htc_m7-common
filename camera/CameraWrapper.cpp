@@ -132,7 +132,8 @@ static char *camera_fixup_getparams(int id, const char *settings)
     if (params.get(KEY_VIDEO_HDR)) {
         videoHdr = params.get(KEY_VIDEO_HDR);
     }
-
+   // params.set(KEY_SUPPORTED_VIDEO_SIZES,
+     //                  "1280x720,640x480,320x240,176x144");
     /* Disable face detection */
     params.set(android::CameraParameters::KEY_MAX_NUM_DETECTED_FACES_HW, "0");
     params.set(android::CameraParameters::KEY_MAX_NUM_DETECTED_FACES_SW, "0");

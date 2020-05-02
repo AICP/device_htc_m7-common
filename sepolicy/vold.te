@@ -1,0 +1,3 @@
+allow vold block_device:blk_file { getattr };
+allow vold hal_bootctl_hwservice:hwservice_manager { add find };
+
