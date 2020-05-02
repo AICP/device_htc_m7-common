@@ -1,4 +1,7 @@
 allow init camera_sysfs:file rw_file_perms;
 allow init debugfs:file write;
+allow init persist_file:lnk_file { read };
+allow init socket_device:sock_file { create setattr unlink };
+allow init sysfs_leds:file { setattr };
+allow init sysfs_flashlight_leds:file rw_file_perms;
 allow init vibeamp_sysfs:file rw_file_perms;
-

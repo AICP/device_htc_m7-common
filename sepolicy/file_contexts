@@ -1,19 +1,26 @@
-
 # Audio
 /dev/htc-acoustic               u:object_r:audio_device:s0
 /dev/rt5501                     u:object_r:audio_device:s0
 /dev/tfa9887                    u:object_r:audio_device:s0
 /dev/tfa9887l                   u:object_r:audio_device:s0
 
+# Battery-temp
+/sys/devices/platform/htc_battery/power_supply/battery/batt_temp   u:object_r:sysfs_battery_temp:s0
+
 # Bluetooth
-/dev/btlock                     u:object_r:bluetooth_device:s0
-/dev/rfkill                     u:object_r:bluetooth_device:s0
+/dev/btlock                              u:object_r:bluetooth_device:s0
+/dev/rfkill                              u:object_r:bluetooth_device:s0
+/sys/module/bluetooth/parameters/(.*)    u:object_r:sysfs_bluetooth:s0
 
 # Camera
 /data/cam_socket.*              u:object_r:camera_socket:s0
 /dev/gemini.*                   u:object_r:camera_device:s0
 /dev/rawchip.*                  u:object_r:camera_device:s0
 /sys/camera_htccallback/htccallback u:object_r:camera_sysfs:s0
+/sys/camera_led_status/(.*)     u:object_r:sysfs_camera_led_status:s0
+/sys/android_camera_awb_cal/(.*)   u:object_r:sysfs_camera_awb_cal:s0
+/sys/android_camera/sensor      u:object_r:sysfs_camera_sensor:s0
+/sys/android_camera2/sensor     u:object_r:sysfs_camera_sensor:s0
 
 # CIR
 /dev/ttyHSL2                    u:object_r:cir_device:s0
@@ -25,11 +32,33 @@
 # Encryption
 /dev/block/platform/msm_sdcc\.1/by-name/extra  u:object_r:metadata_block_device:s0
 
+# Flashlight
+/sys/devices/i2c-2/2-0033/leds/flashlight/(.*)      u:object_r:sysfs_flashlight_leds:s0
+
+# Gnss
+/data/misc/gpsone_d/(.*)                u:object_r:data_gpsone_file:s0
+
 # Graphics
 /sys/devices/platform/kgsl-3d0\.0/kgsl/kgsl-3d0/gpuclk       u:object_r:sysfs_thermal:s0
 /sys/devices/platform/kgsl-3d0\.0/kgsl/kgsl-3d0/max_gpuclk   u:object_r:sysfs_thermal:s0
 /sys/devices/platform/kgsl-3d0\.0/kgsl/kgsl-3d0/reset_count  u:object_r:sysfs_thermal:s0
 /sys/kernel/debug/ion/mm                                     u:object_r:ion_debugfs:s0
+
+# Health
+/sys/devices/platform/htc_battery/power_supply/ac/(.*)           u:object_r:sysfs_battery_supply:s0
+/sys/devices/platform/htc_battery/power_supply/usb/(.*)          u:object_r:sysfs_battery_supply:s0
+/sys/devices/platform/htc_battery/power_supply/battery/(.*)      u:object_r:sysfs_battery_supply:s0
+/sys/devices/platform/htc_battery/power_supply/wireless/(.*)     u:object_r:sysfs_battery_supply:s0
+
+# Lights
+/system/vendor/bin/hw/android.hardware.light@2.0-service.htc_msm8960                    u:object_r:hal_light_default_exec:s0
+/sys/devices/platform/msm_ssbi.0/pm8921-core/pm8xxx-led/leds/amber/(.*)?                u:object_r:sysfs_leds:s0
+/sys/devices/platform/msm_ssbi.0/pm8921-core/pm8xxx-led/leds/green/(.*)?                u:object_r:sysfs_leds:s0
+/sys/devices/platform/msm_ssbi.0/pm8921-core/pm8xxx-led/leds/button-backlight/(.*)?     u:object_r:sysfs_leds:s0
+/sys/devices/platform/msm_fb.590593/leds/lcd-backlight/(.*)                             u:object_r:sysfs_leds:s0
+
+# Mdm_helper
+/data/efs/(.*)                  u:object_r:mdm_helper_efs:s0
 
 # Modem
 /dev/block/mmcblk0p17           u:object_r:modem_efs_partition_device:s0
@@ -42,22 +71,49 @@
 /data/system/default_values     u:object_r:mpctl_data_file:s0
 /dev/socket/mpctl               u:object_r:mpctl_socket:s0
 
+# Netd
+/sys/devices/virtual/net/(.*)        u:object_r:sysfs_virtual_net:s0
+
 # Root-fs
 /devlog(/.*)?                   u:object_r:rootfs:s0
 /ramdump(/.*)?                  u:object_r:rootfs:s0
 /tombstones(/.*)?               u:object_r:rootfs:s0
 
 # Sensors
-/data/misc/akmd_set.txt         u:object_r:sensors_data_file:s0
-/dev/akm8963                    u:object_r:sensors_device:s0
-/dev/akm8963_dev                u:object_r:sensors_device:s0
-/dev/cm3602                     u:object_r:sensors_device:s0
-/dev/lightsensor                u:object_r:sensors_device:s0
-/dev/timerirq                   u:object_r:sensors_device:s0
-/system/bin/akmd                u:object_r:akmd_exec:s0
+/system/vendor/bin/hw/android.hardware.sensors@1.0-service.htc8960    u:object_r:sensors_exec:s0
+/data/misc/akmd_set.txt                                               u:object_r:sensors_data_file:s0
+/dev/akm8963                                                          u:object_r:sensors_device:s0
+/dev/akm8963_dev                                                      u:object_r:sensors_device:s0
+/dev/cm3602                                                           u:object_r:sensors_device:s0
+/dev/lightsensor                                                      u:object_r:sensors_device:s0
+/dev/timerirq                                                         u:object_r:sensors_device:s0
+/sys/devices/virtual/htc_gyro/gyro/enable_device                      u:object_r:sysfs_sensors:s0
+/sys/devices/virtual/htc_g_sensor/g_sensor                            u:object_r:sysfs_sensors:s0
+
+# Soc
+/sys/devices/system/soc/soc0/id               u:object_r:sysfs_system_soc:s0
 
 # Surfaceflinger
 /sys/devices/virtual/graphics/fb1/format_3d            -- u:object_r:surfaceflinger_sysfs:s0
 /sys/devices/virtual/graphics/fb1/hpd                  -- u:object_r:surfaceflinger_sysfs:s0
 /sys/devices/virtual/graphics/fb1/product_description  -- u:object_r:surfaceflinger_sysfs:s0
 /sys/devices/virtual/graphics/fb1/vendor_name          -- u:object_r:surfaceflinger_sysfs:s0
+
+# Wifi
+/sys/devices/platform/msm_sdcc.3/mmc_host/mmc1/mmc1:0001/mmc1:0001:2/net/wlan0/mtu   u:object_r:sysfs_wifi:s0
+/sys/devices/platform/msm_sdcc.3/mmc_host/mmc1/mmc1:0001/mmc1:0001:2/net/p2p0/mtu    u:object_r:sysfs_wifi:s0
+/sys/module/bcmdhd/parameters/firmware_path                                          u:object_r:sysfs_wifi:s0
+
+# Zygote
+/system/vendor/overlay                   u:object_r:system_vendor_overlay:s0
+
+# blobs
+/system/bin/akmd                         u:object_r:akmd_exec:s0
+/system/bin/mm-qcamera-daemon            u:object_r:mm-qcamerad_exec:s0
+/system/bin/netmgrd                      u:object_r:netmgrd_exec:s0
+/system/bin/qmuxd                        u:object_r:qmuxd_exec:s0
+/system/bin/qseecomd                     u:object_r:tee_exec:s0
+/system/lib/libmmcamera_(.*)             u:object_r:vendor_lib_file:s0
+/system/lib/libmmjpeg.so                 u:object_r:vendor_lib_file:s0
+/system/vendor/lib/libdrmfs.so           u:object_r:vendor_lib_file:s0
+/system/vendor/lib/libdrmtime.so         u:object_r:vendor_lib_file:s0
