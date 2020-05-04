@@ -57,7 +57,7 @@ PRODUCT_COPY_FILES += \
 
 # Bluetooth
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/bluetooth/bcm4335_prepatch.hcd:$(TARGET_COPY_OUT_VENDOR)/firmware/bcm4335_prepatch.hcd
+    $(LOCAL_PATH)/bluetooth/bcm4335_prepatch.hcd:$(TARGET_COPY_OUT_VENDOR)/etc/firmware/bcm4335_prepatch.hcd
 
 # Camera HIDL interfaces
 PRODUCT_PACKAGES += \
@@ -210,8 +210,8 @@ PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service.basic
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/wifi/calibration:$(TARGET_COPY_OUT_SYSTEM)/etc/calibration \
-    $(LOCAL_PATH)/configs/wifi/calibration_EMEA:$(TARGET_COPY_OUT_SYSTEM)/etc/calibration_EMEA \
+    $(LOCAL_PATH)/configs/wifi/calibration:$(TARGET_COPY_OUT_VENDOR)/etc/calibration \
+    $(LOCAL_PATH)/configs/wifi/calibration_EMEA:$(TARGET_COPY_OUT_VENDOR)/etc/calibration_EMEA \
     $(LOCAL_PATH)/configs/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
     $(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf
 
