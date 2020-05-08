@@ -40,5 +40,7 @@ public class Startup extends BroadcastReceiver {
     public static void restoreAfterUserSwitch(Context context) {
 
         VibratorStrengthPreference.restore(context);
+        boolean enabled = Settings.System.getInt(context.getContentResolver(), FastChargeSwitch.SETTINGS_KEY, 0) != 0;
+        restore(FastChargeSwitch.getFile(), enabled);
     }
 }

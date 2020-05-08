@@ -8,6 +8,7 @@ type sysfs_bluetooth, fs_type, sysfs_type;
 type sysfs_camera_awb_cal, fs_type, sysfs_type;
 type sysfs_camera_led_status, fs_type, sysfs_type;
 type sysfs_camera_sensor, fs_type, sysfs_type;
+type sysfs_fastcharger, sysfs_type, fs_type;
 type sysfs_flashlight_leds, fs_type, sysfs_type;
 type sysfs_system_soc, fs_type, sysfs_type;
 type sysfs_virtual_net, fs_type, sysfs_type;
