@@ -1,10 +1,10 @@
 [
   {
-    "repository": "device_htc_msm8960-common",
+    "repository": "AICP/device_htc_msm8960-common",
     "target_path": "device/htc/msm8960-common"
   },
   {
-    "repository": "kernel_htc_msm8960",
+    "repository": "AICP/kernel_htc_msm8960",
     "target_path": "kernel/htc/msm8960"
   }
 ]
