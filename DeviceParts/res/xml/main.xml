@@ -24,4 +24,11 @@
             android:summary="@string/vib_strength_summary"
             android:persistent="false" />
     </PreferenceCategory>
+
+    <SwitchPreference
+        android:key="fastcharge"
+        android:summary="@string/fastcharge_summary"
+        android:title="@string/fastcharge_title"
+        android:icon="@drawable/ic_fastcharge"
+        android:defaultValue="true"/>
 </PreferenceScreen>

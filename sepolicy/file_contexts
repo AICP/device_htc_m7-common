@@ -32,6 +32,9 @@
 # Encryption
 /dev/block/platform/msm_sdcc\.1/by-name/extra  u:object_r:metadata_block_device:s0
 
+# Fastcharge
+/sys/kernel/fast_charge/force_fast_charge   u:object_r:sysfs_fastcharger:s0
+
 # Flashlight
 /sys/devices/i2c-2/2-0033/leds/flashlight/(.*)      u:object_r:sysfs_flashlight_leds:s0
 

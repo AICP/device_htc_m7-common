@@ -150,6 +150,10 @@ on init
     chmod 0664 /sys/class/timed_output/vibrator/voltage_level
     restorecon /sys/class/timed_output/vibrator/voltage_level
 
+    # fastcharge
+    chown system system /sys/kernel/fast_charge/force_fast_charge
+    chmod 0666 /sys/kernel/fast_charge/force_fast_charge
+
     # Touchscreen
     chown system system /sys/class/leds/button-backlight/currents
 
