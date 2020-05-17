@@ -83,13 +83,6 @@ PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl \
     android.hardware.gnss@1.0-service
 
-# GPS
-PRODUCT_PACKAGES += \
-    gps.msm8960
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/gps/gps.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/gps.conf
-
 # IDC
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/idc/projector_input.idc:$(TARGET_COPY_OUT_SYSTEM)/usr/idc/projector_input.idc \
