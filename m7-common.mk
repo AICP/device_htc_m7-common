@@ -84,6 +84,9 @@ PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-service
 
 # GPS
+PRODUCT_PACKAGES += \
+    gps.msm8960
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/flp.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/flp.conf \
     $(LOCAL_PATH)/gps/etc/gps.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/gps.conf \
