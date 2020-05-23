@@ -1,5 +1,5 @@
 cc_library_shared {
-    name: "libcamera_client_htc",
+    name: "libcamera_client_m7",
 
     aidl: {
         export_aidl_headers: true,
