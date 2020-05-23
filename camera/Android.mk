@@ -34,7 +34,7 @@ LOCAL_STATIC_LIBRARIES := \
 LOCAL_SHARED_LIBRARIES := \
     libhardware \
     liblog \
-    libcamera_client_htc \
+    libcamera_client_m7 \
     libutils \
     libcutils \
     libdl \
