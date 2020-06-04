@@ -328,7 +328,7 @@ service cir_fw_update /system/bin/cir_fw_update -u cir.img
     group system
     oneshot
 
-service netmgrd /system/bin/netmgrd
+service netmgrd /system/vendor/bin/netmgrd
     class core
 
 service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
@@ -342,7 +342,7 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     user camera
     group camera system inet graphics
 
-service qmuxd /system/bin/qmuxd
+service qmuxd /system/vendor/bin/qmuxd
     class core
     user radio
     group radio audio gps oem_2950
