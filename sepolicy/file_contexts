@@ -39,6 +39,7 @@
 /sys/devices/i2c-2/2-0033/leds/flashlight/(.*)      u:object_r:sysfs_flashlight_leds:s0
 
 # Gnss
+/data/misc/gpsone_d                     u:object_r:data_gpsone_file:s0
 /data/misc/gpsone_d/(.*)                u:object_r:data_gpsone_file:s0
 
 # Graphics
