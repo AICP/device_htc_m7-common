@@ -16,7 +16,6 @@
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="@string/device_title"
-        android:theme="@style/AppTheme"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         tools:replace="android:appComponentFactory"
         android:supportsRtl="true" >
