@@ -6,8 +6,7 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_STATIC_ANDROID_LIBRARIES := \
     androidx.core_core \
     androidx.preference_preference
-
-LOCAL_SRC_FILES := $(call all-java-files-under, src)
+LOCAL_SRC_FILES := $(call all-named-files-under,*.kt,$(1))
 LOCAL_PACKAGE_NAME := DeviceParts
 LOCAL_CERTIFICATE := platform
 LOCAL_PRIVATE_PLATFORM_APIS := true
@@ -37,3 +36,4 @@ include $(BUILD_PACKAGE)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 endif
+
