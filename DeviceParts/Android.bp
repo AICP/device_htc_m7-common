@@ -16,7 +16,7 @@
 //
 
 android_app {
-    name: "DeviceParts",
+    name: "DeviceParts_m7",
     resource_dirs: ["res","deviceparts_res"],
 
     srcs: ["src/**/*.kt"],

@@ -76,7 +76,7 @@ WITH_CM_CHARGER := false
 
 # DeviceParts
 PRODUCT_PACKAGES += \
-    DeviceParts
+    DeviceParts_m7
 
 # GNSS HAL
 PRODUCT_PACKAGES += \
