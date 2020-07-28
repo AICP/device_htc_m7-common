@@ -21,8 +21,6 @@ android_app {
 
     srcs: ["src/**/*.kt"],
 
-    product_specific: true,
-
     static_libs: [
         "androidx.core_core",
         "androidx.preference_preference",
