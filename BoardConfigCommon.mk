@@ -121,6 +121,9 @@ TARGET_USERIMAGES_USE_F2FS := true
 BOARD_PROVIDES_LIBRIL := true
 BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril
 
+# Memory
+MALLOC_SVELTE := true
+
 # SELinux
 -include device/qcom/sepolicy-legacy/sepolicy.mk
 
