@@ -105,9 +105,6 @@ BOARD_ROOT_EXTRA_SYMLINKS += \
     /data/ramdump:/ramdump \
     /data/devlog:/devlog
 
-# LMKD stats logging
-TARGET_LMKD_STATS_LOG := true
-
 # MEMFD
 TARGET_HAS_MEMFD_BACKPORT := true
 
