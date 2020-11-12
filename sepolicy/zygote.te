@@ -4,3 +4,5 @@ allow zygote system_vendor_overlay:dir { getattr };
 get_prop(zygote, bluetooth_prop);
 get_prop(zygote, exported_camera_prop);
 
+get_prop(zygote, exported_camera_prop);
+
