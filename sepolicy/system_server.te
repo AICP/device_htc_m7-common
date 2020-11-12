@@ -5,3 +5,6 @@ allow system_server sysfs_doubletap2wake:file rw_file_perms;
 allow system_server vibeamp_sysfs:dir search;
 allow system_server vibeamp_sysfs:file rw_file_perms;
 
+get_prop(system_server, userspace_reboot_config_prop);
+get_prop(system_server, userspace_reboot_exported_prop);
+
