@@ -82,6 +82,7 @@ TARGET_SPECIFIC_HEADER_PATH += device/htc/m7-common/include
 # Graphics
 HAVE_ADRENO_SOURCE := false
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
+TARGET_DISABLE_POSTRENDER_CLEANUP := true
 
 # HIDL
 DEVICE_MANIFEST_FILE += device/htc/m7-common/manifest.xml
