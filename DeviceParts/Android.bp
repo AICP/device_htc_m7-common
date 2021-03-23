@@ -30,7 +30,6 @@ android_app {
 
     platform_apis: true,
     privileged: true,
-    sdk_version: "current",
     certificate: "platform",
 
 }
