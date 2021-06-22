@@ -38,6 +38,7 @@ LOCAL_SHARED_LIBRARIES := \
     libutils \
     libcutils \
     libdl \
+    libui \
     android.hidl.token@1.0-utils \
     android.hardware.graphics.bufferqueue@1.0 \
     android.hardware.graphics.bufferqueue@2.0
