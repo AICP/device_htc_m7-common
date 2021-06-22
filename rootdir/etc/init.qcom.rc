@@ -6,6 +6,11 @@ on early-init
     mount debugfs /sys/kernel/debug /sys/kernel/debug
     chown system system /sys/kernel/debug/kgsl/proc
 
+    # Allow QMUX daemon to assign port open wait time
+    #chown radio.radio /sys/devices/virtual/hsicctl/hsicctl0/modem_wait
+    # Init modem
+    write /sys/module/rmnet_usb/parameters/rmnet_data_init 1
+
 on init
 
     # For Invensense MPU3050
@@ -366,14 +371,6 @@ service time_daemon /vendor/bin/time_daemon
     class late_start
     user root
     group root
-
-# Property triggers begin here
-
-on property:init.svc.bootanim=stopped
-    # Allow QMUX daemon to assign port open wait time
-    chown radio.radio /sys/devices/virtual/hsicctl/hsicctl0/modem_wait
-    # Init modem
-    write /sys/module/rmnet_usb/parameters/rmnet_data_init 1
 
 on property:sys.boot_completed=1
     restart vendor.media.omx
