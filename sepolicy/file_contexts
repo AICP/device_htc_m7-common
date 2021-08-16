@@ -38,6 +38,9 @@
 # Flashlight
 /sys/devices/i2c-2/2-0033/leds/flashlight/(.*)      u:object_r:sysfs_flashlight_leds:s0
 
+# Gatekeeper
+/system/vendor/bin/hw/android\.hardware\.gatekeeper@1\.0-service\.software           u:object_r:hal_gatekeeper_default_exec:s0
+
 # Gnss
 /data/misc/gpsone_d                     u:object_r:data_gpsone_file:s0
 /data/misc/gpsone_d/(.*)                u:object_r:data_gpsone_file:s0
