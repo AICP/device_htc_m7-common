@@ -5,6 +5,7 @@
   },
   {
     "repository": "AICP/kernel_htc_msm8960",
-    "target_path": "kernel/htc/msm8960"
+    "target_path": "kernel/htc/msm8960",
+    "branch": "r11.1_los"
   }
 ]
