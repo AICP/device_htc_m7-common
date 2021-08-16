@@ -1,0 +1,2 @@
+set_prop(bootanim, userspace_reboot_exported_prop);
+
