@@ -151,7 +151,7 @@ sp<SensorEventQueue> SensorManager::createEventQueue()
     Mutex::Autolock _l(mLock);
     while (assertStateLocked() == NO_ERROR) {
         sp<ISensorEventConnection> connection =
-                mSensorServer->createSensorEventConnection(String8(""), 0, gPackageName);
+                mSensorServer->createSensorEventConnection(String8(""), 0, gPackageName, String16(""));
         if (connection == NULL) {
             // SensorService just died.
             ALOGE("createEventQueue: connection is NULL. SensorService died.");
