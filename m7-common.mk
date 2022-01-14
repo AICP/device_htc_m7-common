@@ -74,10 +74,6 @@ PRODUCT_COPY_FILES += \
 # Charger
 WITH_CM_CHARGER := false
 
-# DeviceParts
-PRODUCT_PACKAGES += \
-    DeviceParts_m7
-
 # GNSS HAL
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl \
