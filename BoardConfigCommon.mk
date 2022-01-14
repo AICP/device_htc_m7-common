@@ -127,9 +127,9 @@ BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril
 MALLOC_SVELTE := true
 
 # SELinux
--include device/qcom/sepolicy-legacy/sepolicy.mk
-
-BOARD_SEPOLICY_DIRS += device/htc/m7-common/sepolicy
+#-include device/qcom/sepolicy-legacy/sepolicy.mk
+BOARD_SEPOLICY_DIRS += device/htc/m7-common/sepolicy-minimal
+SELINUX_IGNORE_NEVERALLOWS := true
 
 # We modify several neverallows, so let the build proceed
 ifneq ($(TARGET_BUILD_VARIANT),user)
