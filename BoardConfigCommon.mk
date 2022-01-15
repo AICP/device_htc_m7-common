@@ -59,7 +59,6 @@ TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
     /system/bin/mediaserver=22 \
     /system/bin/mm-qcamera-daemon=22 \
     /system/bin/qseecomd=21
-
 USE_DEVICE_SPECIFIC_CAMERA := true
 
 # Charger
