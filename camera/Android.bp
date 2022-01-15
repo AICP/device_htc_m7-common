@@ -1,5 +1,6 @@
 // Copyright 2010 The Android Open Source Project
 //           2017-2020 The LineageOS Project
+//           2022 Android Ice Cold Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,8 +14,40 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+package {
+    default_applicable_licenses: ["frameworks_av_camera_license_m7"],
+}
+
+// Added automatically by a large-scale-change that took the approach of
+// 'apply every license found to every target'. While this makes sure we respect
+// every license restriction, it may not be entirely correct.
+//
+// e.g. GPL in an MIT project might only apply to the contrib/ directory.
+//
+// Please consider splitting the single license below into multiple licenses,
+// taking care not to lose any license_kind information, and overriding the
+// default license using the 'licenses: [...]' property on targets as needed.
+//
+// For unused files, consider creating a 'fileGroup' with "//visibility:private"
+// to attach the license to, and including a comment whether the files may be
+// used in the current project.
+// See: http://go/android-license-faq
+license {
+    name: "frameworks_av_camera_license_m7",
+    visibility: [":__subpackages__"],
+    license_kinds: [
+        "SPDX-license-identifier-Apache-2.0",
+        "SPDX-license-identifier-MIT",
+        "SPDX-license-identifier-Unicode-DFS",
+    ],
+    license_text: [
+        "NOTICE",
+    ],
+}
+
 cc_library_shared {
     name: "libcamera_client_m7",
+    defaults: ["camera_parameter_library_defaults"],
 
     aidl: {
         export_aidl_headers: true,
@@ -26,29 +59,33 @@ cc_library_shared {
 
     srcs: [
         // AIDL files for camera interfaces
+        // The headers for these interfaces will be available to any modules that
+        // include libcamera_client, at the path "aidl/package/path/BnFoo.h"
         ":libcamera_client_aidl",
 
         // Source for camera interface parcelables, and manually-written interfaces
         "Camera.cpp",
-        "CameraBase.cpp",
-        "CameraUtils.cpp",
         "CameraMetadata.cpp",
+        "CaptureResult.cpp",
         "CameraParameters.cpp",
         "CameraParameters2.cpp",
-        "CaptureResult.cpp",
+        "CameraSessionStats.cpp",
+        "ICamera.cpp",
+        "ICameraClient.cpp",
+        "ICameraRecordingProxy.cpp",
+        "ICameraRecordingProxyListener.cpp",
         "camera2/CaptureRequest.cpp",
         "camera2/ConcurrentCamera.cpp",
         "camera2/OutputConfiguration.cpp",
         "camera2/SessionConfiguration.cpp",
         "camera2/SubmitInfo.cpp",
-        "ICamera.cpp",
-        "ICameraClient.cpp",
-        "ICameraRecordingProxy.cpp",
-        "ICameraRecordingProxyListener.cpp",
+        "CameraBase.cpp",
+        "CameraUtils.cpp",
         "VendorTagDescriptor.cpp",
     ],
 
     shared_libs: [
+        "libbase",
         "libcutils",
         "libutils",
         "liblog",
@@ -63,9 +100,10 @@ cc_library_shared {
         "frameworks/native/include/media/openmax",
     ],
     export_include_dirs: [
-        "include",
-        "include/camera"
+         "include",
+         "include/camera"
     ],
+    export_shared_lib_headers: ["libcamera_metadata", "libnativewindow", "libgui"],
 
     cflags: [
         "-Werror",
@@ -74,3 +112,4 @@ cc_library_shared {
     ],
 
 }
+
